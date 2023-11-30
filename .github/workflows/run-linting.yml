@@ -1,0 +1,100 @@
+name: run-linting
+
+on:
+    push:
+      branches:
+        - main
+        - develop
+    pull_request:
+
+jobs:
+    pre_job:
+      continue-on-error: true
+      runs-on: ubuntu-latest
+      outputs:
+        should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      steps:
+        - id: skip_check
+          uses: fkirc/skip-duplicate-actions@master
+          with:
+            skip_after_successful_duplicate: 'true'
+
+    run-php-linting:
+        needs: pre_job
+        if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Update apt
+              run: sudo apt-get update --fix-missing
+
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: 8.2
+
+            - name: Get Composer cache directory
+              id: composer-cache
+              run: |
+                echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Cache Composer packages
+              uses: actions/cache@v3
+              with:
+                path: ${{ steps.composer-cache.outputs.dir }}
+                key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: |
+                composer config "http-basic.packagehub.nextapps.be" "${{ secrets.PACKAGEHUB_USERNAME }}" "${{ secrets.PACKAGEHUB_PASSWORD }}"
+                composer install --prefer-dist --no-interaction --no-suggest
+
+            - name: Execute linting
+              run: |
+                PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run
+                vendor/bin/phpcs --colors --report-full
+
+    run-blade-linting:
+        needs: pre_job
+        if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Update apt
+              run: sudo apt-get update --fix-missing
+
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+
+            - name: Get npm cache directory
+              id: npm-cache-dir
+              run: |
+                echo "::set-output name=dir::$(npm config get cache)"
+
+            - name: Cache npm packages
+              uses: actions/cache@v3
+              with:
+                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
+
+            - name: Install dependencies
+              run: |
+                npm install
+
+            - name: Execute linting
+              run: |
+                ./node_modules/.bin/prettier  resources/**/*.blade.php --check
