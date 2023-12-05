@@ -9,13 +9,48 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/**/*.js',
     ],
 
     theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        boxShadow: {
+            'light': '0px 4px 4px rgba(2, 51, 115, 0.08)',
+            'dark': '0px 4px 4px rgba(0, 0, 0, 0.15)',
+            'none': '0 0 #000000',
+        },
+
+        colors: {
+            transparent: 'transparent',
+            current: 'currentColor',
+            'white': '#FFFFFF',
+            'black': '#4A4D57',
+            'blue': {
+                'dark': '#023373',
+                'base': '#2A4D8C',
+                'light': '#5D7CA6',
+                'lightest': '#F4F7FC',
             },
+            'gray': {
+                'dark': '#9FADBF',
+                'base': '#BCC5D2',
+                'light': '#DEE3E9'
+            },
+            'orange': {
+                'dark': '#FC7B49',
+                'base': '#FC8D62',
+                'light': '#FC9F7B'
+            },
+            'red': {
+                'base': '#EF6161',
+            },
+            'green': {
+                'base': '#1EE372',
+            },
+        },
+
+        fontFamily: {
+            'highlight-sans': ['Barlow Condensed', ...defaultTheme.fontFamily.sans],
+            'sans': ['Open Sans', ...defaultTheme.fontFamily.sans],
         },
     },
 

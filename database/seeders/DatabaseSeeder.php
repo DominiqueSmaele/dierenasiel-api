@@ -2,21 +2,23 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run() : void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(OAuthKeySeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        if (App::environment('production')) {
+            return;
+        }
+
+        if (! $this->command->confirm('Are you sure you want to run the seeders that may alter your data?')) {
+            return;
+        }
+
+        $this->call(LaratrustSeeder::class);
     }
 }

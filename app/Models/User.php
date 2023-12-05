@@ -2,60 +2,71 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Casts\Hashed;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laratrust\Contracts\LaratrustUser;
+use Laratrust\Traits\HasRolesAndPermissions;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\RefreshToken;
 
-class User extends Authenticatable
+class User extends Authenticatable implements LaratrustUser, HasLocalePreference
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasRolesAndPermissions,
+        TwoFactorAuthenticatable,
+        SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'locale',
+        'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
+        'last_active_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $casts = [
+        'password' => Hashed::class,
+        'two_factor_confirmed_at' => 'datetime',
+        'shelter_id' => 'integer',
+        'last_active_at' => 'datetime',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function shelter() : BelongsTo
+    {
+        return $this->belongsTo(Shelter::class);
+    }
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    public function revokeTokens() : void
+    {
+        RefreshToken::query()
+            ->whereIn('access_token_id', $this->tokens()->select('id')->where('revoked', false))
+            ->update(['revoked' => true]);
+
+        $this->tokens()
+            ->where('revoked', false)
+            ->update(['revoked' => true]);
+    }
+
+    public function preferredLocale() : string
+    {
+        return in_array($this->locale, config('app.supported_locales')) ? $this->locale : config('app.fallback_locale');
+    }
 }

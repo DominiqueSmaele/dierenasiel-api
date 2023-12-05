@@ -82,7 +82,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'nl',
+
+    'supported_locales' => ['nl', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +97,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'nl',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +110,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'nl_BE',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
+        App\Providers\AdminDashboardServiceProvider::class,
     ])->toArray(),
 
     /*
