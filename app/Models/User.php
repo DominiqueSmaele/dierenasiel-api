@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
+use App\Enums\ShelterRole;
 use App\Models\Casts\Hashed;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,6 +54,22 @@ class User extends Authenticatable implements LaratrustUser, HasLocalePreference
     public function shelter() : BelongsTo
     {
         return $this->belongsTo(Shelter::class);
+    }
+
+    public function getRole() : Role
+    {
+        return Role::from($this->getRoles()[0]);
+    }
+
+    public function getShelterRole() : ?ShelterRole
+    {
+        if ($this->shelter_id === null) {
+            return null;
+        }
+
+        $role = $this->getRoles($this->shelter_id)[0] ?? null;
+
+        return $role ? ShelterRole::from($role) : null;
     }
 
     public function revokeTokens() : void

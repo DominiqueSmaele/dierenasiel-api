@@ -12,8 +12,8 @@
     $baseClasses = 'flex items-center justify-center gap-x-2 font-semibold leading-5 text-lg leading-5 focus:outline-none';
 
     $variantClasses = match ($variant) {
-        'primary' => ' font-semibold border border-current rounded-full disabled:bg-gray-light disabled:hover:bg-gray-light',
-        'secondary' => 'bg-transparent border rounded-full disabled:border-gray-light disabled:hover:border-gray-light',
+        'primary' => ' font-semibold border border-current disabled:bg-gray-light disabled:hover:bg-gray-light',
+        'secondary' => 'bg-transparent border disabled:border-gray-light disabled:hover:border-gray-light',
         'tertiary' => 'disabled:text-gray-light disabled:hover:text-gray-light',
     };
 

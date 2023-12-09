@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class LaratrustSetupTables extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         // Create table for storing roles
@@ -31,11 +36,14 @@ class LaratrustSetupTables extends Migration
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('user_id');
             $table->string('user_type');
+            $table->unsignedBigInteger('shelter_id')->nullable();
 
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('shelter_id')->references('id')->on('shelters')
+                ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['user_id', 'role_id', 'user_type']);
+            $table->unique(['user_id', 'role_id', 'user_type', 'shelter_id']);
         });
 
         // Create table for associating permissions to users (Many To Many Polymorphic)
@@ -43,11 +51,14 @@ class LaratrustSetupTables extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('user_id');
             $table->string('user_type');
+            $table->unsignedBigInteger('shelter_id')->nullable();
 
             $table->foreign('permission_id')->references('id')->on('permissions')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('shelter_id')->references('id')->on('shelters')
+                ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['user_id', 'permission_id', 'user_type']);
+            $table->unique(['user_id', 'permission_id', 'user_type', 'shelter_id'], 'permission_user_user_id_permission_id_shelter_id_unique');
         });
 
         // Create table for associating permissions to roles (Many-to-Many)
@@ -76,5 +87,6 @@ class LaratrustSetupTables extends Migration
         Schema::dropIfExists('permissions');
         Schema::dropIfExists('role_user');
         Schema::dropIfExists('roles');
+        Schema::dropIfExists('shelters');
     }
 }

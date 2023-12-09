@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Livewire\Global\Developer\DevelopersOverviewPage;
+use App\Http\Livewire\Global\Shelter\SheltersOverviewPage;
+use App\Http\Middleware\DispatchServingAdminDashboardEvent;
+use App\Http\Middleware\EnsureUserCanViewAdminDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::middleware(['auth', EnsureUserCanViewDashboard::class, DispatchServingAdminDashboardEvent::class])->group(function () {
+Route::middleware(['auth', EnsureUserCanViewAdminDashboard::class, DispatchServingAdminDashboardEvent::class])->group(function () {
+    Route::redirect('/settings', '/shelters')->name('global.home');
+    Route::redirect('/shelter/{shelter}', '/shelter/{shelter}/animals')->name('shelter.home');
+
+    Route::get('/shelters', SheltersOverviewPage::class)->name('global.shelters-overview');
+    Route::get('/developers', DevelopersOverviewPage::class)->name('global.developers-overview');
 });

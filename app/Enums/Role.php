@@ -10,7 +10,6 @@ enum Role : string
     use HasTranslation;
 
     case developer = 'developer';
-    case admin = 'admin';
     case user = 'user';
 
     public function getKey() : int

@@ -119,7 +119,7 @@ return [
         /*
          * Will be used only if the teams functionality is enabled.
          */
-        'team' => \App\Models\Team::class,
+        'team' => \App\Models\Shelter::class,
     ],
 
     /*
@@ -138,7 +138,7 @@ return [
         /*
          * Will be used only if the teams functionality is enabled.
          */
-        'teams' => 'teams',
+        'teams' => 'shelters',
 
         'role_user' => 'role_user',
 
@@ -174,7 +174,7 @@ return [
         /*
          * Role foreign key on Laratrust's role_user and permission_user tables.
          */
-        'team' => 'team_id',
+        'team' => 'shelter_id',
     ],
 
     /*
@@ -195,7 +195,7 @@ return [
          * Method to be called in the middleware return case.
          * Available: abort|redirect.
          */
-        'handling' => 'abort',
+        'handling' => 'redirect',
 
         /*
          * Handlers for the unauthorized method in the middlewares.
@@ -236,7 +236,7 @@ return [
         | Please check the docs to see what you need to do in case you have the package already configured.
         |
         */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
         |--------------------------------------------------------------------------

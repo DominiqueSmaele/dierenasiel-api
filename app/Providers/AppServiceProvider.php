@@ -37,25 +37,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict(true);
 
-        Model::handleLazyLoadingViolationUsing(function ($model, $relation) {
-            // When the environment is set to 'testing', then lazy loading is not really an
-            // issue, so we won't do anything with those violations.
-            if ($this->app->environment('testing')) {
-                return;
-            }
+        if (! $this->app->environment('local')) {
+            Model::handleLazyLoadingViolationUsing(function ($model, $relation) {
+                // When the environment is set to 'testing', then lazy loading is not really an
+                // issue, so we won't do anything with those violations.
+                if ($this->app->environment('testing')) {
+                    return;
+                }
 
-            // Laravel Scout causes lazy loading issues when Scout indexes have to be updated.
-            // To prevent Scout from polluting the logging those lazy loading violation will
-            // not be logged and no exceptions will be thrown for those violations.
-            $trace = collect(debug_backtrace())->firstWhere(function ($trace) {
-                return isset($trace['function']) && $trace['function'] === 'toSearchableArray';
+                Log::warning(new LazyLoadingViolationException($model, $relation));
             });
-
-            if ($trace !== null) {
-                return;
-            }
-
-            Log::warning(new LazyLoadingViolationException($model, $relation));
-        });
+        }
     }
 }

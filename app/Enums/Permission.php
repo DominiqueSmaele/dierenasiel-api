@@ -6,7 +6,7 @@ use App\Models\Permission as PermissionModel;
 
 enum Permission : string
 {
-    case viewAdminDashboard = 'viewAdminDashboard';
+    case manageAllShelters = 'manageAllShelters';
 
     public function getKey() : int
     {
