@@ -5,7 +5,7 @@
         @csrf
 
         <x-input.group :error="$errors->first('email')">
-            <x-label for="email" class="ml-2">{{ __('web.login_email_label') }}</x-label>
+            <x-label for="email">{{ __('web.login_email_label') }}</x-label>
             <x-input id="email" class="mt-1" type="email" name="email" :value="old('email')" :placeholder="__('web.login_email_placeholder')" required autofocus autocomplete="username" />
             @if (session('status'))
                 <div class="ml-3 mt-1 text-sm font-normal leading-5 text-green-base">
@@ -15,11 +15,11 @@
         </x-input.group>
 
         <x-input.group :error="$errors->first('password')" class="mt-4">
-            <x-label for="password" class="ml-2">{{ __('web.login_password_label') }}</x-label>
+            <x-label for="password">{{ __('web.login_password_label') }}</x-label>
             <x-input id="password" class="mt-1" type="password" name="password" :placeholder="__('web.login_password_placeholder')" required autocomplete="current-password" />
         </x-input.group>
 
-        <div class="ml-2 mt-4 block">
+        <div class="ml-1 mt-4 block">
             <label for="remember_me" class="flex items-center">
                 <x-checkbox id="remember_me" name="remember" />
                 <span class="text-dark-25 ml-2 text-sm leading-5">{{ __('web.login_remember_me_label') }}</span>

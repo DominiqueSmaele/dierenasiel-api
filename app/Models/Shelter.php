@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laratrust\Models\Team as TeamModel;
 use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 
-class Shelter extends Model
+class Shelter extends TeamModel
 {
     use HasFactory,
         SoftDeletes;

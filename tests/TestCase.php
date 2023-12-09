@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use NextApps\TestHelpers\MakesCustomAssertions;
 use NextApps\TestHelpers\MocksPolicies;
@@ -27,6 +28,7 @@ abstract class TestCase extends BaseTestCase
         $this->seed(LaratrustSeeder::class);
 
         Storage::fake();
+        Notification::fake();
 
         $this->withoutVite();
 
@@ -36,7 +38,7 @@ abstract class TestCase extends BaseTestCase
             $this->setUpOAuthUser();
         }
 
-        if (isset($uses[AuthenticateAsWebAdminUser::class])) {
+        if (isset($uses[AuthenticateAsWebUser::class])) {
             $this->setUpWebAdminUser();
         }
     }

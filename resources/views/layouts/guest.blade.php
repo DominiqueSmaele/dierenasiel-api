@@ -12,7 +12,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body @class(['font-sans antialiased text-black'])>
+<body @class([
+    'font-sans antialiased text-black',
+    'debug-screens' => app()->isLocal(),
+])>
     <div class="flex min-h-screen flex-col content-start items-center justify-center">
         <div class="w-full max-w-md">
             <a href="{{ route('login') }}" class="flex justify-center">

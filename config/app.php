@@ -170,6 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        App\Providers\LivewireServiceProvider::class,
         App\Providers\AdminDashboardServiceProvider::class,
     ])->toArray(),
 
