@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between">
         <h2 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.shelters_overview_page_title') }}</h2>
 
-        <x-button leading-icon="plus" wire:click="$emit('slide-over.open', 'global.create-shelter-slide-over')">
+        <x-button leading-icon="plus" wire:click="$dispatch('slide-over.open', {component: 'global.create-shelter-slide-over'}) ">
             {{ __('web.shelters_overview_page_create_button') }}
         </x-button>
     </div>

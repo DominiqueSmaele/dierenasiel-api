@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import laravel, { refreshPaths } from 'laravel-vite-plugin';
-import fs from 'fs';
 
 export default defineConfig({
     build: {

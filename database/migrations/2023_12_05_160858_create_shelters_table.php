@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('phone');
             $table->foreignId('address_id')->constrained('addresses');
             $table->timestamps();
             $table->softDeletes();

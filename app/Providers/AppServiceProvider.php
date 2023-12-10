@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Tests\Faker\CustomProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

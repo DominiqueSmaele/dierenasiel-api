@@ -13,7 +13,11 @@ class SheltersOverviewPage extends Component
     use AuthorizesRequests,
         WithPagination;
 
-    public function booted() : void
+    protected $listeners = [
+        'shelterCreated' => '$refresh',
+    ];
+
+    public function boot() : void
     {
         $this->authorize('viewAny', Shelter::class);
     }

@@ -6,6 +6,7 @@ use App\Http\Livewire\Global\Shelter\SheltersOverviewPage;
 use App\Http\Middleware\DispatchServingAdminDashboardEvent;
 use App\Http\Middleware\EnsureUserCanViewAdminDashboard;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,9 @@ Route::middleware(['auth', EnsureUserCanViewAdminDashboard::class, DispatchServi
 
     Route::get('/shelters', SheltersOverviewPage::class)->name('global.shelters-overview');
     Route::get('/developers', DevelopersOverviewPage::class)->name('global.developers-overview');
+});
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/livewire/update', $handle)
+        ->middleware([DispatchServingAdminDashboardEvent::class]);
 });

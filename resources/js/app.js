@@ -1,12 +1,4 @@
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-import collapse from '@alpinejs/collapse';
-import persist from '@alpinejs/persist';
+import '../../vendor/wire-elements/pro/resources/js/overlay-component.js';
+import parsePhoneNumber from 'libphonenumber-js';
 
-window.Alpine = Alpine;
-
-Alpine.plugin(focus);
-Alpine.plugin(collapse);
-Alpine.plugin(persist);
-
-Alpine.start();
+window.parsePhoneNumber = parsePhoneNumber;
