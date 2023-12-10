@@ -53,6 +53,7 @@ jobs:
             - name: Install dependencies
               run: |
                 composer config "http-basic.packagehub.nextapps.be" "${{ secrets.PACKAGEHUB_USERNAME }}" "${{ secrets.PACKAGEHUB_PASSWORD }}"
+                composer config "http-basic.wire-elements-pro.composer.sh" "${{ secrets.WIRE_ELEMENTS_USERNAME }}" "${{ secrets.WIRE_ELEMENTS_PASSWORD }}"
                 composer install --prefer-dist --no-interaction --no-suggest
 
             - name: Execute linting
