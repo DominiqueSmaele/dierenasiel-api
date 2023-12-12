@@ -17,6 +17,7 @@
         "propaganistas/laravel-phone": "^5.0",
         "santigarcor/laratrust": "^8.2",
         "spatie/geocoder": "^3.15",
+        "spatie/laravel-medialibrary": "^10.15",
         "wire-elements/pro": "^4.0"
     },
     "require-dev": {
