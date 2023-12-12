@@ -13,7 +13,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 use WireElements\Pro\Components\SlideOver\SlideOver;
 
-class CreateShelterSlideOver extends SlideOver
+class UpdateShelterSlideOver extends SlideOver
 {
     use AuthorizesRequests,
         ValidatesShelter,
@@ -25,20 +25,24 @@ class CreateShelterSlideOver extends SlideOver
 
     public TemporaryUploadedFile | string | null $image = null;
 
-    public function booted() : void
+    public bool $withoutImage = false;
+
+    public function mount(int $shelterId) : void
     {
-        $this->authorize('create', Shelter::class);
+        $this->shelter = Shelter::find($shelterId);
     }
 
-    public function create() : void
+    public function booted() : void
+    {
+        $this->authorize('update', $this->shelter);
+    }
+
+    public function update() : void
     {
         $this->validate();
 
         DB::transaction(function () {
             $this->address->save();
-
-            $this->shelter->address()->associate($this->address);
-
             $this->shelter->save();
 
             if ($this->image === null) {
@@ -53,12 +57,12 @@ class CreateShelterSlideOver extends SlideOver
         });
 
         $this->close(andDispatch: [
-            'shelterCreated',
+            'shelterUpdated',
         ]);
     }
 
     public function render() : View
     {
-        return view('livewire.global.shelter.create-shelter-slide-over');
+        return view('livewire.global.shelter.update-shelter-slide-over');
     }
 }

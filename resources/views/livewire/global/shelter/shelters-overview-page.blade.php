@@ -15,12 +15,17 @@
                 @endphp
 
                 <a wire:key="shelter-{{ $shelter->id }}" href="{{ route('shelter.home', $shelter->id) }}" class="relative flex flex-col items-center justify-center border border-blue-base bg-white p-4 shadow-light hover:border-blue-light">
-                    @if ($image)
-                        <img class="mt-3 h-32" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
-                    @else
-                        <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
-                    @endif
-                    <div class="text-center">
+                    <x-button class="absolute right-1 top-1" variant="tertiary" wire:click.prevent="$dispatch('slide-over.open', {component: 'global.update-shelter-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
+                        <x-icon.pencil class="h-4 w-4" />
+                    </x-button>
+
+                    <div class="flex flex-col items-center justify-center">
+                        @if ($image)
+                            <img class="mt-3 h-32" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                        @else
+                            <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
+                        @endif
+
                         <p class="mt-3 font-highlight-sans text-xl font-semibold leading-5">{{ $shelter->name }}</p>
                     </div>
 
