@@ -8,13 +8,22 @@
     </div>
 
     @if ($shelters->isNotEmpty())
-        <div class="mt-12 flex flex-col gap-4">
+        <div class="mt-12 grid grid-cols-4 gap-4">
             @foreach ($shelters as $shelter)
-                <a wire:key="shelter-{{ $shelter->id }}" href="{{ route('shelter.home', $shelter->id) }}" class="flex items-center justify-between border border-blue-base bg-white p-4 shadow-light hover:border-blue-light">
-                    <div>
-                        <p class="font-highlight-sans text-lg font-semibold leading-5">{{ $shelter->name }}</p>
-                        <p class="text-gray-dark">{{ $shelter->email }}</p>
+                @php
+                    $image = $shelter?->getMedia('image')->first();
+                @endphp
+
+                <a wire:key="shelter-{{ $shelter->id }}" href="{{ route('shelter.home', $shelter->id) }}" class="relative flex flex-col items-center justify-center border border-blue-base bg-white p-4 shadow-light hover:border-blue-light">
+                    @if ($image)
+                        <img class="mt-3 h-32" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                    @else
+                        <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
+                    @endif
+                    <div class="text-center">
+                        <p class="mt-3 font-highlight-sans text-xl font-semibold leading-5">{{ $shelter->name }}</p>
                     </div>
+
                 </a>
             @endforeach
         </div>

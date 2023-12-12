@@ -8,6 +8,7 @@ use App\Models\Shelter;
 use App\Models\Values\Point;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 use Spatie\Geocoder\Facades\Geocoder;
 
@@ -19,11 +20,16 @@ trait ValidatesShelter
 
     public ?string $phone;
 
+    public TemporaryUploadedFile | string | null $image = null;
+
+    public bool $withoutImage = false;
+
     public function mountValidatesShelter() : void
     {
         $this->shelter ??= Shelter::make();
         $this->address = $this->shelter->address ?? Address::make();
         $this->phone = $this->shelter->phone;
+        $this->withoutImage = $this->shelter->image === null;
     }
 
     public function bootedValidatesShelter() : void
@@ -54,8 +60,17 @@ trait ValidatesShelter
                 }
 
                 $this->shelter->phone = $this->phone;
+
+                if ($this->withoutImage) {
+                    $this->image = null;
+                }
             });
         });
+    }
+
+    public function updatedImage() : void
+    {
+        $this->withoutImage = $this->image === null;
     }
 
     protected function rules() : array
@@ -106,6 +121,11 @@ trait ValidatesShelter
                 'required',
                 'integer',
                 Rule::exists(Country::class, 'id'),
+            ],
+            'image' => [
+                'nullable',
+                'image',
+                'max:10000',
             ],
         ];
     }

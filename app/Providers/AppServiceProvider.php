@@ -2,17 +2,23 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
+use App\Models\Shelter;
+use App\Models\User;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Tests\Faker\CustomProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot() : void
     {
+        $this->setMorphMap();
         $this->registerMacros();
         $this->configureEloquent();
     }
@@ -26,6 +32,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Generator::class . ':' . config('app.faker_locale'), Generator::class);
     }
 
+    protected function setMorphMap() : void
+    {
+        Relation::enforceMorphMap([
+            'user' => User::class,
+            'shelter' => Shelter::class,
+            'address' => Address::class,
+        ]);
+    }
+
     protected function registerMacros() : void
     {
         Request::macro('locale', function () {
@@ -34,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
 
             return head(explode('_', str_replace('-', '_', $firstLocale)));
         });
+
+        TemporaryUploadedFile::macro('storagePath', fn () => $this->path);
+        TemporaryUploadedFile::macro('storageDisk', fn () => $this->disk);
     }
 
     protected function configureEloquent() : void

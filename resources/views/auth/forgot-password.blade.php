@@ -16,7 +16,7 @@
             @endif
         </x-input.group>
 
-        <x-button type="submit" color="blue" class="mt-8 w-full">
+        <x-button type="submit" class="mt-8 w-full">
             {{ __('web.forgot_password_submit_button') }}
         </x-button>
 
