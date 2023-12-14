@@ -16,8 +16,8 @@ export default {
 
     theme: {
         boxShadow: {
-            'light': '0px 4px 4px rgba(2, 51, 115, 0.08)',
-            'dark': '0px 4px 4px rgba(0, 0, 0, 0.15)',
+            'light': '2px 2px 2px 2px rgba(2, 51, 115, 0.08)',
+            'dark': '2px 2px 2px 2px rgba(0, 0, 0, 0.15)',
             'none': '0 0 #000000',
         },
 

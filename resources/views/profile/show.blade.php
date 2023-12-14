@@ -1,4 +1,4 @@
-<x-dynamic-component :component="request()->query('companyId') ? 'company-layout' : 'global-layout'" :company="request()->query('companyId') ? \App\Models\Company::find(request()->query('companyId')) : null">
+<x-dynamic-component :component="request()->query('shelterId') ? 'shelter-layout' : 'global-layout'" :shelter="request()->query('shelterId') ? \App\Models\Shelter::find(request()->query('shelterId')) : null">
     <h1 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.profile_title') }}</h1>
 
     <div class="flex flex-col gap-10 divide-y divide-gray-light">

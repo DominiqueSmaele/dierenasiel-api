@@ -21,7 +21,7 @@
                 @endif
             </div>
         </div>
-        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-32 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
+        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-48 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
             <input
                 type="file"
                 accept="image/jpg,image/jpeg,image/png"
@@ -33,7 +33,8 @@
                 class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0" />
 
             @if (($shelter->exists && !$withoutImage) || ($image && is_object($image)))
-                <div class="h-32 w-full bg-cover bg-center" style="background-image: url('{{ $image && is_object($image) ? $image?->temporaryUrl() : $shelter->image?->getAvailableFullUrl(['small', 'medium']) }}')">
+                <div>
+                    <img class="h-32" src="{{ $image && is_object($image) ? $image?->temporaryUrl() : $shelter->image?->getAvailableFullUrl(['small', 'medium']) }}" />
                 </div>
             @else
                 <x-icon.loading wire:loading wire:target="image" class="h-4 w-4 animate-spin text-gray-base" />

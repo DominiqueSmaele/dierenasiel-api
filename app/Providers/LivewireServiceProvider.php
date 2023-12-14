@@ -6,6 +6,7 @@ use App\Http\Livewire\Global\Developer\DevelopersOverviewPage;
 use App\Http\Livewire\Global\Shelter\CreateShelterSlideOver;
 use App\Http\Livewire\Global\Shelter\SheltersOverviewPage;
 use App\Http\Livewire\Global\Shelter\UpdateShelterSlideOver;
+use App\Http\Livewire\Shelter\Animal\AnimalsOverviewPage;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -17,6 +18,8 @@ class LivewireServiceProvider extends ServiceProvider
         'global.shelters-overview-page' => SheltersOverviewPage::class,
         'global.create-shelter-slide-over' => CreateShelterSlideOver::class,
         'global.update-shelter-slide-over' => UpdateShelterSlideOver::class,
+
+        'shelter.animals-overview-page' => AnimalsOverviewPage::class,
     ];
 
     public function boot() : void
