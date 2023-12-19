@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Address;
 use App\Models\Animal;
+use App\Models\Country;
 use App\Models\Shelter;
 use App\Models\User;
 use Faker\Factory;
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
             'user' => User::class,
             'shelter' => Shelter::class,
             'address' => Address::class,
+            'country' => Country::class,
             'animal' => Animal::class,
         ]);
     }

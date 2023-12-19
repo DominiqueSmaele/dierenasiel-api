@@ -231,7 +231,7 @@ class UpdateShelterSlideOverTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_unauthorized_response_if_update__shelter_denied_by_policy()
+    public function it_returns_unauthorized_response_if_update_shelter_denied_by_policy()
     {
         $this->partialMockPolicy(ShelterPolicy::class)->forUser($this->user)->shouldDeny('update', $this->shelter);
 

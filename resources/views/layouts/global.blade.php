@@ -9,8 +9,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    @livewireStyles
 </head>
 
 <body @class([
@@ -75,8 +73,6 @@
 
     @livewire('slide-over-pro')
     @livewire('modal-pro')
-
-    @livewireScripts
 </body>
 
 </html>

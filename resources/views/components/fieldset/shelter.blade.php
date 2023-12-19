@@ -46,7 +46,7 @@
 
     <x-input.group :error="$errors->first('shelter.name')">
         <x-label>{{ __('web.shelter_fieldset_name_label') }}</x-label>
-        <x-input class="mt-3" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required autofocus />
+        <x-input class="mt-1" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required autofocus />
     </x-input.group>
 
     <x-input.group :error="$errors->first('shelter.email')">
@@ -90,10 +90,10 @@
         </div>
 
         <x-input.group :error="$errors->first('address.country_id')" class="mt-3">
-            <x-label>{{ __('web.shelter_fieldset_address_country_id_label') }}</x-label>
+            <x-label for="address.country_id">{{ __('web.shelter_fieldset_address_country_id_label') }}</x-label>
 
             <div x-data="{ countryId: @entangle('address.country_id') }" x-init="countryId ??= {{ $countries->first()?->id }}">
-                <x-select x-model="countryId" class="mt-1" required>
+                <x-select x-model="countryId" class="mt-1">
                     @foreach ($countries as $country)
                         <x-select.option :value="$country->id">{{ $country->getName() }}</x-select.option>
                     @endforeach

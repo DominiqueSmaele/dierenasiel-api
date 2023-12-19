@@ -16,6 +16,10 @@ class AnimalsOverviewPage extends Component
 
     public Shelter $shelter;
 
+    protected $listeners = [
+        'animalCreated' => '$refresh',
+    ];
+
     public function booted() : void
     {
         $this->authorize('viewAny', [Animal::class, $this->shelter]);

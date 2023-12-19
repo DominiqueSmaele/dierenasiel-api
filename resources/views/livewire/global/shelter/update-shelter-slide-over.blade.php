@@ -1,4 +1,4 @@
-<x-slide-over wire:submit.prevent="update" :title="__('web.update_shelter_slide_over_title')">
+<x-slide-over wire:submit="update" :title="__('web.update_shelter_slide_over_title')">
     <x-fieldset.shelter :shelter="$shelter" :image="$image" :without-image="$withoutImage" />
 
     <div class="mt-10 flex flex-col gap-2">

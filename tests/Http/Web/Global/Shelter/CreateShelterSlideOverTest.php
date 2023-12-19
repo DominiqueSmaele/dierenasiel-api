@@ -187,7 +187,7 @@ class CreateShelterSlideOverTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_unauthorized_response_if_create__shelter_denied_by_policy()
+    public function it_returns_unauthorized_response_if_create_shelter_denied_by_policy()
     {
         $this->partialMockPolicy(ShelterPolicy::class)->forUser($this->user)->shouldDeny('create');
 

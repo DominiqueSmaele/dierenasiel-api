@@ -28,6 +28,8 @@ class Animal extends Model implements HasMedia
     ];
 
     protected $casts = [
+        'years' => 'integer',
+        'months' => 'integer',
         'type_id' => 'integer',
         'shelter_id' => 'integer',
     ];

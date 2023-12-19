@@ -29,9 +29,4 @@ class Address extends Model
     {
         return $this->belongsTo(Country::class);
     }
-
-    public function shelter() : BelongsTo
-    {
-        return $this->belongsTo(Shelter::class);
-    }
 }

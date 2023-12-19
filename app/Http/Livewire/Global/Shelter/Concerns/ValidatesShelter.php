@@ -44,13 +44,19 @@ trait ValidatesShelter
                     return;
                 }
 
+                $country = Country::find($this->address->country_id)->code;
+
                 try {
-                    $coordinates = Geocoder::setCountry($this->address->country->code)->getCoordinatesForAddress(
+                    $coordinates = Geocoder::setCountry($country)->getCoordinatesForAddress(
                         "{$this->address->street} {$this->address->number} {$this->address->box_number}, " .
-                        "{$this->address->zipcode} {$this->address->city}, {$this->address->country->code}"
+                        "{$this->address->zipcode} {$this->address->city}, {$country}"
                     );
 
                     if (in_array('result_not_found', $coordinates, true)) {
+                        throw new CouldNotGeocode();
+                    }
+
+                    if (isset($coordinates['partial_match']) && $coordinates['partial_match'] === true) {
                         throw new CouldNotGeocode();
                     }
 
