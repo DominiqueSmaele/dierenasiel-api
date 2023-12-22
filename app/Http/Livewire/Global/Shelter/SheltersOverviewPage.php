@@ -15,9 +15,10 @@ class SheltersOverviewPage extends Component
 
     protected $listeners = [
         'shelterCreated' => '$refresh',
+        'shelterUpdated' => '$refresh',
     ];
 
-    public function boot() : void
+    public function booted() : void
     {
         $this->authorize('viewAny', Shelter::class);
     }
