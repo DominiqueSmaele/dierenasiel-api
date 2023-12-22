@@ -18,5 +18,10 @@ return [
                 'no_permission' => 'U heeft geen toestemming om dierenasielen aan te passen.',
             ],
         ],
+        'animal' => [
+            'view_any' => [
+                'no_permission' => 'U heeft geen toestemming om dieren te bekijken.',
+            ],
+        ],
     ],
 ];

@@ -33,6 +33,7 @@ return [
     'attributes' => [
         'name' => 'naam',
         'email' => 'email-adres',
+        'password' => 'wachtwoord',
         'phone' => 'telefoonnummer',
         'street' => 'straatnaam',
         'number' => 'huisnummer',

@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Enums\Permission;
 use App\Enums\ShelterPermission;
 use App\Events\ServingAdminDashboard;
+use App\Models\Animal;
 use App\Models\Shelter;
 use App\Models\User;
+use App\Policies\AdminDashboard\AnimalPolicy;
 use App\Policies\AdminDashboard\ShelterPolicy;
 use App\Policies\AdminDashboard\UserPolicy;
 use Illuminate\Support\Facades\Event;
@@ -18,6 +20,7 @@ class AdminDashboardServiceProvider extends ServiceProvider
     protected $policies = [
         User::class => UserPolicy::class,
         Shelter::class => ShelterPolicy::class,
+        Animal::class => AnimalPolicy::class,
     ];
 
     public function boot() : void
