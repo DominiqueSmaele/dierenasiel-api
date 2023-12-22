@@ -7,6 +7,8 @@ export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
+        './vendor/wire-elements/pro/config/wire-elements-pro.php',
+        './vendor/wire-elements/pro/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/**/*.js',

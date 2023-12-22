@@ -22,4 +22,16 @@ class ShelterPolicy
 
         return $this->allow();
     }
+
+    public function create(User $user) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters)) {
+            return $this->deny(
+                __('policies.admin_dashboard.shelter.create.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
 }

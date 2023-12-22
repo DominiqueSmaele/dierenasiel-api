@@ -8,7 +8,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <script defer src="https://unpkg.com/@alpinejs/ui@3.12.0-beta.0/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles
@@ -27,12 +26,12 @@
                 </a>
                 <div class="mt-20 flex flex-col gap-2">
                     @can('viewAny', App\Models\Shelter::class)
-                        <x-navbar-link href="{{ route('global.shelters-overview') }}" icon="building-offices" :active="request()->routeIs('global.shelters-overview')">
+                        <x-navbar-link href="{{ route('global.shelters-overview') }}" wire:navigate icon="building-offices" :active="request()->routeIs('global.shelters-overview')">
                             {{ __('web.dashboard_navigation_shelters_link') }}
                         </x-navbar-link>
                     @endcan
                     @can('viewAnyDeveloper', App\Models\User::class)
-                        <x-navbar-link href="{{ route('global.developers-overview') }}" icon="command-line" :active="request()->routeIs('global.developers-overview')">
+                        <x-navbar-link href="{{ route('global.developers-overview') }}" wire:navigate icon="command-line" :active="request()->routeIs('global.developers-overview')">
                             {{ __('web.dashboard_navigation_developers_link') }}
                         </x-navbar-link>
                     @endcan
@@ -73,6 +72,11 @@
             @endif
         </div>
     </main>
+
+    @livewire('slide-over-pro')
+    @livewire('modal-pro')
+
+    @livewireScripts
 </body>
 
 </html>

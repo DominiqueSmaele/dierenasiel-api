@@ -172,6 +172,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\LivewireServiceProvider::class,
         App\Providers\AdminDashboardServiceProvider::class,
+        WireElements\Pro\Components\Modal\ModalServiceProvider::class,
+        WireElements\Pro\Components\SlideOver\SlideOverServiceProvider::class,
     ])->toArray(),
 
     /*

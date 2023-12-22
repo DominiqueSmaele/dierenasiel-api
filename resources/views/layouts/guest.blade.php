@@ -8,7 +8,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <script defer src="https://unpkg.com/@alpinejs/ui@3.12.0-beta.0/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
