@@ -19,7 +19,7 @@ trait ValidatesAnimal
     public function mountValidatesAnimal() : void
     {
         $this->animal ??= Animal::make();
-        $this->withoutImage = $this->shelter->image === null;
+        $this->withoutImage = $this->animal->image === null;
     }
 
     public function bootedValidatesAnimal() : void
@@ -58,7 +58,7 @@ trait ValidatesAnimal
             'animal.sex' => [
                 'required',
                 'string',
-                Rule::in([__('web.animal_fieldset_sex_male'), __('web.animal_fieldset_sex_female')]),
+                Rule::in(['male', 'female']),
             ],
             'animal.years' => [
                 'nullable',
@@ -83,7 +83,7 @@ trait ValidatesAnimal
                 'max:2550',
             ],
             'image' => [
-                'required',
+                ! $this->animal->exists ? 'required' : 'nullable',
                 'image',
                 'max:10000',
             ],

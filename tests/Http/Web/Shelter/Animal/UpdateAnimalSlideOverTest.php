@@ -2,9 +2,8 @@
 
 namespace Tests\Http\Web\Shelter\Animal;
 
-use App\Http\Livewire\Shelter\Animal\CreateAnimalSlideOver;
+use App\Http\Livewire\Shelter\Animal\UpdateAnimalSlideOver;
 use App\Models\Animal;
-use App\Models\Shelter;
 use App\Models\Type;
 use App\Policies\AdminDashboard\AnimalPolicy;
 use Illuminate\Http\UploadedFile;
@@ -12,11 +11,11 @@ use Livewire\Livewire;
 use Tests\AuthenticateAsWebUser;
 use Tests\TestCase;
 
-class CreateAnimalSlideOverTest extends TestCase
+class UpdateAnimalSlideOverTest extends TestCase
 {
     use AuthenticateAsWebUser;
 
-    public Shelter $shelter;
+    public Animal $animal;
 
     public UploadedFile $image;
 
@@ -38,7 +37,7 @@ class CreateAnimalSlideOverTest extends TestCase
     {
         parent::setUp();
 
-        $this->shelter = Shelter::factory()->create();
+        $this->animal = Animal::factory()->create();
 
         $this->image = UploadedFile::fake()->image('image.png');
         $this->name = $this->faker->name();
@@ -51,9 +50,9 @@ class CreateAnimalSlideOverTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_animal()
+    public function it_updates_animal()
     {
-        Livewire::test(CreateAnimalSlideOver::class, [$this->shelter->id])
+        Livewire::test(UpdateAnimalSlideOver::class, [$this->animal->id])
             ->set('image', $this->image)
             ->set('animal.name', $this->name)
             ->set('animal.type_id', $this->type->id)
@@ -62,9 +61,9 @@ class CreateAnimalSlideOverTest extends TestCase
             ->set('animal.months', $this->months)
             ->set('animal.race', $this->race)
             ->set('animal.description', $this->description)
-            ->call('create')
+            ->call('update')
             ->assertHasNoErrors()
-            ->assertDispatched('animalCreated')
+            ->assertDispatched('animalUpdated')
             ->assertDispatched('slide-over.close');
 
         $dbAnimal = Animal::first();
@@ -83,7 +82,7 @@ class CreateAnimalSlideOverTest extends TestCase
     /** @test */
     public function it_throws_validation_error_if_required_data_is_missing()
     {
-        Livewire::test(CreateAnimalSlideOver::class, [$this->shelter->id])
+        Livewire::test(UpdateAnimalSlideOver::class, [$this->animal->id])
             ->set('image', null)
             ->set('animal.name', null)
             ->set('animal.type_id', null)
@@ -92,15 +91,15 @@ class CreateAnimalSlideOverTest extends TestCase
             ->set('animal.months', null)
             ->set('animal.race', null)
             ->set('animal.description', null)
-            ->call('create')
+            ->call('update')
             ->assertHasErrors([
-                'image',
                 'animal.name',
                 'animal.type_id',
                 'animal.sex',
                 'animal.description',
             ])
             ->assertHasNoErrors([
+                'image',
                 'animal.years',
                 'animal.months',
                 'animal.race',
@@ -108,18 +107,18 @@ class CreateAnimalSlideOverTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_success_response_if_create_animal_allowed_by_policy()
+    public function it_returns_success_response_if_update_animal_allowed_by_policy()
     {
-        $this->partialMockPolicy(AnimalPolicy::class)->forUser($this->user)->shouldAllow('create', $this->shelter);
+        $this->partialMockPolicy(AnimalPolicy::class)->forUser($this->user)->shouldAllow('update', $this->animal);
 
-        Livewire::test(CreateAnimalSlideOver::class, [$this->shelter->id])->assertSuccessful();
+        Livewire::test(UpdateAnimalSlideOver::class, [$this->animal->id])->assertSuccessful();
     }
 
     /** @test */
-    public function it_returns_unauthorized_response_if_create_animal_denied_by_policy()
+    public function it_returns_unauthorized_response_if_update_animal_denied_by_policy()
     {
-        $this->partialMockPolicy(AnimalPolicy::class)->forUser($this->user)->shouldDeny('create', $this->shelter);
+        $this->partialMockPolicy(AnimalPolicy::class)->forUser($this->user)->shouldDeny('update', $this->animal);
 
-        Livewire::test(CreateAnimalSlideOver::class, [$this->shelter->id])->assertForbidden();
+        Livewire::test(UpdateAnimalSlideOver::class, [$this->animal->id])->assertForbidden();
     }
 }

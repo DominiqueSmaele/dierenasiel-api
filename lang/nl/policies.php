@@ -25,6 +25,9 @@ return [
             'create' => [
                 'no_permission' => 'U heeft geen toestemming om dieren aan te maken.',
             ],
+            'update' => [
+                'no_permission' => 'U heeft geen toestemming om dieren aan te passen.',
+            ],
         ],
     ],
 ];
