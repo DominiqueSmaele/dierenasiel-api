@@ -6,6 +6,7 @@ use App\Http\Livewire\Global\Shelter\CreateShelterSlideOver;
 use App\Models\Country;
 use App\Models\Shelter;
 use App\Policies\AdminDashboard\ShelterPolicy;
+use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 use Spatie\Geocoder\Facades\Geocoder;
@@ -15,6 +16,8 @@ use Tests\TestCase;
 class CreateShelterSlideOverTest extends TestCase
 {
     use AuthenticateAsWebUser;
+
+    public UploadedFile $image;
 
     public string $name;
 
@@ -42,6 +45,7 @@ class CreateShelterSlideOverTest extends TestCase
     {
         parent::setUp();
 
+        $this->image = UploadedFile::fake()->image('image.png');
         $this->name = $this->faker->name();
         $this->email = $this->faker->email();
         $this->phone = $this->faker->e164PhoneNumber();
@@ -69,6 +73,7 @@ class CreateShelterSlideOverTest extends TestCase
             ->andReturn(['lng' => $this->longitude, 'lat' => $this->latitude]);
 
         Livewire::test(CreateShelterSlideOver::class)
+            ->set('image', $this->image)
             ->set('shelter.name', $this->name)
             ->set('shelter.email', $this->email)
             ->set('phone', $this->phone)
@@ -86,6 +91,7 @@ class CreateShelterSlideOverTest extends TestCase
         $dbShelter = Shelter::first();
 
         $this->assertNotNull($dbShelter);
+        $this->assertCount(1, $dbShelter->getMedia('image'));
         $this->assertSame($this->name, $dbShelter->name);
         $this->assertSame($this->email, $dbShelter->email);
         $this->assertSame($this->phone, $dbShelter->phone->formatE164());
@@ -106,6 +112,7 @@ class CreateShelterSlideOverTest extends TestCase
         Shelter::factory()->create(['email' => $this->email]);
 
         Livewire::test(CreateShelterSlideOver::class)
+            ->set('image', $this->image)
             ->set('shelter.name', $this->name)
             ->set('shelter.email', $this->email)
             ->set('phone', $this->phone)
@@ -123,6 +130,7 @@ class CreateShelterSlideOverTest extends TestCase
     public function it_throws_validation_error_if_required_data_is_missing()
     {
         Livewire::test(CreateShelterSlideOver::class)
+            ->set('image', null)
             ->set('shelter.name', null)
             ->set('shelter.email', null)
             ->set('phone', null)
@@ -143,7 +151,10 @@ class CreateShelterSlideOverTest extends TestCase
                 'address.city',
                 'address.country_id',
             ])
-            ->assertHasNoErrors(['address.box_number']);
+            ->assertHasNoErrors([
+                'image',
+                'address.box_number',
+            ]);
     }
 
     /** @test */
@@ -152,6 +163,7 @@ class CreateShelterSlideOverTest extends TestCase
         Geocoder::shouldReceive('setCountry->getCoordinatesForAddress')->once()->andThrow(new CouldNotGeocode());
 
         Livewire::test(CreateShelterSlideOver::class)
+            ->set('image', $this->image)
             ->set('shelter.name', $this->name)
             ->set('shelter.email', $this->email)
             ->set('phone', $this->phone)

@@ -1,7 +1,7 @@
 <x-slide-over wire:submit.prevent="create" :title="__('web.create_shelter_slide_over_title')">
-    <x-fieldset.shelter />
+    <x-fieldset.shelter :shelter="$shelter" :image="$image" :without-image="$withoutImage" />
 
-    <div class="flex flex-col gap-2">
+    <div class="mt-10 flex flex-col gap-2">
         <x-button type="submit" class="w-full">
             {{ __('web.create_shelter_slide_over_submit_button') }}
         </x-button>

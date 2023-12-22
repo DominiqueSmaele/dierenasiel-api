@@ -7,17 +7,23 @@ use App\Models\Address;
 use App\Models\Shelter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 use WireElements\Pro\Components\SlideOver\SlideOver;
 
 class CreateShelterSlideOver extends SlideOver
 {
     use AuthorizesRequests,
-        ValidatesShelter;
+        ValidatesShelter,
+        WithFileUploads;
 
     public Shelter $shelter;
 
     public Address $address;
+
+    public TemporaryUploadedFile | string | null $image = null;
 
     public function boot() : void
     {
@@ -34,6 +40,16 @@ class CreateShelterSlideOver extends SlideOver
             $this->shelter->address()->associate($this->address);
 
             $this->shelter->save();
+
+            if ($this->image === null) {
+                return;
+            }
+
+            $this->shelter->addMediaFromDisk($this->image->storagePath(), $this->image->storageDisk())
+                ->setFileName(Str::ascii($this->image->getClientOriginalName()))
+                ->toMediaCollection('image');
+
+            $this->reset('image');
         });
 
         $this->close(andDispatch: [

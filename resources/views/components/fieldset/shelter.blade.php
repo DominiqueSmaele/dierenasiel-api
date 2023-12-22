@@ -1,3 +1,5 @@
+@props(['shelter', 'image', 'withoutImage'])
+
 @php
     $countries = \App\Models\Country::all()
         ->sortBy(fn($country) => $country->getName())
@@ -5,9 +7,45 @@
 @endphp
 
 <div class="flex flex-1 flex-col gap-4">
+    <x-input.group :error="$errors->first('image')">
+        <div class="mb-1 flex items-center justify-between gap-4">
+            <x-label>{{ __('web.shelter_fieldset_image_label') }}</x-label>
+
+            <div class="flex items-center justify-end gap-2 text-gray-dark">
+                @if ($shelter->exists && (!$withoutImage || $image !== null))
+                    <x-button type="button" @click="document.querySelector('#shelter-image').click()" variant="tertiary" class="!p-0">{{ __('web.shelter_fieldset_image_change_button') }}</x-button>
+                    <p>/</p>
+                @endif
+                @if (($shelter->exists && !$withoutImage) || $image !== null)
+                    <x-button type="button" @click="$wire.set('image', null); $wire.set('withoutImage', true);" variant="tertiary" class="!p-0">{{ __('web.shelter_fieldset_image_remove_button') }}</x-button>
+                @endif
+            </div>
+        </div>
+        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-32 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
+            <input
+                type="file"
+                accept="image/jpg,image/jpeg,image/png"
+                wire:model="image"
+                @dragover="dragging = true"
+                @dragleave="dragging = false"
+                @drop="dragging = false"
+                id="shelter-image"
+                class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0" />
+
+            @if (($shelter->exists && !$withoutImage) || ($image && is_object($image)))
+                <div class="h-full w-full bg-cover bg-center" style="background-image: url('{{ $image && is_object($image) ? $image?->temporaryUrl() : $shelter->image?->getAvailableFullUrl(['small', 'medium']) }}')">
+                </div>
+            @else
+                <x-icon.loading wire:loading wire:target="image" class="h-4 w-4 animate-spin text-gray-base" />
+                <x-icon.image wire:loading.remove wire:target="image" class="h-6 w-6 text-gray-base" />
+                <p class="text-sm text-gray-dark">{{ __('web.shelter_fieldset_image_button') }}</p>
+            @endif
+        </div>
+    </x-input.group>
+
     <x-input.group :error="$errors->first('shelter.name')">
         <x-label>{{ __('web.shelter_fieldset_name_label') }}</x-label>
-        <x-input class="mt-1" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required autofocus />
+        <x-input class="mt-3" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required autofocus />
     </x-input.group>
 
     <x-input.group :error="$errors->first('shelter.email')">

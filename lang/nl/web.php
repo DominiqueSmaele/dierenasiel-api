@@ -34,6 +34,10 @@ return [
     'create_shelter_slide_over_title' => 'Dierenasiel aanmaken',
     'create_shelter_slide_over_submit_button' => 'Aanmaken',
     'create_shelter_slide_over_cancel_button' => 'Annuleren',
+    'shelter_fieldset_image_label' => 'Logo',
+    'shelter_fieldset_image_change_button' => 'Aanpassen',
+    'shelter_fieldset_image_remove_button' => 'Verwijderen',
+    'shelter_fieldset_image_button' => 'Upload een logo',
     'shelter_fieldset_name_label' => 'Naam',
     'shelter_fieldset_name_placeholder' => 'Naam',
     'shelter_fieldset_email_label' => 'Email-adres',
@@ -71,4 +75,5 @@ return [
     'two_factor_authentication_form_show_recovery_codes_button' => 'Toon herstelcodes',
     'two_factor_authentication_form_cancel_button' => 'Annuleer',
     'two_factor_authentication_form_disable_button' => 'Uitschakelen',
+    'optional_label' => 'Optioneel',
 ];

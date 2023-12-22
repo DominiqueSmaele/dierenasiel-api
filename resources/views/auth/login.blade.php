@@ -26,7 +26,7 @@
             </label>
         </div>
 
-        <x-button type="submit" variant="primary" color="blue" class="mt-8 w-full">
+        <x-button type="submit" variant="primary" class="mt-8 w-full">
             {{ __('web.login_button') }}
         </x-button>
 
