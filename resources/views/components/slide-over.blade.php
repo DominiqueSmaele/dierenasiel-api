@@ -5,7 +5,7 @@
 @endphp
 
 <{{ $tag }} {{ $attributes->except('wire:close')->class(['flex flex-1 flex-col bg-blue-base overflow-hidden']) }}>
-    <div class="flex items-center justify-center px-4 pb-8 pt-4">
+    <div class="flex items-center justify-center px-4 pb-6 pt-6">
         <div class="flex-1">
             @if ($attributes->has('x-on:close'))
                 <x-button type="button" variant="tertiary" color="gray" @click="{{ $attributes->get('x-on:close') }}">

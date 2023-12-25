@@ -25,6 +25,19 @@ class ShelterPolicy
         return $this->allow();
     }
 
+    public function view(User $user, Shelter $shelter) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+            ! $user->hasPermission(ShelterPermission::manageShelter, $shelter)) {
+            return $this->deny(
+                __('policies.admin_dashboard.shelter.view.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
+
     public function create(User $user) : Response | bool
     {
         if (! $user->hasPermission(Permission::manageAllShelters)) {

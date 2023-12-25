@@ -15,6 +15,9 @@ return new class() extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('tiktok')->nullable();
             $table->foreignId('address_id')->constrained('addresses');
             $table->timestamps();
             $table->softDeletes();

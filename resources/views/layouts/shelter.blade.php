@@ -28,6 +28,12 @@
                             {{ __('web.shelter_navigation_animals_link') }}
                         </x-navbar-link>
                     @endcan
+
+                    @can('view', [App\Models\Shelter::class, $shelter])
+                        <x-navbar-link href="{{ route('shelter.detail', $shelter->id) }}" wire:navigate icon="information" :active="request()->routeIs('shelter.detail')">
+                            {{ __('web.shelter_navigation_information_link') }}
+                        </x-navbar-link>
+                    @endcan
                 </div>
             </div>
 

@@ -40,6 +40,12 @@ trait ValidatesShelter
                     return;
                 }
 
+                $this->shelter->phone = $this->phone;
+
+                if ($this->withoutImage) {
+                    $this->image = null;
+                }
+
                 if ($this->address->isClean(['street', 'number', 'box_number', 'zipcode', 'city', 'country_id'])) {
                     return;
                 }
@@ -64,12 +70,6 @@ trait ValidatesShelter
                 } catch (CouldNotGeocode) {
                     return $validator->errors()->add('address', __('validation.custom.address.geocode'));
                 }
-
-                $this->shelter->phone = $this->phone;
-
-                if ($this->withoutImage) {
-                    $this->image = null;
-                }
             });
         });
     }
@@ -93,9 +93,19 @@ trait ValidatesShelter
                 Rule::unique(Shelter::class, 'email')->ignore($this->shelter),
                 'max:255',
             ],
-            'phone' => [
-                'required',
-                'phone:BE',
+            'shelter.facebook' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'shelter.instagram' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'shelter.tiktok' => [
+                'nullable',
+                'string',
                 'max:255',
             ],
             'address.street' => [
@@ -132,6 +142,11 @@ trait ValidatesShelter
                 'nullable',
                 'image',
                 'max:10000',
+            ],
+            'phone' => [
+                'required',
+                'phone:BE',
+                'max:255',
             ],
         ];
     }
