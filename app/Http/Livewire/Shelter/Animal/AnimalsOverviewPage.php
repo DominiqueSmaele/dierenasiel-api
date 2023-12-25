@@ -19,6 +19,7 @@ class AnimalsOverviewPage extends Component
     protected $listeners = [
         'animalCreated' => '$refresh',
         'animalUpdated' => '$refresh',
+        'animalDeleted' => '$refresh',
     ];
 
     public function booted() : void

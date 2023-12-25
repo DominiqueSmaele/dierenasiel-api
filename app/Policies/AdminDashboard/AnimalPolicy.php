@@ -55,4 +55,32 @@ class AnimalPolicy
 
         return $this->allow();
     }
+
+    public function delete(User $user, Animal $animal) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+            ! $user->hasPermission(ShelterPermission::manageShelter, $animal->shelter)
+        ) {
+            return $this->deny(
+                __('policies.admin_dashboard.animal.delete.no_permission'),
+                'no_permission'
+            );
+        }
+
+        if ($animal->trashed()) {
+            return $this->deny(
+                __('policies.admin_dashboard.animal.delete.deleted'),
+                'deleted'
+            );
+        }
+
+        if ($animal->shelter->trashed()) {
+            return $this->deny(
+                __('policies.admin_dashboard.animal.delete.shelter_deleted'),
+                'shelter_deleted'
+            );
+        }
+
+        return $this->allow();
+    }
 }
