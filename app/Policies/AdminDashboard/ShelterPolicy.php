@@ -62,4 +62,23 @@ class ShelterPolicy
 
         return $this->allow();
     }
+
+    public function delete(User $user, Shelter $shelter) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters)) {
+            return $this->deny(
+                __('policies.admin_dashboard.shelter.delete.no_permission'),
+                'no_permission'
+            );
+        }
+
+        if ($shelter->trashed()) {
+            return $this->deny(
+                __('policies.admin_dashboard.shelter.delete.deleted'),
+                'deleted'
+            );
+        }
+
+        return $this->allow();
+    }
 }

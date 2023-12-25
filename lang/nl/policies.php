@@ -17,6 +17,10 @@ return [
             'update' => [
                 'no_permission' => 'U heeft geen toestemming om dierenasielen aan te passen.',
             ],
+            'delete' => [
+                'no_permission' => 'U heeft geen toestemming om dierenasielen te verwijderen.',
+                'deleted' => 'U kan geen dierenasiel verwijderen dat al verwijderd is.',
+            ],
         ],
         'animal' => [
             'view_any' => [

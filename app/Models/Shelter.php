@@ -48,6 +48,11 @@ class Shelter extends TeamModel implements HasMedia
         return $this->hasMany(User::class);
     }
 
+    public function animals() : HasMany
+    {
+        return $this->hasMany(Animal::class);
+    }
+
     protected function image() : Attribute
     {
         return Attribute::make(get: fn () : ?Media => $this->getFirstMedia('image'));
