@@ -72,7 +72,7 @@ class CreateAnimalQualityTest extends TestCase
             ->assertDispatched('animalCreated')
             ->assertDispatched('slide-over.close');
 
-        $dbAnimal = Animal::first()->qualities()->get();
+        $dbAnimalQualities = Animal::first()->qualities()->get();
 
         $this->assertNotNull($dbAnimalQualities);
         $this->assertEqualsArray($this->qualities->pluck('id'), $dbAnimalQualities->pluck('pivot.quality_id'));
