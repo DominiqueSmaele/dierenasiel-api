@@ -28,8 +28,13 @@
                             {{ __('web.global_navigation_shelters_link') }}
                         </x-navbar-link>
                     @endcan
+                    @can('viewAny', App\Models\Quality::class)
+                        <x-navbar-link href="{{ route('global.qualities-overview') }}" wire:navigate icon="folder" :active="request()->routeIs('global.qualities-overview')">
+                            {{ __('web.global_navigation_qualities_link') }}
+                        </x-navbar-link>
+                    @endcan
                     @can('viewAnyDeveloper', App\Models\User::class)
-                        <x-navbar-link href="{{ route('global.developers-overview') }}" wire:navigate icon="command-line" :active="request()->routeIs('global.developers-overview')">
+                        <x-navbar-link class="mt-10" href="{{ route('global.developers-overview') }}" wire:navigate icon="command-line" :active="request()->routeIs('global.developers-overview')">
                             {{ __('web.global_navigation_developers_link') }}
                         </x-navbar-link>
                     @endcan

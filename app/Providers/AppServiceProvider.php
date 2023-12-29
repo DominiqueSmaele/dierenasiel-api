@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Address;
 use App\Models\Animal;
 use App\Models\Country;
+use App\Models\Quality;
 use App\Models\Shelter;
 use App\Models\User;
 use Faker\Factory;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             'address' => Address::class,
             'country' => Country::class,
             'animal' => Animal::class,
+            'quality' => Quality::class,
         ]);
     }
 
