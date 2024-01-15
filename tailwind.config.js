@@ -45,12 +45,13 @@ export default {
             'gray': {
                 'dark': '#9FADBF',
                 'base': '#BCC5D2',
-                'light': '#DEE3E9'
+                'light': '#DEE3E9',
+                'lighter' : '#EDF1F5',
             },
             'orange': {
                 'dark': '#FC7B49',
                 'base': '#FC8D62',
-                'light': '#FC9F7B'
+                'light': '#FC9F7B',
             },
             'red': {
                 'base': '#EF6161',

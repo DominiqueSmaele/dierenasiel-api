@@ -15,6 +15,13 @@ trait ValidatesQuality
         $this->quality ??= Quality::make();
     }
 
+    protected function prepareForValidation($attributes)
+    {
+        $attributes['quality']['name'] = strtolower($attributes['quality']['name']);
+
+        return $attributes;
+    }
+
     protected function rules() : array
     {
         return [

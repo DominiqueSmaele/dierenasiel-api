@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Livewire\Global\Developer\DevelopersOverviewPage;
 use App\Http\Livewire\Global\Quality\QualitiesOverviewPage;
 use App\Http\Livewire\Global\Shelter\SheltersOverviewPage;
+use App\Http\Livewire\Shelter\Animal\AnimalDetailPage;
 use App\Http\Livewire\Shelter\Animal\AnimalsOverviewPage;
 use App\Http\Livewire\Shelter\ShelterDetailPage;
 use App\Http\Middleware\DispatchServingAdminDashboardEvent;
@@ -34,6 +35,8 @@ Route::middleware(['auth', EnsureUserCanViewAdminDashboard::class, DispatchServi
 
     Route::get('/shelter/{shelter}/animals', AnimalsOverviewPage::class)->name('shelter.animals-overview');
     Route::get('/shelter/{shelter}/information', ShelterDetailPage::class)->name('shelter.detail');
+
+    Route::get('/animal/{animal}', AnimalDetailPage::class)->name('shelter.animal-detail');
 });
 
 Livewire::setUpdateRoute(function ($handle) {
