@@ -36,6 +36,6 @@ class UserFactory extends Factory
 
     public function assignShelterRole(ShelterRole $role) : UserFactory
     {
-        return $this->afterCreating(fn (User $user) => $user->syncRoles([$role]));
+        return $this->afterCreating(fn (User $user) => $user->syncRoles([$role], $user->shelter_id));
     }
 }

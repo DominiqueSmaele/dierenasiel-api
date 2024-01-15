@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'image' => 'Het :attribute moet een afbeelding zijn.',
-    'email' => 'Het :attribute moet een geldig e-mailadres zijn.',
+    'image' => ':attribute moet een afbeelding zijn.',
+    'email' => ':attribute moet een geldig e-mailadres zijn.',
     'password' => [
         'letters' => 'Het :attribute moet minimaal één letter bevatten.',
         'mixed' => 'Het :attribute moet minimaal één hoofdletter en één kleine letter bevatten.',
@@ -10,16 +10,16 @@ return [
         'symbols' => 'Het :attribute moet minstens één symbool bevatten.',
         'uncompromised' => 'Het opgegeven :attribuut is verschenen in een datalek. Kies een ander :attribuut.',
     ],
-    'phone' => 'Het :attribute-veld bevat een ongeldig nummer.',
+    'phone' => ':attribute-veld bevat een ongeldig nummer.',
     'required' => 'Dit veld is verplicht.',
     'size' => [
-        'array' => 'Het :attribute moet :size items bevatten.',
-        'file' => 'Het :attribute moet :size kilobytes zijn.',
-        'numeric' => 'Het :attribute moet :size zijn.',
-        'string' => 'Het :attribute moet :size tekens zijn.',
+        'array' => ':attribute moet :size items bevatten.',
+        'file' => ':attribute moet :size kilobytes zijn.',
+        'numeric' => ':attribute moet :size zijn.',
+        'string' => ':attribute moet :size tekens zijn.',
     ],
-    'string' => 'Het :attribute moet een string zijn.',
-    'unique' => 'Het :attribute is al in gebruik.',
+    'string' => ':attribute moet een string zijn.',
+    'unique' => ':attribute is al in gebruik.',
 
     'custom' => [
         'address' => [
@@ -31,14 +31,16 @@ return [
     ],
 
     'attributes' => [
-        'name' => 'naam',
-        'email' => 'email-adres',
-        'password' => 'wachtwoord',
-        'phone' => 'telefoonnummer',
-        'street' => 'straatnaam',
-        'number' => 'huisnummer',
-        'box_number' => 'toevoeging',
-        'zipcode' => 'postcode',
-        'city' => 'stad',
+        'name' => 'Naam',
+        'email' => 'Email-adres',
+        'password' => 'Wachtwoord',
+        'password_repeat' => 'Wachtwoord',
+        'phone' => 'Telefoonnummer',
+        'street' => 'Straatnaam',
+        'number' => 'Huisnummer',
+        'box_number' => 'Toevoeging',
+        'zipcode' => 'Postcode',
+        'city' => 'Stad',
     ],
+    'same' => ':attribute komt niet overeen.',
 ];

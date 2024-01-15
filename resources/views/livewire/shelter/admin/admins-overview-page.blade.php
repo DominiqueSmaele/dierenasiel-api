@@ -1,5 +1,11 @@
 <div class="flex h-full flex-col">
-    <h2 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.admins_overview_page_title') }}</h2>
+    <div class="flex items-center justify-between">
+        <h2 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.admins_overview_page_title') }}</h2>
+
+        <x-button leading-icon="plus" wire:click="$dispatch('slide-over.open', {component: 'shelter.create-admin-slide-over', arguments: {'shelterId': {{ $shelter->id }}}}) ">
+            {{ __('web.admins_overview_page_create_button') }}
+        </x-button>
+    </div>
 
     @if ($admins->isNotEmpty())
         <div class="mt-12 flex flex-col gap-4">

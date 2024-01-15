@@ -9,6 +9,9 @@ return [
             'view_any_admin' => [
                 'no_permission' => 'U heeft geen toestemming om admins te bekijken.',
             ],
+            'create_admin' => [
+                'no_permission' => 'U heeft geen toestemming om admins aan te maken.',
+            ],
         ],
         'shelter' => [
             'view_any' => [

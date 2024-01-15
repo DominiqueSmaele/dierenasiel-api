@@ -17,6 +17,10 @@ class AdminsOverviewPage extends Component
 
     public Shelter $shelter;
 
+    protected $listeners = [
+        'adminCreated' => '$refresh',
+    ];
+
     public function booted() : void
     {
         $this->authorize('viewAnyAdmin', [User::class, $this->shelter]);
@@ -26,8 +30,7 @@ class AdminsOverviewPage extends Component
     {
         return view('livewire.shelter.admin.admins-overview-page', [
             'admins' => User::query()
-                ->where('shelter_id', $this->shelter->id)
-                ->whereHasRole(ShelterRole::admin)
+                ->whereHasRole([ShelterRole::admin], $this->shelter)
                 ->orderBy('lastname')
                 ->orderBy('firstname')
                 ->orderBy('id')
