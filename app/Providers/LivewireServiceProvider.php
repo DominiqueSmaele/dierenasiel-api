@@ -9,6 +9,7 @@ use App\Http\Livewire\Global\Shelter\CreateShelterSlideOver;
 use App\Http\Livewire\Global\Shelter\DeleteShelterModal;
 use App\Http\Livewire\Global\Shelter\SheltersOverviewPage;
 use App\Http\Livewire\Global\Shelter\UpdateShelterSlideOver;
+use App\Http\Livewire\Shelter\Admin\AdminsOverviewPage;
 use App\Http\Livewire\Shelter\Animal\AnimalDetailPage;
 use App\Http\Livewire\Shelter\Animal\AnimalsOverviewPage;
 use App\Http\Livewire\Shelter\Animal\CreateAnimalSlideOver;
@@ -38,6 +39,8 @@ class LivewireServiceProvider extends ServiceProvider
         'shelter.animal-detail-page' => AnimalDetailPage::class,
 
         'shelter.detail-page' => ShelterDetailPage::class,
+
+        'shelter.admins-overview-page' => AdminsOverviewPage::class,
     ];
 
     public function boot() : void

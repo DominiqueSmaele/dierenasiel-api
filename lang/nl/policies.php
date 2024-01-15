@@ -6,6 +6,9 @@ return [
             'view_any_developer' => [
                 'no_permission' => 'U heeft geen toestemming om ontwikkelaars te bekijken.',
             ],
+            'view_any_admin' => [
+                'no_permission' => 'U heeft geen toestemming om admins te bekijken.',
+            ],
         ],
         'shelter' => [
             'view_any' => [
