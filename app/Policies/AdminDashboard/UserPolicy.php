@@ -73,4 +73,32 @@ class UserPolicy
 
         return $this->allow();
     }
+
+    public function deleteAdmin(User $authUser, User $user) : Response | bool
+    {
+        if (! $authUser->hasPermission(Permission::manageAllShelters) &&
+            ! $authUser->hasPermission(ShelterPermission::manageShelter, $user->shelter)
+        ) {
+            return $this->deny(
+                __('policies.admin_dashboard.user.delete_admin.no_permission'),
+                'no_permission'
+            );
+        }
+
+        if (! $user->hasRole([ShelterRole::admin], $user->shelter)) {
+            return $this->deny(
+                __('policies.admin_dashboard.user.delete_admin.incorrect_role'),
+                'incorrect_role'
+            );
+        }
+
+        if ($authUser->id === $user->id) {
+            return $this->deny(
+                __('policies.admin_dashboard.user.delete_admin.no_self_delete'),
+                'no_self_delete'
+            );
+        }
+
+        return $this->allow();
+    }
 }

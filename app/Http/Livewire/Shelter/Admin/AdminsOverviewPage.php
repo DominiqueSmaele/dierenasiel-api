@@ -20,6 +20,7 @@ class AdminsOverviewPage extends Component
     protected $listeners = [
         'adminCreated' => '$refresh',
         'adminUpdated' => '$refresh',
+        'adminDeleted' => '$refresh',
     ];
 
     public function booted() : void
