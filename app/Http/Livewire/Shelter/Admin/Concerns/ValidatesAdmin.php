@@ -13,11 +13,14 @@ trait ValidatesAdmin
 
     public ?string $password;
 
-    public ?string $password_repeat;
+    public ?string $passwordRepeat;
+
+    public ?string $oldPassword;
 
     public function mountValidatesAdmin() : void
     {
         $this->user ??= User::make();
+        $this->password = '';
     }
 
     public function bootedValidatesAdmin() : void
@@ -25,6 +28,10 @@ trait ValidatesAdmin
         $this->withValidator(function (Validator $validator) {
             $validator->after(function (Validator $validator) {
                 if ($validator->errors()->isNotEmpty()) {
+                    return;
+                }
+
+                if (empty($this->password)) {
                     return;
                 }
 
@@ -53,14 +60,18 @@ trait ValidatesAdmin
                 'max:255',
             ],
             'password' => [
-                'required',
+                $this->user->id ? 'nullable' : 'required',
                 'string',
+                'min:8',
                 'max:255',
+                'regex:/[0-9]/',
             ],
-            'password_repeat' => [
-                'required',
+            'passwordRepeat' => [
+                $this->user->id ? 'nullable' : 'required',
                 'string',
+                'min:8',
                 'max:255',
+                'regex:/[0-9]/',
                 'same:password',
             ],
         ];
