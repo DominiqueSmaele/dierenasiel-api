@@ -35,7 +35,7 @@ class AnimalsOverviewPage extends Component
                 ->with('type')
                 ->orderBy('name')
                 ->orderBy('id')
-                ->paginate(12),
+                ->paginate(20),
         ])->layout('layouts.shelter', ['shelter' => $this->shelter]);
     }
 }

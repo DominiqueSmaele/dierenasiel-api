@@ -6,4 +6,7 @@ return [
         'admin' => 'admin',
         'user' => 'user',
     ],
+    'shelter_role' => [
+        'administrator' => 'administrator',
+    ],
 ];

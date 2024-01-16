@@ -35,7 +35,7 @@ class QualitiesOverviewPage extends Component
                 ->orderBy('type_id')
                 ->orderBy('name')
                 ->orderBy('id')
-                ->paginate(20),
+                ->paginate(30),
         ])->layout('layouts.global');
     }
 }

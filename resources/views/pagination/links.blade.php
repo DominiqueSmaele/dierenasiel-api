@@ -1,8 +1,8 @@
 @props(['translationKey' => null])
 
 @if ($paginator->hasPages())
-    <nav class="flex items-center justify-between py-3.5">
-        <x-button type="button" variant="tertiary" leading-icon="arrow-left" :disabled="$paginator->onFirstPage()" wire:click.prefetch="previousPage('{{ $paginator->getPageName() }}')" rel="prev" aria-label="{{ __('pagination.previous') }}">
+    <nav class="flex items-center justify-between py-5">
+        <x-button type="button" variant="tertiary" leading-icon="arrow-left" :disabled="$paginator->onFirstPage()" wire:click="previousPage('{{ $paginator->getPageName() }}')" rel="prev" aria-label="{{ __('pagination.previous') }}">
             {{ __('pagination.previous') }}
         </x-button>
 
@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <x-button type="button" variant="tertiary" trailing-icon="arrow-right" :disabled="!$paginator->hasMorePages()" wire:click.prefetch="nextPage('{{ $paginator->getPageName() }}')" rel="next" aria-label="{{ __('pagination.next') }}">
+        <x-button type="button" variant="tertiary" trailing-icon="arrow-right" :disabled="!$paginator->hasMorePages()" wire:click="nextPage('{{ $paginator->getPageName() }}')" rel="next" aria-label="{{ __('pagination.next') }}">
             {{ __('pagination.next') }}
         </x-button>
     </nav>

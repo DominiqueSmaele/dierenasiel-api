@@ -38,14 +38,14 @@
                         </div>
 
                         <p class="mb-3 mt-3 font-highlight-sans text-base leading-5">
-                            <span class="line-clamp-4">{{ ucfirst($animal->description) }}</span>
+                            <span class="line-clamp-3">{!! nl2br(e($animal->description)) !!}</span>
                         </p>
                     </div>
                 </a>
             @endforeach
         </div>
 
-        {{ $animals->links('pagination.links', ['translationKey' => 'web.shelters_pagination_info']) }}
+        {{ $animals->links('pagination.links', ['translationKey' => 'web.animals_pagination_info']) }}
     @else
         <x-empty-state :title="__('web.animals_overview_page_empty_state_title')" :description="__('web.animals_overview_page_empty_state_description')" />
     @endif
