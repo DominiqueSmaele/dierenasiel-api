@@ -22,6 +22,9 @@ return [
             'view_any' => [
                 'no_permission' => 'U heeft geen toestemming om dieren te bekijken.',
             ],
+            'create' => [
+                'no_permission' => 'U heeft geen toestemming om dieren aan te maken.',
+            ],
         ],
     ],
 ];

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Global\Shelter;
+namespace App\Http\Livewire\Shelter\Animal;
 
-use App\Http\Livewire\Global\Shelter\Concerns\ValidatesShelter;
-use App\Models\Address;
+use App\Http\Livewire\Shelter\Animal\Concerns\ValidatesAnimal;
+use App\Models\Animal;
 use App\Models\Shelter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
@@ -13,21 +13,26 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 use WireElements\Pro\Components\SlideOver\SlideOver;
 
-class CreateShelterSlideOver extends SlideOver
+class CreateAnimalSlideOver extends SlideOver
 {
     use AuthorizesRequests,
-        ValidatesShelter,
+        ValidatesAnimal,
         WithFileUploads;
+
+    public Animal $animal;
 
     public Shelter $shelter;
 
-    public Address $address;
-
     public TemporaryUploadedFile | string | null $image = null;
+
+    public function mount(int $shelterId) : void
+    {
+        $this->shelter = Shelter::find($shelterId);
+    }
 
     public function booted() : void
     {
-        $this->authorize('create', Shelter::class);
+        $this->authorize('create', [Animal::class, $this->shelter]);
     }
 
     public function create() : void
@@ -35,32 +40,27 @@ class CreateShelterSlideOver extends SlideOver
         $this->validate();
 
         DB::transaction(function () {
-            $this->address->save();
-
-            $this->shelter->address()->associate($this->address);
-
-            $this->shelter->save();
+            $this->animal->shelter()->associate($this->shelter);
+            $this->animal->save();
 
             if ($this->image === null) {
                 return;
             }
 
-            $this->shelter->addMediaFromDisk($this->image->storagePath(), $this->image->storageDisk())
+            $this->animal->addMediaFromDisk($this->image->storagePath(), $this->image->storageDisk())
                 ->setFileName(Str::ascii($this->image->getClientOriginalName()))
                 ->toMediaCollection('image');
 
             $this->reset('image');
         });
 
-        $this->close(
-            andDispatch: [
-                'shelterCreated',
-            ]
-        );
+        $this->close(andDispatch: [
+            'animalCreated',
+        ]);
     }
 
     public function render() : View
     {
-        return view('livewire.global.shelter.create-shelter-slide-over');
+        return view('livewire.shelter.animal.create-animal-slide-over');
     }
 }

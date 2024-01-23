@@ -15,6 +15,16 @@ export default {
     ],
 
     theme: {
+        screens: {
+            'sm': "640px",
+            'md': "768px",
+            'lg': "1024px",
+            'xl': "1280px",
+            "2xl": "1536px",
+            '3xl': '1920px',
+            '4xl': '2560px',
+        },
+
         boxShadow: {
             'light': '2px 2px 2px 2px rgba(2, 51, 115, 0.08)',
             'dark': '2px 2px 2px 2px rgba(0, 0, 0, 0.15)',
