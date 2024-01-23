@@ -16,6 +16,7 @@ class SheltersOverviewPage extends Component
     protected $listeners = [
         'shelterCreated' => '$refresh',
         'shelterUpdated' => '$refresh',
+        'shelterDeleted' => '$refresh',
     ];
 
     public function booted() : void
