@@ -88,7 +88,7 @@
 
     <x-input.group :error="$errors->first('animal.race')">
         <x-label>{{ __('web.animal_fieldset_race_label') }}</x-label>
-        <x-input class="mt-1" wire:model="animal.race" :placeholder="__('web.animal_fieldset_race_placeholder')" autofocus />
+        <x-input class="mt-1" wire:model="animal.race" :placeholder="__('web.animal_fieldset_race_placeholder')" />
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.description')">

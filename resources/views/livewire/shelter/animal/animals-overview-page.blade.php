@@ -8,7 +8,7 @@
     </div>
 
     @if ($animals->isNotEmpty())
-        <div class="mt-12 grid grid-cols-4 gap-5 4xl:grid-cols-5">
+        <div class="mt-12 grid grid-cols-3 gap-5 2xl:grid-cols-4 4xl:grid-cols-5">
             @foreach ($animals as $animal)
                 @php
                     $image = $animal?->getMedia('image')->first();

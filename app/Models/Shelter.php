@@ -24,10 +24,13 @@ class Shelter extends TeamModel implements HasMedia
         'name',
         'email',
         'phone',
+        'facebook',
+        'instagram',
+        'tiktok',
     ];
 
     protected $casts = [
-        'phone' => E164PhoneNumberCast::class,
+        'phone' => E164PhoneNumberCast::class . ':BE',
         'address_id' => 'integer',
     ];
 
