@@ -9,7 +9,7 @@
 <div class="flex flex-1 flex-col gap-4">
     <x-input.group :error="$errors->first('image')">
         <div class="mb-1 flex items-center justify-between gap-4">
-            <x-label>{{ __('web.animal_fieldset_image_label') }}</x-label>
+            <x-label>{{ __('web.animal_fieldset_image_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
             <div class="flex items-center justify-end gap-2 text-gray-dark">
                 @if ($animal->exists && (!$withoutImage || $image !== null))
@@ -30,7 +30,8 @@
                 @dragleave="dragging = false"
                 @drop="dragging = false"
                 id="animal-image"
-                class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0" required />
+                class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0"
+                @if (!$animal->exists) required @endif />
 
             @if (($animal->exists && !$withoutImage) || ($image && is_object($image)))
                 <div class="h-full w-full bg-cover bg-center" style="background-image: url('{{ $image && is_object($image) ? $image?->temporaryUrl() : $animal->image?->getAvailableFullUrl(['small', 'medium']) }}')">
@@ -44,12 +45,12 @@
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.name')">
-        <x-label>{{ __('web.animal_fieldset_name_label') }}</x-label>
+        <x-label>{{ __('web.animal_fieldset_name_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
         <x-input class="mt-1" wire:model="animal.name" :placeholder="__('web.animal_fieldset_name_placeholder')" required autofocus />
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.type_id')" class="mt-1">
-        <x-label>{{ __('web.animal_fieldset_animal_type_label') }}</x-label>
+        <x-label>{{ __('web.animal_fieldset_animal_type_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
         <div x-data="{ typeId: @entangle('animal.type_id') }" x-init="typeId ??= {{ $types->first()?->id }}">
             <x-select x-model="typeId" class="mt-1" required>
@@ -61,12 +62,12 @@
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.sex')" class="mt-1">
-        <x-label>{{ __('web.animal_fieldset_sex_label') }}</x-label>
+        <x-label>{{ __('web.animal_fieldset_sex_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
-        <div x-data="{ sex: @entangle('animal.sex') }" x-init="sex ??= '{{ __('web.animal_fieldset_sex_male') }}'">
+        <div x-data="{ sex: @entangle('animal.sex') }" x-init="sex ??= 'male'">
             <x-select x-model="sex" class="mt-1" required>
-                <x-select.option :value="__('web.animal_fieldset_sex_male')">{{ ucfirst(__('web.animal_fieldset_sex_male')) }}</x-select.option>
-                <x-select.option :value="__('web.animal_fieldset_sex_female')">{{ ucfirst(__('web.animal_fieldset_sex_female')) }}</x-select.option>
+                <x-select.option value='male'>{{ ucfirst(__('web.animal_fieldset_sex_male')) }}</x-select.option>
+                <x-select.option value='female'>{{ ucfirst(__('web.animal_fieldset_sex_female')) }}</x-select.option>
             </x-select>
         </div>
     </x-input.group>
@@ -76,11 +77,11 @@
 
         <div class="flex gap-2">
             <x-input.group :error="$errors->first('animal.years')" class="basis-1/2">
-                <x-input class="mt-1" wire:model="animal.years" :placeholder="__('web.animal_fieldset_years_placeholder')" />
+                <x-input class="mt-1" wire:model="animal.years" type="number" min="0" max="99" :placeholder="__('web.animal_fieldset_years_placeholder')" />
             </x-input.group>
 
             <x-input.group :error="$errors->first('animal.months')" class="basis-1/2">
-                <x-input class="mt-1" wire:model="animal.months" :placeholder="__('web.animal_fieldset_months_placeholder')" />
+                <x-input class="mt-1" wire:model="animal.months" type="number" min="0" max="11" :placeholder="__('web.animal_fieldset_months_placeholder')" />
             </x-input.group>
         </div>
     </div>
@@ -91,7 +92,7 @@
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.description')">
-        <x-label>{{ __('web.animal_fieldset_description_label') }}</x-label>
+        <x-label>{{ __('web.animal_fieldset_description_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
         <x-input.textarea class="mt-1" rows="5" wire:model="animal.description" :placeholder="__('web.animal_fieldset_description_placeholder')" required />
     </x-input.group>
 </div>
