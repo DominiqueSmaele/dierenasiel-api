@@ -38,4 +38,17 @@ class UserPolicy
 
         return $this->allow();
     }
+
+    public function createAdmin(User $user, Shelter $shelter) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+            ! $user->hasPermission(ShelterPermission::manageShelter, $shelter)) {
+            return $this->deny(
+                __('policies.admin_dashboard.user.create_admin.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
 }
