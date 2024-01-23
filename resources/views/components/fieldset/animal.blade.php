@@ -93,6 +93,6 @@
 
     <x-input.group :error="$errors->first('animal.description')">
         <x-label>{{ __('web.animal_fieldset_description_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-        <x-input.textarea class="mt-1" rows="5" wire:model="animal.description" :placeholder="__('web.animal_fieldset_description_placeholder')" required />
+        <x-input.textarea class="mt-1" rows="8" wire:model="animal.description" :placeholder="__('web.animal_fieldset_description_placeholder')" required />
     </x-input.group>
 </div>

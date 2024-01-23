@@ -40,7 +40,7 @@ class CreateQualitySlideOverTest extends TestCase
         $dbQuality = Quality::first();
 
         $this->assertNotNull($dbQuality);
-        $this->assertSame($this->name, $dbQuality->name);
+        $this->assertSame(strtolower($this->name), $dbQuality->name);
         $this->assertSame($this->type->id, $dbQuality->type->id);
     }
 

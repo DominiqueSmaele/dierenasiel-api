@@ -14,7 +14,7 @@
                     $image = $animal?->getMedia('image')->first();
                 @endphp
 
-                <a wire:key="animal-{{ $animal->id }}" href="" class="relative box-border flex flex-col border border-blue-light bg-white">
+                <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" class="relative box-border flex flex-col border border-blue-light bg-white">
                     <x-button class="absolute right-0 top-0 h-10 border-0" variant="primary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-animal-slide-over', arguments: {'animalId': {{ $animal->id }}}})">
                         <x-icon.pencil class="h-4 w-4" />
                     </x-button>

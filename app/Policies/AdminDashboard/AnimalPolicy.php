@@ -28,6 +28,20 @@ class AnimalPolicy
         return $this->allow();
     }
 
+    public function view(User $user, Animal $animal) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+            ! $user->hasPermission(ShelterPermission::manageShelter, $animal->shelter)
+        ) {
+            return $this->deny(
+                __('policies.admin_dashboard.animal.view.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
+
     public function create(User $user, Shelter $shelter) : Response | bool
     {
         if (! $user->hasPermission(Permission::manageAllShelters) &&

@@ -6,7 +6,7 @@
             @endphp
 
             @if ($image)
-                <img class="mt-3 h-32" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                <img class="mt-3 h-32 4xl:h-48" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
             @else
                 <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
             @endif
