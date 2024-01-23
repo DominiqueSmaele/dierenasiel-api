@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\Role;
+use App\Enums\ShelterRole;
 use App\Models\Shelter;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,6 +30,11 @@ class UserFactory extends Factory
     }
 
     public function assignRole(Role $role) : UserFactory
+    {
+        return $this->afterCreating(fn (User $user) => $user->syncRoles([$role]));
+    }
+
+    public function assignShelterRole(ShelterRole $role) : UserFactory
     {
         return $this->afterCreating(fn (User $user) => $user->syncRoles([$role]));
     }

@@ -34,6 +34,12 @@
                             {{ __('web.shelter_navigation_information_link') }}
                         </x-navbar-link>
                     @endcan
+
+                    @can('viewAnyAdmin', [App\Models\User::class, $shelter])
+                        <x-navbar-link class="mt-10" href="{{ route('shelter.admins-overview', $shelter->id) }}" wire:navigate icon="user" :active="request()->routeIs('shelter.admins-overview')">
+                            {{ __('web.shelter_navigation_admins_link') }}
+                        </x-navbar-link>
+                    @endcan
                 </div>
             </div>
 
