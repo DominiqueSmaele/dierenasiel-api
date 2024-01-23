@@ -19,6 +19,7 @@ class QualitiesOverviewPage extends Component
 
     protected $listeners = [
         'qualityCreated' => '$refresh',
+        'qualityUpdated' => '$refresh',
     ];
 
     public function booted() : void

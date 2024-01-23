@@ -30,10 +30,10 @@
     @if ($qualities->isNotEmpty())
         <div class="mt-12 grid grid-cols-4 gap-5 2xl:grid-cols-5 4xl:grid-cols-6">
             @foreach ($qualities as $quality)
-                <a wire:key="quality-{{ $quality->id }}" class="flex flex-col items-center border border-blue-base bg-white p-4 shadow-light">
+                <x-button wire:key="quality-{{ $quality->id }}" wire:click="$dispatch('slide-over.open', {component: 'global.update-quality-slide-over', arguments: {'qualityId': {{ $quality->id }}}})" variant="secondary" class="flex h-20 cursor-pointer flex-col items-center border border-blue-base bg-white p-4 shadow-light">
                     <p class="font-highlight-sans text-xl font-semibold leading-5">{{ $quality->type->name }}</p>
                     <p class="mt-3 text-gray-dark">{{ ucfirst($quality->name) }}</p>
-                </a>
+                </x-button>
             @endforeach
         </div>
 

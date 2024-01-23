@@ -56,5 +56,16 @@ return [
                 'shelter_deleted' => 'U kan geen dier verwijderen waarvan het dierenasiel al verwijderd is.',
             ],
         ],
+        'quality' => [
+            'view_any' => [
+                'no_permission' => 'U heeft geen toestemming om eigenschappen te bekijken',
+            ],
+            'create' => [
+                'no_permission' => 'U heeft geen toestemming om eigenschappen aan te maken.',
+            ],
+            'update' => [
+                'no_permission' => 'U heeft geen toestemming om eigenschappen aan te passen.',
+            ],
+        ],
     ],
 ];
