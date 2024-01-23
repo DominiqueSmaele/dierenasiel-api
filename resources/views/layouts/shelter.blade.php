@@ -50,7 +50,7 @@
                     </p>
                     <div>
                         <p class="truncate font-highlight-sans text-xl leading-6 text-gray-light group-hover:text-white">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</p>
-                        <p class="text-sm leading-4 text-gray-light group-hover:text-blue-lightest">{{ ucfirst(auth()->user()->getRole()->getTranslation()) }}</p>
+                        <p class="text-sm leading-4 text-gray-light group-hover:text-blue-lightest">{{ ucfirst((auth()->user()->getShelterRole() ??auth()->user()->getRole())->getTranslation()) }}</p>
                     </div>
                 </a>
 

@@ -34,7 +34,7 @@ return [
         'name' => 'Naam',
         'email' => 'Email-adres',
         'password' => 'Wachtwoord',
-        'password_repeat' => 'Wachtwoord',
+        'passwordRepeat' => 'Wachtwoord',
         'phone' => 'Telefoonnummer',
         'street' => 'Straatnaam',
         'number' => 'Huisnummer',
@@ -43,4 +43,14 @@ return [
         'city' => 'Stad',
     ],
     'same' => ':attribute komt niet overeen.',
+
+    'max' => [
+        'string' => ':attribute mag maximum :min karakters bevatten.',
+    ],
+
+    'min' => [
+        'string' => ':attribute moet minimum :min karakters bevatten.',
+    ],
+
+    'regex' => ':attribute moet minimum één cijfer bevatten.',
 ];

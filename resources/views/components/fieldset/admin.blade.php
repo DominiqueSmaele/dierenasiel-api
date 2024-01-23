@@ -17,12 +17,18 @@
     </x-input.group>
 
     <x-input.group class="mt-5" :error="$errors->first('password')">
-        <x-label>{{ __('web.admin_fieldset_password_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-        <x-input class="mt-1" type="password" wire:model="password" :placeholder="__('web.admin_fieldset_password_placeholder')" />
+        <x-label>{{ $this->user->id ? __('web.admin_fieldset_new_password_label') : __('web.admin_fieldset_password_label') }} @if (!$this->user->id)
+                <span class="text-red-base">{{ __('web.required_label') }}</span>
+            @endif
+        </x-label>
+        <x-input class="mt-1" type="password" wire:model="password" :placeholder="$this->user->id ? __('web.admin_fieldset_new_password_placeholder') : __('web.admin_fieldset_password_placeholder')" />
     </x-input.group>
 
-    <x-input.group class="mt-5" :error="$errors->first('password_repeat')">
-        <x-label>{{ __('web.admin_fieldset_password_repeat_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-        <x-input class="mt-1" type="password" wire:model="password_repeat" :placeholder="__('web.admin_fieldset_password_repeat_placeholder')" />
+    <x-input.group class="mt-5" :error="$errors->first('passwordRepeat')">
+        <x-label>{{ $this->user->id ? __('web.admin_fieldset_new_password_repeat_label') : __('web.admin_fieldset_password_repeat_label') }} @if (!$this->user->id)
+                <span class="text-red-base">{{ __('web.required_label') }}</span>
+            @endif
+        </x-label>
+        <x-input class="mt-1" type="password" wire:model="passwordRepeat" :placeholder="$this->user->id ? __('web.admin_fieldset_new_password_repeat_placeholder') : __('web.admin_fieldset_password_repeat_placeholder')" />
     </x-input.group>
 </div>

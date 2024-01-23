@@ -12,6 +12,10 @@ return [
             'create_admin' => [
                 'no_permission' => 'U heeft geen toestemming om admins aan te maken.',
             ],
+            'update_admin' => [
+                'no_permission' => 'U heeft geen toestemming om admins aan te passen.',
+                'incorrect_role' => 'De gebruiker die u probeert aan te passen is geen admin.',
+            ],
         ],
         'shelter' => [
             'view_any' => [

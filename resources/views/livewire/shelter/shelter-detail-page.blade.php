@@ -1,5 +1,5 @@
 <div>
-    <div class="mt-1 flex items-start justify-between">
+    <div class="flex items-start justify-between">
         <div class="flex gap-2">
             @php
                 $image = $shelter?->getMedia('image')->first();

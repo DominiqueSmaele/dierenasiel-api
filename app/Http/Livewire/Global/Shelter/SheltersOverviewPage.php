@@ -31,7 +31,7 @@ class SheltersOverviewPage extends Component
                 ->with('address.country')
                 ->orderBy('name')
                 ->orderBy('id')
-                ->paginate(12),
+                ->paginate(20),
         ])->layout('layouts.global');
     }
 }

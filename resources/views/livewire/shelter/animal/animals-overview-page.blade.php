@@ -2,9 +2,11 @@
     <div class="flex items-center justify-between">
         <h2 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.animals_overview_page_title') }}</h2>
 
-        <x-button leading-icon="plus" wire:click="$dispatch('slide-over.open', {component: 'shelter.create-animal-slide-over', arguments: {'shelterId': {{ $shelter->id }}}}) ">
-            {{ __('web.animals_overview_page_create_button') }}
-        </x-button>
+        @can('create', [App\Models\Animal::class, $shelter])
+            <x-button leading-icon="plus" wire:click="$dispatch('slide-over.open', {component: 'shelter.create-animal-slide-over', arguments: {'shelterId': {{ $shelter->id }}}}) ">
+                {{ __('web.animals_overview_page_create_button') }}
+            </x-button>
+        @endcan
     </div>
 
     @if ($animals->isNotEmpty())
@@ -15,9 +17,11 @@
                 @endphp
 
                 <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" class="relative box-border flex flex-col border border-blue-light bg-white">
-                    <x-button class="absolute right-0 top-0 h-10 border-0" variant="primary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-animal-slide-over', arguments: {'animalId': {{ $animal->id }}}})">
-                        <x-icon.pencil class="h-4 w-4" />
-                    </x-button>
+                    @can('update', $animal)
+                        <x-button class="absolute right-0 top-0 h-10 border-0" variant="primary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-animal-slide-over', arguments: {'animalId': {{ $animal->id }}}})">
+                            <x-icon.pencil class="h-4 w-4" />
+                        </x-button>
+                    @endcan
 
                     @if ($image)
                         <img class="h-96 object-cover" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
@@ -34,14 +38,14 @@
                         </div>
 
                         <p class="mb-3 mt-3 font-highlight-sans text-base leading-5">
-                            <span class="line-clamp-4">{{ ucfirst($animal->description) }}</span>
+                            <span class="line-clamp-3">{!! nl2br(e($animal->description)) !!}</span>
                         </p>
                     </div>
                 </a>
             @endforeach
         </div>
 
-        {{ $animals->links('pagination.links', ['translationKey' => 'web.shelters_pagination_info']) }}
+        {{ $animals->links('pagination.links', ['translationKey' => 'web.animals_pagination_info']) }}
     @else
         <x-empty-state :title="__('web.animals_overview_page_empty_state_title')" :description="__('web.animals_overview_page_empty_state_description')" />
     @endif
