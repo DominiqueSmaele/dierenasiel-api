@@ -18,7 +18,7 @@
 }
 
 .wep-modal-content {
-    @apply relative bg-white rounded-lg text-left overflow-hidden shadow-dark transform transition-all w-full m-4 sm:m-0;
+    @apply relative bg-white text-left overflow-hidden shadow-dark transform transition-all w-full m-4 sm:m-0;
 }
 
 .wep-modal-content > div {
