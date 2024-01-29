@@ -1,22 +1,22 @@
 <div>
-    <div class="flex items-start justify-between">
-        <div class="flex gap-2">
-            @php
-                $image = $shelter?->getMedia('image')->first();
-            @endphp
-
-            @if ($image)
-                <img class="mt-3 h-32 4xl:h-48" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
-            @else
-                <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
-            @endif
-        </div>
-
+    <div class="flex items-start justify-end">
         @can('update', $shelter)
             <x-button leading-icon="pencil" wire:click.prevent="$dispatch('slide-over.open', {component: 'global.update-shelter-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
                 {{ __('web.shelter_detail_page_edit_button') }}
             </x-button>
         @endcan
+    </div>
+
+    <div>
+        @php
+            $image = $shelter?->getMedia('image')->first();
+        @endphp
+
+        @if ($image)
+            <img class="mt-3 h-36 4xl:h-48" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+        @else
+            <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
+        @endif
     </div>
 
     <div class="mt-10">
@@ -25,6 +25,7 @@
 
     <div class="flex">
         <div class="mt-10 w-1/2 flex-col gap-20">
+
             <div class="flex gap-20">
                 <div>
                     <div class="flex">

@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Shelter\Animal;
 
 use App\Http\Livewire\Shelter\Animal\Concerns\ValidatesAnimal;
 use App\Models\Animal;
-use App\Models\Quality;
 use App\Models\Shelter;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
@@ -43,16 +42,6 @@ class CreateAnimalSlideOver extends SlideOver
         DB::transaction(function () {
             $this->animal->shelter()->associate($this->shelter);
             $this->animal->save();
-
-            $qualities = Quality::where('type_id', $this->animal->type->id)->get();
-
-            foreach ($qualities as $quality) {
-                $this->animal->qualities()->syncWithoutDetaching([
-                    $quality->id => [
-                        'value' => null,
-                    ],
-                ]);
-            }
 
             if ($this->image === null) {
                 return;

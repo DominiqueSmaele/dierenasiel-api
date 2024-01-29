@@ -66,6 +66,9 @@ return [
             'update' => [
                 'no_permission' => 'U heeft geen toestemming om eigenschappen aan te passen.',
             ],
+            'delete' => [
+                'no_permission' => 'U heeft geen toestemming om eigenschappen te verwijderen.',
+            ],
         ],
     ],
 ];

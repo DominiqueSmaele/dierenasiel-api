@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Livewire\Global\Developer\DevelopersOverviewPage;
 use App\Http\Livewire\Global\Quality\CreateQualitySlideOver;
+use App\Http\Livewire\Global\Quality\DeleteQualityModal;
 use App\Http\Livewire\Global\Quality\QualitiesOverviewPage;
 use App\Http\Livewire\Global\Quality\UpdateQualitySlideOver;
 use App\Http\Livewire\Global\Shelter\CreateShelterSlideOver;
@@ -36,6 +37,7 @@ class LivewireServiceProvider extends ServiceProvider
         'global.qualities-overview-page' => QualitiesOverviewPage::class,
         'global.create-quality-slide-over' => CreateQualitySlideOver::class,
         'global.update-quality-slide-over' => UpdateQualitySlideOver::class,
+        'global.delete-quality-modal' => DeleteQualityModal::class,
 
         'shelter.animals-overview-page' => AnimalsOverviewPage::class,
         'shelter.create-animal-slide-over' => CreateAnimalSlideOver::class,
