@@ -2,18 +2,18 @@
     <div class="flex gap-2">
         <x-input.group :error="$errors->first('user.firstname')" class="basis-1/2">
             <x-label>{{ __('web.admin_fieldset_firstname_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-            <x-input class="mt-1" wire:model="user.firstname" :placeholder="__('web.admin_fieldset_firstname_placeholder')" autofocus />
+            <x-input class="mt-1" wire:model="user.firstname" :placeholder="__('web.admin_fieldset_firstname_placeholder')" required autofocus />
         </x-input.group>
 
         <x-input.group :error="$errors->first('user.lastname')" class="basis-1/2">
             <x-label>{{ __('web.admin_fieldset_lastname_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-            <x-input class="mt-1" wire:model="user.lastname" :placeholder="__('web.admin_fieldset_lastname_placeholder')" />
+            <x-input class="mt-1" wire:model="user.lastname" :placeholder="__('web.admin_fieldset_lastname_placeholder')" required />
         </x-input.group>
     </div>
 
     <x-input.group class="mt-5" :error="$errors->first('user.email')">
         <x-label>{{ __('web.admin_fieldset_email_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-        <x-input class="mt-1" wire:model="user.email" :placeholder="__('web.admin_fieldset_email_placeholder')" />
+        <x-input class="mt-1" wire:model="user.email" :placeholder="__('web.admin_fieldset_email_placeholder')" required />
     </x-input.group>
 
     <x-input.group class="mt-5" :error="$errors->first('password')">

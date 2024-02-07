@@ -35,7 +35,8 @@
                     @dragleave="dragging = false"
                     @drop="dragging = false"
                     id="shelter-image"
-                    class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0" />
+                    class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0"
+                    autofocus />
 
                 @if (($shelter->exists && !$withoutImage) || ($image && is_object($image)))
                     <div>
@@ -51,7 +52,7 @@
 
         <x-input.group :error="$errors->first('shelter.name')" class="mt-5">
             <x-label>{{ __('web.shelter_fieldset_name_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-            <x-input class="mt-1" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required autofocus />
+            <x-input class="mt-1" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required />
         </x-input.group>
 
         <x-input.group :error="$errors->first('shelter.email')" class="mt-5">
