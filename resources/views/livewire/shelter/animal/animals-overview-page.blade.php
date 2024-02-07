@@ -10,7 +10,7 @@
     </div>
 
     @if ($animals->isNotEmpty())
-        <div class="mt-12 grid grid-cols-3 gap-5 2xl:grid-cols-4 4xl:grid-cols-5">
+        <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-9">
             @foreach ($animals as $animal)
                 @php
                     $image = $animal?->getMedia('image')->first();
@@ -24,7 +24,7 @@
                     @endcan
 
                     @if ($image)
-                        <img class="h-96 object-cover" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                        <img class="h-96 object-cover 4xl:h-[450px]" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
                     @endif
 
                     <div class="flex flex-col break-words p-4">

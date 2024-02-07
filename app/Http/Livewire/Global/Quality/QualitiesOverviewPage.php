@@ -28,6 +28,11 @@ class QualitiesOverviewPage extends Component
         $this->authorize('viewAny', Quality::class);
     }
 
+    public function resetFilter() : void
+    {
+        $this->reset('filterValue');
+    }
+
     public function render() : View
     {
         return view('livewire.global.quality.qualities-overview-page', [

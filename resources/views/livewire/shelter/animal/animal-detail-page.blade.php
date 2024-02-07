@@ -26,7 +26,7 @@
             $image = $animal?->getMedia('image')->first();
         @endphp
 
-        <div class="flex w-full gap-10 4xl:w-3/4">
+        <div class="flex w-full gap-10 4xl:w-3/4 5xl:w-1/2">
             <div class="w-4/6 4xl:w-3/6">
                 @if ($image)
                     <img class="h-full min-h-[700px] w-full object-cover" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div class="w-full 4xl:w-3/4">
+        <div class="w-full 4xl:w-3/4 5xl:w-1/2">
             <div class="mb-5 mt-10 flex items-center justify-between border-b pb-5">
                 <p class="font-highlight-sans text-2xl font-semibold leading-5 text-blue-base">{{ __('web.animal_detail_page_qualities_title') }}</p>
 
