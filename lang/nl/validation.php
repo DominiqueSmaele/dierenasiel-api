@@ -41,11 +41,15 @@ return [
         'box_number' => 'Toevoeging',
         'zipcode' => 'Postcode',
         'city' => 'Stad',
+        'image' => 'Foto',
+        'sex' => 'Geslacht',
+        'race' => 'Ras',
+        'description' => 'Omschrijving',
     ],
     'same' => ':attribute komt niet overeen.',
 
     'max' => [
-        'string' => ':attribute mag maximum :min karakters bevatten.',
+        'string' => ':attribute mag maximum :max karakters bevatten.',
     ],
 
     'min' => [

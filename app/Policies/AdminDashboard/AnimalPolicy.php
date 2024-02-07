@@ -97,4 +97,18 @@ class AnimalPolicy
 
         return $this->allow();
     }
+
+    public function updateQualities(User $user, Animal $animal) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+        ! $user->hasPermission(ShelterPermission::manageShelter, $animal->shelter)
+        ) {
+            return $this->deny(
+                __('policies.admin_dashboard.animal.update_qualities.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
 }

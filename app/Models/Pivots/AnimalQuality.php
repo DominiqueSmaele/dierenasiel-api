@@ -2,6 +2,8 @@
 
 namespace App\Models\Pivots;
 
+use App\Models\Animal;
+use App\Models\Quality;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

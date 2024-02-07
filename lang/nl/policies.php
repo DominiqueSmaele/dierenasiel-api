@@ -55,6 +55,9 @@ return [
                 'deleted' => 'Dit dier is al verwijderd geweest.',
                 'shelter_deleted' => 'U kan geen dier verwijderen waarvan het dierenasiel al verwijderd is.',
             ],
+            'update_qualities' => [
+                'no_permission' => 'U heeft geen toestemming om de eigenschappen van dit dier aan te passen.',
+            ],
         ],
         'quality' => [
             'view_any' => [

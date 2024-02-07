@@ -24,7 +24,7 @@
                 </a>
                 <div class="mt-20 flex flex-col gap-2">
                     @can('viewAny', [App\Models\Animal::class, $shelter])
-                        <x-navbar-link href="{{ route('shelter.animals-overview', $shelter->id) }}" wire:navigate icon="animal" :active="request()->routeIs('shelter.animals-overview')">
+                        <x-navbar-link href="{{ route('shelter.animals-overview', $shelter->id) }}" wire:navigate icon="animal" :active="request()->routeIs('shelter.animals-overview') || request()->routeIs('shelter.animal-detail')">
                             {{ __('web.shelter_navigation_animals_link') }}
                         </x-navbar-link>
                     @endcan

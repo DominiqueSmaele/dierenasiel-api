@@ -53,7 +53,7 @@ class Animal extends Model implements HasMedia
     public function qualities() : BelongsToMany
     {
         return $this->belongsToMany(Quality::class, 'animal_quality')
-            ->withPivot('value')
+            ->withPivot('id', 'value')
             ->withTimeStamps()
             ->using(AnimalQuality::class);
     }

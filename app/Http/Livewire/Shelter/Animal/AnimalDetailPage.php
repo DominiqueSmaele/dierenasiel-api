@@ -26,6 +26,7 @@ class AnimalDetailPage extends Component
     protected $listeners = [
         'animalUpdated' => '$refresh',
         'animalDeleted' => 'redirectToAnimalsOverviewPage',
+        'animalQualitiesUpdated' => '$refresh',
     ];
 
     public function booted() : void

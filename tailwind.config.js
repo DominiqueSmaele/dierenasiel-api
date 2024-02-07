@@ -58,7 +58,7 @@ export default {
                 'base': '#EF6161',
             },
             'green': {
-                'base': '#1EE372',
+                'base': '#17b75b',
             },
         },
 
