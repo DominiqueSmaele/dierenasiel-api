@@ -6,13 +6,13 @@
         ->values();
 @endphp
 
-<div class="flex flex-1 flex-col gap-4">
-    <div>
+<div class="flex flex-col">
+    <div class="flex flex-col gap-4">
         <div class="flex">
             <x-label class="bg-blue-base p-1.5 text-white">{{ __('web.shelter_fieldset_general_info') }}</x-label>
         </div>
 
-        <x-input.group :error="$errors->first('image')" class="mt-5">
+        <x-input.group :error="$errors->first('image')" class="mt-1">
             <div class="mb-1 flex items-center justify-between gap-4">
                 <x-label>{{ __('web.shelter_fieldset_image_label') }}</x-label>
 
@@ -50,33 +50,33 @@
             </div>
         </x-input.group>
 
-        <x-input.group :error="$errors->first('shelter.name')" class="mt-5">
+        <x-input.group :error="$errors->first('shelter.name')" class="mt-1">
             <x-label>{{ __('web.shelter_fieldset_name_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
             <x-input class="mt-1" wire:model="shelter.name" :placeholder="__('web.shelter_fieldset_name_placeholder')" required />
         </x-input.group>
 
-        <x-input.group :error="$errors->first('shelter.email')" class="mt-5">
+        <x-input.group :error="$errors->first('shelter.email')" class="mt-1">
             <x-label>{{ __('web.shelter_fieldset_email_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
             <x-input class="mt-1" wire:model="shelter.email" :placeholder="__('web.shelter_fieldset_email_placeholder')" required />
         </x-input.group>
 
-        <x-input.group :error="$errors->first('phone')" class="mt-5">
+        <x-input.group :error="$errors->first('phone')" class="mt-1">
             <x-label>{{ __('web.shelter_fieldset_phone_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
             <x-input.phone class="mt-1" wire:model="phone" :placeholder="__('web.shelter_fieldset_phone_placeholder')" required />
         </x-input.group>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-14 flex flex-col gap-4">
         <div class="flex">
             <x-label class="bg-blue-base p-1.5 text-white">{{ __('web.shelter_fieldset_address_info') }}</x-label>
         </div>
 
-        <x-input.group :error="$errors->first('address.street')" class="mt-5 basis-3/5">
+        <x-input.group :error="$errors->first('address.street')" class="mt-1 basis-3/5">
             <x-label>{{ __('web.shelter_fieldset_address_street_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
             <x-input class="mt-1" wire:model="address.street" :placeholder="__('web.shelter_fieldset_address_street_placeholder')" required />
         </x-input.group>
 
-        <div class="mt-5 flex gap-2">
+        <div class="mt-1 flex gap-2">
             <x-input.group :error="$errors->first('address.number')" class="basis-1/2">
                 <x-label>{{ __('web.shelter_fieldset_address_number_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
                 <x-input class="mt-1" wire:model="address.number" :placeholder="__('web.shelter_fieldset_address_number_placeholder')" required />
@@ -88,7 +88,7 @@
             </x-input.group>
         </div>
 
-        <div class="mt-5 flex gap-2">
+        <div class="mt-1 flex gap-2">
             <x-input.group :error="$errors->first('address.zipcode')" class="basis-1/2">
                 <x-label>{{ __('web.shelter_fieldset_address_zipcode_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
                 <x-input class="mt-1" wire:model="address.zipcode" :placeholder="__('web.shelter_fieldset_address_zipcode_placeholder')" required />
@@ -100,7 +100,7 @@
             </x-input.group>
         </div>
 
-        <x-input.group :error="$errors->first('address.country_id')" class="mt-5">
+        <x-input.group :error="$errors->first('address.country_id')" class="mt-1">
             <x-label for="address.country_id">{{ __('web.shelter_fieldset_address_country_id_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
             <div x-data="{ countryId: @entangle('address.country_id') }" x-init="countryId ??= {{ $countries->first()?->id }}">
@@ -117,22 +117,22 @@
         @enderror
     </div>
 
-    <div class="mt-10">
+    <div class="mt-14 flex flex-col gap-4">
         <div class="flex">
             <x-label class="bg-blue-base p-1.5 text-white">{{ __('web.shelter_fieldset_social_media_info') }}</x-label>
         </div>
 
-        <x-input.group class="mt-5" :error="$errors->first('shelter.facebook')">
+        <x-input.group class="mt-1" :error="$errors->first('shelter.facebook')">
             <x-label>{{ __('web.shelter_fieldset_facebook_label') }}</x-label>
             <x-input class="mt-1" wire:model="shelter.facebook" :placeholder="__('web.shelter_fieldset_facebook_placeholder')" />
         </x-input.group>
 
-        <x-input.group class="mt-5" :error="$errors->first('shelter.instagram')">
+        <x-input.group class="mt-1" :error="$errors->first('shelter.instagram')">
             <x-label>{{ __('web.shelter_fieldset_instagram_label') }}</x-label>
             <x-input.social-media class="mt-1" wire:model="shelter.instagram" :placeholder="__('web.shelter_fieldset_instagram_placeholder')" />
         </x-input.group>
 
-        <x-input.group class="mt-5" :error="$errors->first('shelter.tiktok')">
+        <x-input.group class="mt-1" :error="$errors->first('shelter.tiktok')">
             <x-label>{{ __('web.shelter_fieldset_tiktok_label') }}</x-label>
             <x-input.social-media class="mt-1" wire:model="shelter.tiktok" :placeholder="__('web.shelter_fieldset_tiktok_placeholder')" />
         </x-input.group>

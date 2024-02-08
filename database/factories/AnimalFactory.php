@@ -15,8 +15,7 @@ class AnimalFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'sex' => $this->faker->randomElement(['mannelijk', 'vrouwelijk']),
-            'years' => $this->faker->numberBetween(0, 25),
-            'months' => $this->faker->numberBetween(0, 11),
+            'birth_date' => $this->faker->dateTime(),
             'race' => $this->faker->word(),
             'description' => $this->faker->text(),
             'type_id' => Type::factory(),

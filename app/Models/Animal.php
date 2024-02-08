@@ -23,15 +23,13 @@ class Animal extends Model implements HasMedia
     protected $fillable = [
         'name',
         'sex',
-        'years',
-        'months',
+        'birth_date',
         'race',
         'description',
     ];
 
     protected $casts = [
-        'years' => 'integer',
-        'months' => 'integer',
+        'birth_date' => 'datetime',
         'type_id' => 'integer',
         'shelter_id' => 'integer',
     ];

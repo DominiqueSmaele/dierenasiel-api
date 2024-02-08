@@ -60,17 +60,10 @@ trait ValidatesAnimal
                 'string',
                 Rule::in(['male', 'female']),
             ],
-            'animal.years' => [
+            'animal.birth_date' => [
                 'nullable',
-                'integer',
-                'min:0',
-                'max:99',
-            ],
-            'animal.months' => [
-                'nullable',
-                'integer',
-                'min:0',
-                'max:11',
+                'date',
+                'before_or_equal:' . now()->format('Y-m-d'),
             ],
             'animal.race' => [
                 'nullable',

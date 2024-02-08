@@ -21,7 +21,7 @@
                 @endif
             </div>
         </div>
-        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-[425px] flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
+        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-96 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
             <input
                 type="file"
                 accept="image/jpg,image/jpeg,image/png"
@@ -45,7 +45,7 @@
         </div>
     </x-input.group>
 
-    <x-input.group :error="$errors->first('animal.name')">
+    <x-input.group :error="$errors->first('animal.name')" class="mt-1">
         <x-label>{{ __('web.animal_fieldset_name_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
         <x-input class="mt-1" wire:model="animal.name" :placeholder="__('web.animal_fieldset_name_placeholder')" required />
     </x-input.group>
@@ -73,26 +73,20 @@
         </div>
     </x-input.group>
 
-    <div class="mt-1">
-        <x-label>{{ __('web.animal_fieldset_age_label') }}</x-label>
+    <x-input.group :error="$errors->first('animal.birth_date')" class="mt-1">
+        <x-label>{{ __('web.animal_fieldset_birth_date_label') }}</x-label>
 
-        <div class="flex gap-2">
-            <x-input.group :error="$errors->first('animal.years')" class="basis-1/2">
-                <x-input class="mt-1" wire:model="animal.years" type="number" min="0" max="99" :placeholder="__('web.animal_fieldset_years_placeholder')" />
-            </x-input.group>
-
-            <x-input.group :error="$errors->first('animal.months')" class="basis-1/2">
-                <x-input class="mt-1" wire:model="animal.months" type="number" min="0" max="11" :placeholder="__('web.animal_fieldset_months_placeholder')" />
-            </x-input.group>
+        <div x-data="{ birthDate: @entangle('animal.birth_date') }" x-init="birthDate ?? 'null'">
+            <x-input.date x-model="birthDate" :placeholder="__('web.animal_fieldset_birth_date')" class="flex-none" />
         </div>
-    </div>
+    </x-input.group>
 
-    <x-input.group :error="$errors->first('animal.race')">
+    <x-input.group :error="$errors->first('animal.race')" class="mt-1">
         <x-label>{{ __('web.animal_fieldset_race_label') }}</x-label>
         <x-input class="mt-1" wire:model="animal.race" :placeholder="__('web.animal_fieldset_race_placeholder')" />
     </x-input.group>
 
-    <x-input.group :error="$errors->first('animal.description')">
+    <x-input.group :error="$errors->first('animal.description')" class="mt-1">
         <x-label>{{ __('web.animal_fieldset_description_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
         <x-input.textarea class="mt-1" rows="8" wire:model="animal.description" :placeholder="__('web.animal_fieldset_description_placeholder')" required />
     </x-input.group>

@@ -46,8 +46,11 @@
                     </div>
                     <div class="grid grid-cols-2 place-content-center bg-gray-lighter p-4">
                         <p class="text-base leading-5">{{ __('web.animal_detail_page_age') }}</p>
-                        @if (isset($animal->years) || isset($animal->months))
-                            <p class="text-base leading-5">{{ $animal->years ?? '0' }} {{ __('web.animal_detail_page_years') }} {{ $animal->months ?? '0' }} {{ __('web.animal_detail_page_months') }}</p>
+                        @if ($animal->birth_date)
+                            @php
+                                $age = now()->diff($animal->birth_date);
+                            @endphp
+                            <p class="text-base leading-5">{{ $age->y }} {{ __('web.animal_detail_page_years') }} {{ $age->m }} {{ __('web.animal_detail_page_months') }}</p>
                         @else
                             <p class="text-base leading-5">{{ __('web.animal_detail_page_age_unknown') }}</p>
                         @endif

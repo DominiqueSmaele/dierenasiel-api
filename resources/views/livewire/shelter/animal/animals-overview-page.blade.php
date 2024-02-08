@@ -16,7 +16,7 @@
                     $image = $animal?->getMedia('image')->first();
                 @endphp
 
-                <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" wire:navigate class="relative box-border flex flex-col border border-blue-light bg-white">
+                <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" class="relative box-border flex flex-col border border-blue-light bg-white">
                     @can('update', $animal)
                         <x-button class="absolute right-0 top-0 h-10 border-0" variant="primary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-animal-slide-over', arguments: {'animalId': {{ $animal->id }}}})">
                             <x-icon.pencil class="h-4 w-4" />
@@ -32,8 +32,13 @@
                         <p class="mt-2 font-highlight-sans text-lg font-semibold leading-5">{{ $animal->race ? ucfirst($animal->race) : '-' }}</p>
                         <div class="flex gap-1">
                             <p class="mt-3 font-highlight-sans text-base leading-5">{{ __('web.animals_overview_page_sex_' . $animal->sex) }}</p>
-                            @if ($animal->years || $animal->months)
-                                <p class="mt-3 font-highlight-sans text-base leading-5">- {{ $animal->years ?? '0' }} {{ __('web.animals_overview_page_years') }} {{ $animal->months ?? '0' }} {{ __('web.animals_overview_page_months') }}</p>
+
+                            @if ($animal->birth_date)
+                                @php
+                                    $age = now()->diff($animal->birth_date);
+                                @endphp
+
+                                <p class="mt-3 font-highlight-sans text-base leading-5">- {{ $age->y }} {{ __('web.animals_overview_page_years') }} {{ $age->m }} {{ __('web.animals_overview_page_months') }}</p>
                             @endif
                         </div>
 
