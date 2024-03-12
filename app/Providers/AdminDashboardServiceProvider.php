@@ -6,10 +6,12 @@ use App\Enums\Permission;
 use App\Enums\ShelterPermission;
 use App\Events\ServingAdminDashboard;
 use App\Models\Animal;
+use App\Models\OpeningPeriod;
 use App\Models\Quality;
 use App\Models\Shelter;
 use App\Models\User;
 use App\Policies\AdminDashboard\AnimalPolicy;
+use App\Policies\AdminDashboard\OpeningPeriodPolicy;
 use App\Policies\AdminDashboard\QualityPolicy;
 use App\Policies\AdminDashboard\ShelterPolicy;
 use App\Policies\AdminDashboard\UserPolicy;
@@ -24,6 +26,7 @@ class AdminDashboardServiceProvider extends ServiceProvider
         Shelter::class => ShelterPolicy::class,
         Animal::class => AnimalPolicy::class,
         Quality::class => QualityPolicy::class,
+        OpeningPeriod::class => OpeningPeriodPolicy::class,
     ];
 
     public function boot() : void

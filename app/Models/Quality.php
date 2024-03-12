@@ -23,7 +23,7 @@ class Quality extends Model
     public function animals() : BelongsToMany
     {
         return $this->belongsToMany(Animal::class, 'animal_quality')
-            ->withPivot('value')
+            ->withPivot(['id', 'value'])
             ->withTimestamps()
             ->using(AnimalQuality::class);
     }

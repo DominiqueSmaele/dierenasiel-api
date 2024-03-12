@@ -24,12 +24,15 @@ trait ValidatesShelter
 
     public bool $withoutImage = false;
 
+    public ?string $activeTab;
+
     public function mountValidatesShelter() : void
     {
         $this->shelter ??= Shelter::make();
         $this->address = $this->shelter->address ?? Address::make();
         $this->phone = $this->shelter->phone;
         $this->withoutImage = $this->shelter->image === null;
+        $this->activeTab = 'general';
     }
 
     public function bootedValidatesShelter() : void

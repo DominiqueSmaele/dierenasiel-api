@@ -48,18 +48,18 @@ class UpdateAnimalQualitiesSlideOverTest extends TestCase
     public function it_updates_animal_qualities()
     {
         Livewire::test(UpdateAnimalQualitiesSlideOver::class, [$this->animal->id])
-            ->set('animalQualities.0.pivot.value', true)
-            ->set('animalQualities.1.pivot.value', false)
-            ->set('animalQualities.2.pivot.value', null)
+            ->set('animalQualities.0.value', true)
+            ->set('animalQualities.1.value', false)
+            ->set('animalQualities.2.value', null)
             ->call('update')
             ->assertHasNoErrors()
             ->assertDispatched('animalQualitiesUpdated');
 
-        $dbAnimalQualities = Animal::first()->qualities->sortBy('name');
+        $dbAnimalQualities = Animal::first()->qualities->sortBy('name')->pluck('pivot');
 
-        $this->assertTrue($dbAnimalQualities[0]->pivot->value);
-        $this->assertNotTrue($dbAnimalQualities[1]->pivot->value);
-        $this->assertNull($dbAnimalQualities[2]->pivot->value);
+        $this->assertEquals(1, $dbAnimalQualities[0]->value);
+        $this->assertEquals(0, $dbAnimalQualities[1]->value);
+        $this->assertNull($dbAnimalQualities[2]->value);
     }
 
     /** @test */

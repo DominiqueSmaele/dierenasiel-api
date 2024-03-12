@@ -20,6 +20,7 @@ return [
     ],
     'string' => ':attribute moet een string zijn.',
     'unique' => ':attribute is al in gebruik.',
+    'before_or_equal' => 'Datum moet voor of gelijk zijn aan vandaag.',
 
     'custom' => [
         'address' => [

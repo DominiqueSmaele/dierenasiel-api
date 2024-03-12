@@ -26,6 +26,9 @@ return [
             'view_any' => [
                 'no_permission' => 'U heeft geen toestemming om dierenasielen te bekijken.',
             ],
+            'view' => [
+                'no_permission' => 'U heeft geen toestemming om dit dierenasiel te bekijken.',
+            ],
             'create' => [
                 'no_permission' => 'U heeft geen toestemming om dierenasielen aan te maken.',
             ],
@@ -42,7 +45,7 @@ return [
                 'no_permission' => 'U heeft geen toestemming om dieren te bekijken.',
             ],
             'view' => [
-                'no_permission' => 'U heeft geen toestemming om een dier te bekijken.',
+                'no_permission' => 'U heeft geen toestemming om dit dier te bekijken.',
             ],
             'create' => [
                 'no_permission' => 'U heeft geen toestemming om dieren aan te maken.',
@@ -71,6 +74,17 @@ return [
             ],
             'delete' => [
                 'no_permission' => 'U heeft geen toestemming om eigenschappen te verwijderen.',
+            ],
+        ],
+        'opening_period' => [
+            'view' => [
+                'no_permission' => 'U heeft geen toestemming om de openingsuren te bekijken.',
+            ],
+            'create' => [
+                'no_permission' => 'U heeft geen toestemming om openingsuren aan te maken.',
+            ],
+            'update' => [
+                'no_permission' => 'U heeft geen toestemming om openingsuren aan te passen.',
             ],
         ],
     ],

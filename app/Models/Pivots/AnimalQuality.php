@@ -14,7 +14,7 @@ class AnimalQuality extends Pivot
     ];
 
     protected $casts = [
-        'value' => 'boolean',
+        'value' => 'integer',
     ];
 
     public function animal() : BelongsTo

@@ -33,8 +33,8 @@ class UpdateAnimalQualitiesSlideOver extends SlideOver
         DB::transaction(function () {
             foreach ($this->animalQualities as $animalQuality) {
                 $this->animal->qualities()->syncWithoutDetaching([
-                    $animalQuality['id'] => [
-                        'value' => $animalQuality['pivot']['value'],
+                    $animalQuality->quality->id => [
+                        'value' => $animalQuality->value,
                     ],
                 ]);
             }

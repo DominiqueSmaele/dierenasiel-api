@@ -41,6 +41,7 @@ export default {
                 'dark': '#023373',
                 'base': '#2A4D8C',
                 'light': '#5D7CA6',
+                'lighter': '#e0e8f7',
                 'lightest': '#F4F7FC',
             },
             'gray': {
