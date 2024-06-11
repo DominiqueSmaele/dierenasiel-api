@@ -9,11 +9,13 @@ use App\Models\Animal;
 use App\Models\OpeningPeriod;
 use App\Models\Quality;
 use App\Models\Shelter;
+use App\Models\Timeslot;
 use App\Models\User;
 use App\Policies\AdminDashboard\AnimalPolicy;
 use App\Policies\AdminDashboard\OpeningPeriodPolicy;
 use App\Policies\AdminDashboard\QualityPolicy;
 use App\Policies\AdminDashboard\ShelterPolicy;
+use App\Policies\AdminDashboard\TimeslotPolicy;
 use App\Policies\AdminDashboard\UserPolicy;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -27,6 +29,7 @@ class AdminDashboardServiceProvider extends ServiceProvider
         Animal::class => AnimalPolicy::class,
         Quality::class => QualityPolicy::class,
         OpeningPeriod::class => OpeningPeriodPolicy::class,
+        Timeslot::class => TimeslotPolicy::class,
     ];
 
     public function boot() : void

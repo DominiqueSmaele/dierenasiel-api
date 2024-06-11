@@ -25,6 +25,7 @@ use App\Http\Livewire\Shelter\OpeningPeriod\CreateOpeningPeriodSlideOver;
 use App\Http\Livewire\Shelter\OpeningPeriod\OpeningPeriodsOverviewPage;
 use App\Http\Livewire\Shelter\OpeningPeriod\UpdateOpeningPeriodSlideOver;
 use App\Http\Livewire\Shelter\ShelterDetailPage;
+use App\Http\Livewire\Shelter\Volunteer\TimeslotsOverviewPage;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -49,6 +50,8 @@ class LivewireServiceProvider extends ServiceProvider
         'shelter.update-animal-slide-over' => UpdateAnimalSlideOver::class,
         'shelter.delete-animal-modal' => DeleteAnimalModal::class,
         'shelter.animal-detail-page' => AnimalDetailPage::class,
+
+        'shelter.timeslots-overview-page' => TimeslotsOverviewPage::class,
 
         'shelter.detail-page' => ShelterDetailPage::class,
 

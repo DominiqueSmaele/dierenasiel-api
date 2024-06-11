@@ -29,6 +29,12 @@
                         </x-navbar-link>
                     @endcan
 
+                    @can('viewAny', [App\Models\Timeslot::class, $shelter])
+                        <x-navbar-link href="{{ route('shelter.volunteers-overview', $shelter->id) }}" wire:navigate icon="heart" :active="request()->routeIs('shelter.volunteers-overview')">
+                            {{ __('web.shelter_navigation_volunteers_link') }}
+                        </x-navbar-link>
+                    @endcan
+
                     @can('view', [App\Models\Shelter::class, $shelter])
                         <x-navbar-link href="{{ route('shelter.detail', $shelter->id) }}" wire:navigate icon="information" :active="request()->routeIs('shelter.detail')">
                             {{ __('web.shelter_navigation_information_link') }}
@@ -85,6 +91,8 @@
 
     @livewire('slide-over-pro')
     @livewire('modal-pro')
+    @livewireScripts
+    @livewireCalendarScripts
 </body>
 
 </html>
