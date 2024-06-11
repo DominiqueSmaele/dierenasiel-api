@@ -91,6 +91,8 @@
 
     @livewire('slide-over-pro')
     @livewire('modal-pro')
+    @livewireScripts
+    @livewireCalendarScripts
 </body>
 
 </html>
