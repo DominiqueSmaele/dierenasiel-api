@@ -20,7 +20,7 @@
                 </div>
 
                 @foreach ($day['timeslots'] as $timeslot)
-                    <div class="-ml-px -mt-px flex h-[75px] items-center justify-between border border-gray-base bg-blue-lighter px-3 py-6">
+                    <div class="-ml-px -mt-px flex h-[75px] items-center justify-between border border-gray-base bg-blue-lightest px-3 py-6">
                         @php
                             $volunteer = $timeslot?->volunteer;
                         @endphp
@@ -47,7 +47,7 @@
                     <div class="-ml-px -mt-px flex h-[50px] items-center justify-between border border-gray-base bg-blue-lighter px-3 py-6">
                         <p>{{ __('web.volunteers_overview_page_create_timeslot') }}</p>
 
-                        <x-button variant="tertiary" color="orange">
+                        <x-button variant="tertiary" color="orange" wire:click="$dispatch('slide-over.open', {component: 'shelter.create-timeslot-slide-over', arguments: {'shelterId': {{ $shelter->id }}, 'dateString': '{{ $date->format('Y-m-d') }}' }}) ">
                             <x-icon.plus class="h-5 w-5" />
                         </x-button>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,5 +33,10 @@ class Timeslot extends Model
     public function volunteer() : BelongsTo
     {
         return $this->belongsTo(Volunteer::class);
+    }
+
+    public function getDateAttribute($value) : string
+    {
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

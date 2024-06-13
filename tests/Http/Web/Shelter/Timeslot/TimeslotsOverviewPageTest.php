@@ -46,21 +46,23 @@ class TimeslotsOverviewPageTest extends TestCase
     }
 
     /** @test */
-    public function it_sorts_all_timeslots_by_date_and_id()
+    public function it_sorts_all_timeslots_by_date_and_start_time_and_id()
     {
-        $secondTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addDay()]);
-        $fourthTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addWeek()]);
-        $firstTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()]);
+        $secondTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now(), 'start_time' => now()->addHour()]);
         $thirdTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addDay()]);
+        $fifthTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addWeek()]);
+        $firstTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now(), 'start_time' => now()]);
+        $fourthTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addDay()]);
 
         Livewire::test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])
-            ->assertViewHas('timeslots', function ($items) use ($firstTimeslot, $secondTimeslot, $thirdTimeslot, $fourthTimeslot) {
+            ->assertViewHas('timeslots', function ($items) use ($firstTimeslot, $secondTimeslot, $thirdTimeslot, $fourthTimeslot, $fifthTimeslot) {
                 $flattenedItems = $items->flatten();
 
                 $this->assertSame($firstTimeslot->id, $flattenedItems[0]->id);
                 $this->assertSame($secondTimeslot->id, $flattenedItems[1]->id);
                 $this->assertSame($thirdTimeslot->id, $flattenedItems[2]->id);
                 $this->assertSame($fourthTimeslot->id, $flattenedItems[3]->id);
+                $this->assertSame($fifthTimeslot->id, $flattenedItems[4]->id);
 
                 return true;
             });

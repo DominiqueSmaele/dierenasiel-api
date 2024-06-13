@@ -21,7 +21,7 @@
         enableTime: @js($enableTime),
         locale: locale = document.querySelector('html').getAttribute('lang') ?? 'en',
         altInput: true,
-        altFormat: 'HH:mm',
+        altFormat: {{ $noCalendar && $enableTime ? json_encode('HH:mm') : json_encode('DD-MM-YYYY H:i:s') }},
         dateFormat: {{ $dateFormat = $enableTime ? json_encode('YYYY-MM-DD\\\\THH:mm:ssZ') : json_encode('YYYY-MM-DD') }},
         defaultDate: value,
         time_24hr: true,
@@ -65,7 +65,11 @@
     wire:ignore>
 
     <div class="pointer-events-none absolute inset-y-0 left-0 m-1 p-2">
-        <x-icon.calendar class="h-5 w-5 text-gray-dark" />
+        @if ($noCalendar && $enableTime)
+            <x-icon.clock class="h-5 w-5 text-gray-dark" />
+        @else
+            <x-icon.calendar class="h-5 w-5 text-gray-dark" />
+        @endif
     </div>
 
     <input :id="$id('input')" data-input type="text" {{ $attributes->only(['placeholder'])->class(['pl-11 w-full border bg-blue-lightest p-3 text-black placeholder:text-gray-dark placeholder:font-normal caret-black text-sm font-bold font-sans leading-5 focus:ring-0', 'border-blue-lightest focus:border-blue-lightest' => !$error, 'border-red-base focus:border-red-base' => $error]) }}>

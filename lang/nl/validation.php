@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'date' => ':attribute moet een geldige datum zijn.',
     'image' => ':attribute moet een afbeelding zijn.',
     'email' => ':attribute moet een geldig e-mailadres zijn.',
     'password' => [
@@ -46,6 +47,7 @@ return [
         'sex' => 'Geslacht',
         'race' => 'Ras',
         'description' => 'Omschrijving',
+        'date' => 'Datum',
     ],
     'same' => ':attribute komt niet overeen.',
 
