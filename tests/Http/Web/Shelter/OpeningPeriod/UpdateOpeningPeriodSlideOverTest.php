@@ -32,7 +32,7 @@ class UpdateOpeningPeriodSlideOverTest extends TestCase
 
         $this->openingPeriods = OpeningPeriod::factory()->for($this->shelter)->count(2)->create();
 
-        $this->open = Carbon::parse($this->faker->time());
+        $this->open = Carbon::parse($this->faker->time($max = '18:59:59'));
         $this->close = $this->open->copy()->addHours(3);
     }
 

@@ -1,9 +1,7 @@
 @props(['shelter', 'image', 'withoutImage'])
 
 @php
-    $countries = \App\Models\Country::all()
-        ->sortBy(fn($country) => $country->getName())
-        ->values();
+    $countries = \App\Models\Country::all()->sortBy(fn($country) => $country->getName())->values();
 @endphp
 
 <div x-data="{ activeTab: @entangle('activeTab') }" class="flex flex-col">

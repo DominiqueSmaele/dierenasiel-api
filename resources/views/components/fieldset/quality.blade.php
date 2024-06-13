@@ -1,7 +1,5 @@
 @php
-    $types = \App\Models\Type::all()
-        ->sortBy('id')
-        ->values();
+    $types = \App\Models\Type::all()->sortBy('id')->values();
 @endphp
 
 <div class="flex flex-1 flex-col gap-4">

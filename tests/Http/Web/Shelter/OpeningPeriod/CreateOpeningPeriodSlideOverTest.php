@@ -26,7 +26,7 @@ class CreateOpeningPeriodSlideOverTest extends TestCase
 
         $this->shelter = Shelter::factory()->create();
 
-        $this->open = Carbon::parse($this->faker->time());
+        $this->open = Carbon::parse($this->faker->time($max = '18:59:59'));
         $this->close = $this->open->copy()->addHours(3);
     }
 
