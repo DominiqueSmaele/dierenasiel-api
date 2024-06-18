@@ -24,6 +24,7 @@ class TimeslotsOverviewPage extends Component
 
     protected $listeners = [
         'timeslotCreated' => '$refresh',
+        'timeslotUpdated' => '$refresh',
     ];
 
     public function __construct()
@@ -46,7 +47,7 @@ class TimeslotsOverviewPage extends Component
         return Timeslot::query()
             ->where('shelter_id', $this->shelter->id)
             ->whereBetween('date', [Carbon::parse($this->calendar->first()), Carbon::parse($this->calendar->last())])
-            ->with('volunteer')
+            ->with('volunteer.user')
             ->orderBy('date')
             ->orderBy('start_time')
             ->orderBy('id')

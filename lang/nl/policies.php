@@ -88,7 +88,9 @@ return [
             ],
         ],
         'timeslot' => [
-            'view_any' => 'U heeft geen toestemming om de vrijwilligersagenda te bekijken',
+            'view_any' => 'U heeft geen toestemming om de vrijwilligersagenda te bekijken.',
+            'create' => 'U heeft geen toestemming om tijdsloten aan te maken.',
+            'update' => 'U heeft geen toestemming om tijdsloten aan te passen.',
         ],
     ],
 ];
