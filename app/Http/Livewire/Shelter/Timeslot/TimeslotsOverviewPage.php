@@ -25,6 +25,7 @@ class TimeslotsOverviewPage extends Component
     protected $listeners = [
         'timeslotCreated' => '$refresh',
         'timeslotUpdated' => '$refresh',
+        'timeslotDeleted' => '$refresh',
     ];
 
     public function __construct()

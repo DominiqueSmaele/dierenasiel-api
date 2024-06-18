@@ -55,4 +55,25 @@ class TimeslotPolicy
 
         return $this->allow();
     }
+
+    public function delete(User $user, Timeslot $timeslot) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters) &&
+            ! $user->hasPermission(ShelterPermission::manageShelter, $timeslot->shelter)
+        ) {
+            return $this->deny(
+                __('policies.admin_dashboard.timeslot.delete.no_permission'),
+                'no_permission'
+            );
+        }
+
+        if ($timeslot->shelter->trashed()) {
+            return $this->deny(
+                __('policies.admin_dashboard.timeslot.delete.shelter_deleted'),
+                'shelter_deleted'
+            );
+        }
+
+        return $this->allow();
+    }
 }

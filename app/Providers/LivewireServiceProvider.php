@@ -26,6 +26,7 @@ use App\Http\Livewire\Shelter\OpeningPeriod\OpeningPeriodsOverviewPage;
 use App\Http\Livewire\Shelter\OpeningPeriod\UpdateOpeningPeriodSlideOver;
 use App\Http\Livewire\Shelter\ShelterDetailPage;
 use App\Http\Livewire\Shelter\Timeslot\CreateTimeslotSlideOver;
+use App\Http\Livewire\Shelter\Timeslot\DeleteTimeslotModal;
 use App\Http\Livewire\Shelter\Timeslot\UpdateTimeslotSlideOver;
 use App\Http\Livewire\Shelter\Volunteer\TimeslotsOverviewPage;
 use Illuminate\Support\ServiceProvider;
@@ -56,6 +57,7 @@ class LivewireServiceProvider extends ServiceProvider
         'shelter.timeslots-overview-page' => TimeslotsOverviewPage::class,
         'shelter.create-timeslot-slide-over' => CreateTimeslotSlideOver::class,
         'shelter.update-timeslot-slide-over' => UpdateTimeslotSlideOver::class,
+        'shelter.delete-timeslot-modal' => DeleteTimeslotModal::class,
 
         'shelter.detail-page' => ShelterDetailPage::class,
 
