@@ -18,6 +18,7 @@ class ShelterResource extends JsonResource
             'tiktok' => $this->tiktok,
             'address' => AddressResource::make($this->whenLoaded('address')),
             'image' => ImageResource::make($this->image)->ofModel($this->resource),
+            'opening_periods' => OpeningPeriodsResource::collection($this->whenLoaded('openingPeriods')),
         ];
     }
 }

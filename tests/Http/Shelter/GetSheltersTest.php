@@ -31,6 +31,7 @@ class GetSheltersTest extends TestCase
                         'tiktok',
                         'address',
                         'image',
+                        'opening_periods',
                     ],
                 ],
             ])->assertJsonArray('data.*.id', $shelters->pluck('id'));

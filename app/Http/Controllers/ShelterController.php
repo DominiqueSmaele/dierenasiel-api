@@ -13,7 +13,7 @@ class ShelterController extends Controller
     {
         $shelters = Shelter::query()
             ->select('*')
-            ->with('address.country')
+            ->with('address.country', 'openingPeriods')
             ->when($request->q, fn ($query) => $query->search($request->q))
             ->when($request->location(), fn ($query) => $query->orderByDistance($request->location()))
             ->orderBy('name')

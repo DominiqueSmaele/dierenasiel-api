@@ -16,7 +16,7 @@ class GetSheltersRequest extends FormRequest
             'per_page' => [
                 'nullable',
                 'integer',
-                'max:15',
+                'max:12',
             ],
         ];
     }
