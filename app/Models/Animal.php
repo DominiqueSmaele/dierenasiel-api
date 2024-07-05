@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\AnimalBuilder;
 use App\Models\Pivots\AnimalQuality;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,6 +38,11 @@ class Animal extends Model implements HasMedia
     protected $with = [
         'media',
     ];
+
+    public function newEloquentBuilder($query) : AnimalBuilder
+    {
+        return new AnimalBuilder($query);
+    }
 
     public function shelter() : BelongsTo
     {
