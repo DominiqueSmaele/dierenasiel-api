@@ -26,6 +26,7 @@ class TimeslotsOverviewPage extends Component
         'timeslotCreated' => '$refresh',
         'timeslotUpdated' => '$refresh',
         'timeslotDeleted' => '$refresh',
+        'timeslotVolunteerDeleted' => '$refresh',
     ];
 
     public function __construct()

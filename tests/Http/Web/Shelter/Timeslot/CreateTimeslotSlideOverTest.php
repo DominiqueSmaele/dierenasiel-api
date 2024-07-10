@@ -5,7 +5,6 @@ namespace Tests\Http\Web\Shelter\Timeslot;
 use App\Http\Livewire\Shelter\Timeslot\CreateTimeslotSlideOver;
 use App\Models\Shelter;
 use App\Models\Timeslot;
-use App\Models\Volunteer;
 use App\Policies\AdminDashboard\TimeslotPolicy;
 use Carbon\Carbon;
 use Livewire\Livewire;
@@ -24,8 +23,6 @@ class CreateTimeslotSlideOverTest extends TestCase
 
     public Carbon $endTime;
 
-    public Volunteer $volunteer;
-
     public function setUp() : void
     {
         parent::setUp();
@@ -35,7 +32,6 @@ class CreateTimeslotSlideOverTest extends TestCase
         $this->date = Carbon::parse($this->faker->dateTimeBetween(now(), now()->addWeeks(2)));
         $this->startTime = Carbon::parse($this->faker->time($max = '22:59:59'));
         $this->endTime = $this->startTime->copy()->addHour();
-        $this->volunteer = Volunteer::factory()->create();
     }
 
     /** @test */
@@ -44,7 +40,6 @@ class CreateTimeslotSlideOverTest extends TestCase
         Livewire::test(CreateTimeslotSlideOver::class, [$this->shelter->id, $this->date->format('Y-m-d')])
             ->set('timeslot.start_time', $this->startTime)
             ->set('timeslot.end_time', $this->endTime)
-            ->set('timeslot.volunteer_id', $this->volunteer->id)
             ->call('create')
             ->assertHasNoErrors()
             ->assertDispatched('timeslotCreated')
@@ -56,7 +51,6 @@ class CreateTimeslotSlideOverTest extends TestCase
         $this->assertSameMinute($this->date->startOfDay(), Carbon::parse($dbTimeslot->date));
         $this->assertSameMinute($this->startTime, $dbTimeslot->start_time);
         $this->assertSameMinute($this->endTime, $dbTimeslot->end_time);
-        $this->assertSame($this->volunteer->id, $dbTimeslot->volunteer_id);
     }
 
     /** @test */
@@ -65,14 +59,10 @@ class CreateTimeslotSlideOverTest extends TestCase
         Livewire::test(CreateTimeslotSlideOver::class, [$this->shelter->id, $this->date->format('Y-m-d')])
             ->set('timeslot.start_time', null)
             ->set('timeslot.end_time', null)
-            ->set('timeslot.volunteer_id', null)
             ->call('create')
             ->assertHasErrors([
                 'timeslot.start_time',
                 'timeslot.end_time',
-            ])
-            ->assertHasNoErrors([
-                'timeslot.volunteer_id',
             ]);
     }
 

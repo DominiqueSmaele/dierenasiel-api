@@ -50,7 +50,7 @@
             ], @js($timeZone)).locale(locale).format(format);
         },
         onChange: (dates, dateStr) => {
-            dates = dates.map(date => picker.formatDate(date, {{ $dateFormat }}));
+            dates = dates.map(date => picker.formatDate(date, {{ $enableTime ? json_encode('YYYY-MM-DD\\\\THH:mm:ssZ') : json_encode('YYYY-MM-DD') }}));
             value = dates[0] ?? null;
         },
         plugins: [
