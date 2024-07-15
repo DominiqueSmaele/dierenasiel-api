@@ -21,7 +21,7 @@
         enableTime: @js($enableTime),
         locale: locale = document.querySelector('html').getAttribute('lang') ?? 'en',
         altInput: true,
-        altFormat: {{ $noCalendar && $enableTime ? json_encode('HH:mm') : json_encode('DD-MM-YYYY H:i:s') }},
+        altFormat: {{ $noCalendar && $enableTime ? json_encode('HH:mm') : json_encode('DD-MM-YYYY') }},
         dateFormat: {{ $dateFormat = $enableTime ? json_encode('YYYY-MM-DD\\\\THH:mm:ssZ') : json_encode('YYYY-MM-DD') }},
         defaultDate: value,
         time_24hr: true,

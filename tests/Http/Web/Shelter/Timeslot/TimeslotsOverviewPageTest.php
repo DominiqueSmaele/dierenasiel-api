@@ -6,6 +6,7 @@ use App\Http\Livewire\Shelter\Timeslot\TimeslotsOverviewPage;
 use App\Models\Shelter;
 use App\Models\Timeslot;
 use App\Policies\AdminDashboard\TimeslotPolicy;
+use App\Services\CalendarService;
 use Livewire\Livewire;
 use Tests\AuthenticateAsWebUser;
 use Tests\TestCase;
@@ -16,17 +17,27 @@ class TimeslotsOverviewPageTest extends TestCase
 
     public Shelter $shelter;
 
+    public CalendarService $calendarService;
+
+    public int $page;
+
     public function setUp() : void
     {
         parent::setUp();
 
         $this->shelter = Shelter::factory()->create();
+
+        $this->calendarService = app(CalendarService::class);
+
+        $this->calendarService->generateCalendar();
+
+        $this->page = $this->calendarService->defaultPage;
     }
 
     /** @test */
     public function it_is_accessible_on_volunteers_route()
     {
-        $this->get("shelter/{$this->shelter->id}/volunteers")
+        $this->get("shelter/{$this->shelter->id}/volunteers?page={$this->page}")
             ->assertStatus(200)
             ->assertSeeLivewire(TimeslotsOverviewPage::class);
     }
@@ -37,7 +48,8 @@ class TimeslotsOverviewPageTest extends TestCase
         $otherTimeslots = Timeslot::factory()->count(3)->create();
         $timeSlots = Timeslot::factory()->for($this->shelter)->count(2)->create();
 
-        Livewire::test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])
+        Livewire::withQueryParams(['page' => $this->page])
+            ->test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])
             ->assertViewHas('timeslots', function ($items) use ($timeSlots) {
                 $this->assertEqualsArray($timeSlots->pluck('id'), $items->flatten()->pluck('id'));
 
@@ -54,7 +66,8 @@ class TimeslotsOverviewPageTest extends TestCase
         $firstTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now(), 'start_time' => now()]);
         $fourthTimeslot = Timeslot::factory()->for($this->shelter)->create(['date' => now()->addDay()]);
 
-        Livewire::test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])
+        Livewire::withQueryParams(['page' => $this->page])
+            ->test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])
             ->assertViewHas('timeslots', function ($items) use ($firstTimeslot, $secondTimeslot, $thirdTimeslot, $fourthTimeslot, $fifthTimeslot) {
                 $flattenedItems = $items->flatten();
 
@@ -73,7 +86,8 @@ class TimeslotsOverviewPageTest extends TestCase
     {
         $this->partialMockPolicy(TimeslotPolicy::class)->forUser($this->user)->shouldAllow('viewAny', $this->shelter);
 
-        Livewire::test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])->assertSuccessful();
+        Livewire::withQueryParams(['page' => $this->page])
+            ->test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])->assertSuccessful();
     }
 
     /** @test */
@@ -81,6 +95,7 @@ class TimeslotsOverviewPageTest extends TestCase
     {
         $this->partialMockPolicy(TimeslotPolicy::class)->forUser($this->user)->shouldDeny('viewAny', $this->shelter);
 
-        Livewire::test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])->assertForbidden();
+        Livewire::withQueryParams(['page' => $this->page])
+            ->test(TimeslotsOverviewPage::class, ['shelter' => $this->shelter])->assertForbidden();
     }
 }

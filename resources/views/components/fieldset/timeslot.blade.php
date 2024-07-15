@@ -6,7 +6,7 @@
         </x-input.group>
 
         <div class="mt-1 flex items-center justify-between gap-4">
-            <x-input.group :error="$errors->first('timeslot.start_time')" class="mt-1">
+            <x-input.group class="flex w-[45%] flex-col self-stretch" :error="$errors->first('timeslot.start_time')">
                 <x-label>{{ __('web.timeslot_fieldset_start_time_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
                 <div class="mt-1" x-data="{ start_time: @entangle('timeslot.start_time') }" x-init="start_time ?? 'null'">
@@ -14,9 +14,9 @@
                 </div>
             </x-input.group>
 
-            <span class="mt-6">-</span>
+            <div class="mt-9 flex self-stretch">-</div>
 
-            <x-input.group :error="$errors->first('timeslot.end_time')" class="mt-1">
+            <x-input.group class="flex w-[45%] flex-col self-stretch" :error="$errors->first('timeslot.end_time')">
                 <x-label>{{ __('web.timeslot_fieldset_end_time_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
                 <div class="mt-1" x-data="{ end_time: @entangle('timeslot.end_time') }" x-init="end_time ?? 'null'">
