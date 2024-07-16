@@ -13,6 +13,8 @@ class SheltersOverviewPage extends Component
     use AuthorizesRequests,
         WithPagination;
 
+    public ?string $searchValue = null;
+
     protected $listeners = [
         'shelterCreated' => '$refresh',
         'shelterUpdated' => '$refresh',
@@ -24,10 +26,16 @@ class SheltersOverviewPage extends Component
         $this->authorize('viewAny', Shelter::class);
     }
 
+    public function updatingSearchValue()
+    {
+        $this->resetPage();
+    }
+
     public function render() : View
     {
         return view('livewire.global.shelter.shelters-overview-page', [
             'shelters' => Shelter::query()
+                ->when($this->searchValue)->search($this->searchValue)
                 ->with('address.country')
                 ->orderBy('name')
                 ->orderBy('id')

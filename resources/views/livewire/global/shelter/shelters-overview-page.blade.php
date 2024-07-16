@@ -7,6 +7,12 @@
         </x-button>
     </div>
 
+    @if (App\Models\Shelter::exists())
+        <div class="mt-12 flex items-end">
+            <x-input wire:model.live.debounce.250ms="searchValue" inline-left-icon="search" :placeholder="__('web.shelters_overview_page_search_placeholder')" class="flex-1"></x-input>
+        </div>
+    @endif
+
     @if ($shelters->isNotEmpty())
         <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-8">
             @foreach ($shelters as $shelter)
