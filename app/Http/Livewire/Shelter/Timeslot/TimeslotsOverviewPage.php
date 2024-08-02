@@ -38,14 +38,17 @@ class TimeslotsOverviewPage extends Component
     {
         $this->calendar = $this->calendarService->generateCalendar();
 
-        if ($this->getPage() != $this->calendarService->defaultPage) {
-            $this->redirect(url()->current() . '?page=' . $this->calendarService->defaultPage);
-        }
+        $this->setPage($this->calendarService->defaultPage);
     }
 
     public function booted() : void
     {
         $this->authorize('viewAny', [Timeslot::class, $this->shelter]);
+    }
+
+    public function resetPage() : void
+    {
+        $this->reset('page');
     }
 
     public function getTimeslots() : Collection

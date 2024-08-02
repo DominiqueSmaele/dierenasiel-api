@@ -11,7 +11,7 @@
         </x-button>
     </div>
 
-    @if (App\Models\Quality::exists() && $types->isNotEmpty())
+    @if ($types->isNotEmpty())
         <div class="mt-10 flex gap-4">
             <x-button wire:click="resetFilter" :variant="$filterValue === null ? 'primary' : 'secondary'" color="blue">
                 {{ __('web.qualities_overview_page_all_types_label') }}
