@@ -1,4 +1,4 @@
-<x-slide-over wire:submit="update" :title="__('web.update_animal_slide_over_title')">
+<x-slide-over wire:submit="update" :title="__('web.update_animal_slide_over_title', ['name' => $animal->name])">
     <x-slot name="action">
         <x-button type="button" variant="tertiary" color="gray" wire:click="$dispatch('modal.open', {component: 'shelter.delete-animal-modal', arguments: {'animalId': {{ $animal->id }}}})">
             <x-icon.trash class="h-5 w-5" />

@@ -21,7 +21,7 @@
 
             @foreach (\App\Models\Type::all()->sortBy('id') as $type)
                 <x-button wire:click="$set('filterValue', {{ $type->id }})" wire:key="{{ $type->id }}" :variant="$filterValue === $type->id ? 'primary' : 'secondary'" color="blue">
-                    {{ $type->name }}
+                    {{ __('web.' . strtolower($type->name)) }}
                 </x-button>
             @endforeach
         </div>

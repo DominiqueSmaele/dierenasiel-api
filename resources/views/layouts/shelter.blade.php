@@ -38,7 +38,7 @@
                     @endcan
 
                     @can('viewAny', [App\Models\Timeslot::class, $shelter])
-                        <x-navbar-link href="{{ route('shelter.volunteers-overview', $shelter->id) }}" wire:navigate icon="heart" :active="request()->routeIs('shelter.volunteers-overview')">
+                        <x-navbar-link href="{{ route('shelter.volunteers-overview', $shelter->id) }}" wire:navigate icon="calendar" :active="request()->routeIs('shelter.volunteers-overview')">
                             <p x-show="!isCollapsed">{{ __('web.shelter_navigation_volunteers_link') }}</p>
                         </x-navbar-link>
                     @endcan

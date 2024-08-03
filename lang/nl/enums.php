@@ -3,10 +3,10 @@
 return [
     'role' => [
         'developer' => 'developer',
-        'admin' => 'admin',
-        'user' => 'user',
+        'admin' => 'beheerder',
+        'user' => 'gebruiker',
     ],
     'shelter_role' => [
-        'administrator' => 'administrator',
+        'administrator' => 'beheerder',
     ],
 ];
