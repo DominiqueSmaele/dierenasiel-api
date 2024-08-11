@@ -2,7 +2,7 @@
 @props(['defaultCountryCode' => 'BE'])
 
 @php
-    $defaultCountryCallingCode = collect(\libphonenumber\CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap)
+    $defaultCountryCallingCode = collect(\libphonenumber\CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP)
         ->filter(fn($countryCodes) => collect($countryCodes)->contains($defaultCountryCode))
         ->keys()
         ->first();

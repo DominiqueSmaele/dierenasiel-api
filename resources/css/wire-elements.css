@@ -111,5 +111,5 @@
 }
 
 .wep-slide-over-container-inner-content {
-    @apply flex h-full flex-col overflow-y-scroll bg-white shadow-dark;
+    @apply flex h-full flex-col bg-white shadow-dark;
 }

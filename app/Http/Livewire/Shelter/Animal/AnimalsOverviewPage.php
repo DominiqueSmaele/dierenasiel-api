@@ -32,7 +32,6 @@ class AnimalsOverviewPage extends Component
         return view('livewire.shelter.animal.animals-overview-page', [
             'animals' => Animal::query()
                 ->where('shelter_id', $this->shelter->id)
-                ->with('type')
                 ->orderBy('name')
                 ->orderBy('id')
                 ->paginate(20),

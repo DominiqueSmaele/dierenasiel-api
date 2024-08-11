@@ -15,12 +15,9 @@ trait ValidatesAdmin
 
     public ?string $passwordRepeat;
 
-    public ?string $oldPassword;
-
     public function mountValidatesAdmin() : void
     {
         $this->user ??= User::make();
-        $this->password = '';
     }
 
     public function bootedValidatesAdmin() : void

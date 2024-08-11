@@ -1,5 +1,9 @@
 @props([
     'error' => null,
+    'noCalendar' => false,
+    'enableTime' => false,
+    'monthOnly' => false,
+    'timeZone' => 'Etc/UTC',
 ])
 
 @php
@@ -13,16 +17,47 @@
         value: @if ($attributes->wire('model')->value()) @entangle($attributes->first('x-model')) @else {{ $attributes->first('x-model') }} @endif
     }"
     x-init="let picker = flatpickr($el, {
+        noCalendar: @js($noCalendar),
+        enableTime: @js($enableTime),
         locale: locale = document.querySelector('html').getAttribute('lang') ?? 'en',
         altInput: true,
+        altFormat: 'HH:mm',
+        dateFormat: {{ $dateFormat = $enableTime ? json_encode('YYYY-MM-DD\\\\THH:mm:ssZ') : json_encode('YYYY-MM-DD') }},
         defaultDate: value,
-        maxDate: 'today',
+        time_24hr: true,
+        {{ $monthOnly ? 'maxDate: new Date(),' : '' }}
         wrap: true,
+        parseDate(dateString, format) {
+            let timezonedDate = new moment.tz(dateString, format, @js($timeZone));
+    
+            return new Date(
+                timezonedDate.year(),
+                timezonedDate.month(),
+                timezonedDate.date(),
+                timezonedDate.hour(),
+                timezonedDate.minute(),
+                timezonedDate.second()
+            );
+        },
+        formatDate(date, format) {
+            return moment.tz([
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds()
+            ], @js($timeZone)).locale(locale).format(format);
+        },
         onChange: (dates, dateStr) => {
-            dates = dates.map(date => picker.formatDate(date, {{ json_encode('Y-m-d') }}));
+            dates = dates.map(date => picker.formatDate(date, {{ $dateFormat }}));
             value = dates[0] ?? null;
         },
-        plugins: [new monthSelectPlugin({ shorthand: true, dateFormat: {{ json_encode('Y-m-d') }}, altFormat: 'F Y' })],
+        plugins: [
+            @if($monthOnly)
+            new monthSelectPlugin({ shorthand: true, dateFormat: {{ json_encode('YYYY-MM-DD') }}, altFormat: 'MMMM YYYY' })
+            @endif
+        ],
     });
     $watch('value', () => picker.setDate(value))"
     x-modelable="value"

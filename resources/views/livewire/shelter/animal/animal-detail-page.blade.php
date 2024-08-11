@@ -3,7 +3,7 @@
 @endphp
 
 <div>
-    <div class="mt-1 flex items-center justify-between">
+    <div class="flex items-center justify-between">
         <h2 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.animal_detail_page_title', ['name' => $animal->name]) }}</h2>
 
         <div class="flex gap-4">
@@ -36,15 +36,15 @@
             <div class="w-full">
                 <div>
                     <p class="mb-5 border-b pb-4 font-highlight-sans text-2xl font-semibold leading-5 text-blue-base">{{ __('web.animal_detail_page_info_title') }}</p>
-                    <div class="grid grid-cols-2 place-content-center bg-gray-lighter p-4">
+                    <div class="grid grid-cols-2 place-content-center bg-blue-lighter p-4">
                         <p class="text-base leading-5">{{ __('web.animal_detail_page_name') }}</p>
                         <p class="text-base leading-5">{{ ucfirst($animal->name) }}</p>
                     </div>
-                    <div class="grid grid-cols-2 place-content-center bg-gray-lightest p-4">
+                    <div class="grid grid-cols-2 place-content-center bg-blue-lightest p-4">
                         <p class="text-base leading-5">{{ __('web.animal_detail_page_sex') }}</p>
                         <p class="text-base leading-5">{{ __('web.animals_overview_page_sex_' . $animal->sex) }}</p>
                     </div>
-                    <div class="grid grid-cols-2 place-content-center bg-gray-lighter p-4">
+                    <div class="grid grid-cols-2 place-content-center bg-blue-lighter p-4">
                         <p class="text-base leading-5">{{ __('web.animal_detail_page_age') }}</p>
                         @if ($animal->birth_date)
                             @php
@@ -55,7 +55,7 @@
                             <p class="text-base leading-5">{{ __('web.animal_detail_page_age_unknown') }}</p>
                         @endif
                     </div>
-                    <div class="grid grid-cols-2 place-content-center bg-gray-lightest p-4">
+                    <div class="grid grid-cols-2 place-content-center bg-blue-lightest p-4">
                         <p class="text-base leading-5">{{ __('web.animal_detail_page_race') }}</p>
                         <p class="text-base leading-5">{{ $animal->race ? ucfirst($animal->race) : '-' }}</p>
                     </div>
@@ -65,7 +65,7 @@
                 <div>
                     <p class="mb-5 mt-10 border-b pb-4 font-highlight-sans text-2xl font-semibold leading-5 text-blue-base">{{ __('web.animal_detail_page_description_title') }}</p>
                     <div>
-                        <p class="bg-gray-lighter p-4 text-base leading-5">{!! nl2br(e($animal->description)) !!}</p>
+                        <p class="bg-blue-lighter p-4 text-base leading-5">{!! nl2br(e($animal->description)) !!}</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
 
             <div class="columns-2">
                 @foreach ($qualities as $index => $quality)
-                    <div class="{{ $index % 2 == 0 ? 'bg-gray-lighter' : 'bg-gray-lightest' }} flex justify-between p-4">
+                    <div class="{{ $index % 2 == 0 ? 'bg-blue-lighter' : 'bg-blue-lightest' }} flex justify-between p-4">
                         <p class="col-start-1 text-base leading-5">{{ ucfirst($quality->name) }}</p>
 
                         @if ($animal->qualities)

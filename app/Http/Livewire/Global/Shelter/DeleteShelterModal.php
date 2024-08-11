@@ -30,6 +30,8 @@ class DeleteShelterModal extends Modal
             $this->shelter->delete();
 
             $this->shelter->animals()->delete();
+
+            $this->shelter->openingPeriods()->delete();
         });
 
         $this->close(withForce: true, andDispatch: [

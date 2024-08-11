@@ -1,9 +1,7 @@
 @props(['animal', 'image', 'withoutImage'])
 
 @php
-    $types = \App\Models\Type::all()
-        ->sortBy('name')
-        ->values();
+    $types = \App\Models\Type::all()->sortBy('id')->values();
 @endphp
 
 <div class="flex flex-1 flex-col gap-4">
@@ -76,8 +74,8 @@
     <x-input.group :error="$errors->first('animal.birth_date')" class="mt-1">
         <x-label>{{ __('web.animal_fieldset_birth_date_label') }}</x-label>
 
-        <div x-data="{ birthDate: @entangle('animal.birth_date') }" x-init="birthDate ?? 'null'">
-            <x-input.date x-model="birthDate" :placeholder="__('web.animal_fieldset_birth_date')" class="flex-none" />
+        <div class="mt-1" x-data="{ birthDate: @entangle('animal.birth_date') }" x-init="birthDate ?? 'null'">
+            <x-input.date x-model="birthDate" :monthOnly="true" :placeholder="__('web.animal_fieldset_birth_date')" class="flex-none" />
         </div>
     </x-input.group>
 
