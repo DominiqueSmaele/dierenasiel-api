@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\CurrentUserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ShelterAnimalController;
 use App\Http\Controllers\ShelterController;
@@ -17,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [LoginController::class, 'authenticate']);
+
 Route::middleware('auth:api')->group(function () {
+    Route::get('user/current', [CurrentUserController::class, 'show']);
+
     Route::get('shelters', [ShelterController::class, 'index']);
 
     Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
