@@ -36,7 +36,7 @@
                         </div>
 
                         @if ($date->gte(now()->startOfDay()))
-                            <x-button variant="tertiary" color="blue">
+                            <x-button variant="tertiary" color="blue" wire:click="$dispatch('slide-over.open', {component: 'shelter.update-timeslot-slide-over', arguments: {'timeslotId': {{ $timeslot->id }}}}) ">
                                 <x-icon.pencil class="h-5 w-5" />
                             </x-button>
                         @endif
