@@ -1,6 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\CurrentUserController;
+use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\ShelterAnimalController;
+use App\Http\Controllers\ShelterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +20,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', [RegisterUserController::class, 'register']);
+Route::post('login', [LoginUserController::class, 'authenticate']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user/current', [CurrentUserController::class, 'show']);
+    Route::patch('user', [CurrentUserController::class, 'update']);
+    Route::patch('user/password', [CurrentUserController::class, 'updatePassword']);
+
+    Route::get('shelters', [ShelterController::class, 'index']);
+
+    Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
+
+    Route::get('animals', [AnimalController::class, 'index']);
+
+    Route::post('logout', [LogoutController::class, 'store']);
 });

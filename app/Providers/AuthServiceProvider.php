@@ -2,25 +2,29 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Http\Middleware\EnforceJson;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        //
-    ];
+    protected $policies = [];
 
-    /**
-     * Register any authentication / authorization services.
-     */
     public function boot() : void
     {
-        //
+        $this->configurePassport();
+    }
+
+    protected function configurePassport() : void
+    {
+        Route::prefix(config('passport.path', 'oauth'))
+            ->post('/token', [AccessTokenController::class, 'issueToken'])
+            ->name('passport.token')
+            ->middleware(['throttle:300,1', EnforceJson::class]);
+
+        Passport::tokensExpireIn(now()->addMinutes(config('passport.access_token_expire_minutes')));
+        Passport::refreshTokensExpireIn(now()->addMinutes(config('passport.refresh_token_expire_minutes')));
     }
 }

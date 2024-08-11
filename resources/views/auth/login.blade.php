@@ -1,48 +1,37 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <h1 class="text-center font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.login_title') }}</h1>
 
-        <x-validation-errors class="mb-4" />
+    <form method="POST" action="{{ route('login') }}" class="mt-12">
+        @csrf
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+        <x-input.group :error="$errors->first('email')">
+            <x-label for="email">{{ __('web.login_email_label') }}</x-label>
+            <x-input id="email" class="mt-1" type="email" name="email" :value="old('email')" :placeholder="__('web.login_email_placeholder')" required autofocus autocomplete="username" />
+            @if (session('status'))
+                <div class="ml-3 mt-1 text-sm font-normal leading-5 text-green-base">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </x-input.group>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+        <x-input.group :error="$errors->first('password')" class="mt-4">
+            <x-label for="password">{{ __('web.login_password_label') }}</x-label>
+            <x-input id="password" class="mt-1" type="password" name="password" :placeholder="__('web.login_password_placeholder')" required autocomplete="current-password" />
+        </x-input.group>
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
+        <div class="ml-1 mt-4 block">
+            <label for="remember_me" class="flex items-center">
+                <x-checkbox id="remember_me" name="remember" />
+                <span class="text-dark-25 ml-2 text-sm leading-5">{{ __('web.login_remember_me_label') }}</span>
+            </label>
+        </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
+        <x-button type="submit" variant="primary" class="mt-8 w-full">
+            {{ __('web.login_button') }}
+        </x-button>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
+        <x-button href="{{ route('password.request') }}" variant="tertiary" class="mt-2 w-full">
+            {{ __('web.login_forgot_password_button') }}
+        </x-button>
+    </form>
 </x-guest-layout>

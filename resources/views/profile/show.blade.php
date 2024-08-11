@@ -1,45 +1,26 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+<x-dynamic-component :component="request()->query('shelterId') ? 'shelter-layout' : 'global-layout'" :shelter="request()->query('shelterId') ? \App\Models\Shelter::find(request()->query('shelterId')) : null">
+    <h1 class="font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.profile_title') }}</h1>
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
+    <div class="flex flex-col gap-10 divide-y divide-gray-light">
+        <div class="mt-10 flex flex-col gap-4">
+            <div>
+                <x-label>{{ __('web.profile_firstname_label') }}</x-label>
+                <p class="text-sm font-medium leading-6">{{ auth()->user()->firstname }}</p>
             </div>
 
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
+            <div>
+                <x-label>{{ __('web.profile_lastname_label') }}</x-label>
+                <p class="text-sm font-medium leading-6">{{ auth()->user()->lastname }}</p>
+            </div>
 
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
+            <div>
+                <x-label>{{ __('web.profile_email_label') }}</x-label>
+                <p class="text-sm font-medium leading-6">{{ auth()->user()->email }}</p>
+            </div>
+        </div>
+
+        <div class="pt-10">
+            <livewire:profile.two-factor-authentication-form />
         </div>
     </div>
-</x-app-layout>
+</x-dynamic-component>

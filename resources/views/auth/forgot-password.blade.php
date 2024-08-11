@@ -1,34 +1,27 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <h1 class="text-center font-highlight-sans text-2xl font-semibold leading-7">{{ __('web.forgot_password_title') }}</h1>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+    <p class="mt-8 text-center leading-5">{{ __('web.forgot_password_description') }}</p>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+    <form method="POST" action="{{ route('password.email') }}" class="mt-8">
+        @csrf
 
-        <x-validation-errors class="mb-4" />
+        <x-input.group :error="$errors->first('email')">
+            <x-label for="email">{{ __('web.forgot_password_email_label') }}</x-label>
+            <x-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email')" :placeholder="__('web.forgot_password_email_placeholder')" required autofocus autocomplete="username" />
+            @if (session('status'))
+                <div class="ml-3 mt-1 text-sm font-normal leading-5 text-green-base">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </x-input.group>
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+        <x-button type="submit" class="mt-8 w-full">
+            {{ __('web.forgot_password_submit_button') }}
+        </x-button>
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
+        <x-button href="{{ route('login') }}" variant="tertiary" class="mt-2 w-full">
+            {{ __('web.forgot_password_back_button') }}
+        </x-button>
+    </form>
 </x-guest-layout>

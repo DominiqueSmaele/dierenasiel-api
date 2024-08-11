@@ -1,7 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Open+Sans:wght@400;600;700&display=swap');
+@import '../../node_modules/flatpickr/dist/themes/airbnb.css';
+@import '../../node_modules/flatpickr/dist/plugins/monthSelect/style.css';
+
+@import './wire-elements.css';
+@import './flatpickr.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 [x-cloak] {
-    display: none;
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-blue-light/50;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+.navigation {
+    @apply ease-in-out duration-300;
 }
