@@ -7,14 +7,19 @@ return [
                 'no_permission' => 'U heeft geen toestemming om ontwikkelaars te bekijken.',
             ],
             'view_any_admin' => [
-                'no_permission' => 'U heeft geen toestemming om admins te bekijken.',
+                'no_permission' => 'U heeft geen toestemming om beheerders te bekijken.',
             ],
             'create_admin' => [
-                'no_permission' => 'U heeft geen toestemming om admins aan te maken.',
+                'no_permission' => 'U heeft geen toestemming om beheerders aan te maken.',
             ],
             'update_admin' => [
-                'no_permission' => 'U heeft geen toestemming om admins aan te passen.',
-                'incorrect_role' => 'De gebruiker die u probeert aan te passen is geen admin.',
+                'no_permission' => 'U heeft geen toestemming om beheerders aan te passen.',
+                'incorrect_role' => 'De gebruiker die u probeert aan te passen is geen beheerder.',
+            ],
+            'delete_admin' => [
+                'no_permission' => 'U heeft geen toestemming om beheerders te verwijderen.',
+                'incorrect_role' => 'De gebruiker die u probeert te verwijderen is geen beheerder.',
+                'no_self_delete' => 'Het is niet mogelijk om uzelf te verwijderen als beheerder.',
             ],
         ],
         'shelter' => [

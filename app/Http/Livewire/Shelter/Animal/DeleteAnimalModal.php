@@ -26,9 +26,7 @@ class DeleteAnimalModal extends Modal
 
     public function delete() : void
     {
-        DB::transaction(function () {
-            $this->animal->delete();
-        });
+        DB::transaction(fn () => $this->animal->delete());
 
         $this->close(withForce: true, andDispatch: [
             'animalDeleted',

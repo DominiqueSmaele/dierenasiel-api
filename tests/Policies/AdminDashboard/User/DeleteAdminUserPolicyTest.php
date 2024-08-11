@@ -11,7 +11,7 @@ use App\Models\Shelter;
 use App\Models\User;
 use Tests\TestCase;
 
-class UpdateAdminUserPolicyTest extends TestCase
+class DeleteAdminUserPolicyTest extends TestCase
 {
     public User $user;
 
@@ -35,7 +35,7 @@ class UpdateAdminUserPolicyTest extends TestCase
     {
         Role::user->syncPermissions([Permission::manageAllShelters]);
 
-        $this->assertGate('updateAdmin', $this->selectedUser)->isAllowed();
+        $this->assertGate('deleteAdmin', $this->selectedUser)->isAllowed();
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class UpdateAdminUserPolicyTest extends TestCase
         Role::user->syncPermissions([]);
         $this->user->syncPermissions([ShelterPermission::manageShelter], $this->selectedUser->shelter);
 
-        $this->assertGate('updateAdmin', $this->selectedUser)->isAllowed();
+        $this->assertGate('deleteAdmin', $this->selectedUser)->isAllowed();
     }
 
     /** @test */
@@ -53,9 +53,9 @@ class UpdateAdminUserPolicyTest extends TestCase
         Role::user->syncPermissions([]);
         $this->user->syncPermissions([ShelterPermission::manageShelter], Shelter::factory()->create());
 
-        $this->assertGate('updateAdmin', $this->selectedUser)
+        $this->assertGate('deleteAdmin', $this->selectedUser)
             ->isDenied()
-            ->withMessage(__('policies.admin_dashboard.user.update_admin.no_permission'))
+            ->withMessage(__('policies.admin_dashboard.user.delete_admin.no_permission'))
             ->withCode('no_permission');
     }
 
@@ -64,9 +64,9 @@ class UpdateAdminUserPolicyTest extends TestCase
     {
         Role::user->syncPermissions([]);
 
-        $this->assertGate('updateAdmin', $this->selectedUser)
+        $this->assertGate('deleteAdmin', $this->selectedUser)
             ->isDenied()
-            ->withMessage(__('policies.admin_dashboard.user.update_admin.no_permission'))
+            ->withMessage(__('policies.admin_dashboard.user.delete_admin.no_permission'))
             ->withCode('no_permission');
     }
 
@@ -76,9 +76,23 @@ class UpdateAdminUserPolicyTest extends TestCase
         Role::user->syncPermissions([Permission::manageAllShelters]);
         $this->selectedUser->removeRoles([ShelterRole::admin], $this->selectedUser->shelter);
 
-        $this->assertGate('updateAdmin', $this->selectedUser)
+        $this->assertGate('deleteAdmin', $this->selectedUser)
             ->isDenied()
-            ->withMessage(__('policies.admin_dashboard.user.update_admin.incorrect_role'))
+            ->withMessage(__('policies.admin_dashboard.user.delete_admin.incorrect_role'))
             ->withCode('incorrect_role');
+    }
+
+    /** @test */
+    public function it_denies_if_user_has_manage_shelter_permission_for_current_shelter_but_selected_user_is_auth_user()
+    {
+        Role::user->syncPermissions([]);
+        $this->user->syncRoles([ShelterRole::admin], $this->user->shelter);
+
+        $this->selectedUser = $this->user;
+
+        $this->assertGate('deleteAdmin', $this->selectedUser)
+            ->isDenied()
+            ->withMessage(__('policies.admin_dashboard.user.delete_admin.no_self_delete'))
+            ->withCode('no_self_delete');
     }
 }
