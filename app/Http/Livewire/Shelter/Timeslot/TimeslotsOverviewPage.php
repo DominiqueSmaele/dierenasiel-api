@@ -26,6 +26,7 @@ class TimeslotsOverviewPage extends Component
         'timeslotCreated' => '$refresh',
         'timeslotUpdated' => '$refresh',
         'timeslotDeleted' => '$refresh',
+        'timeslotVolunteerDeleted' => '$refresh',
     ];
 
     public function __construct()
@@ -36,6 +37,10 @@ class TimeslotsOverviewPage extends Component
     public function mount() : void
     {
         $this->calendar = $this->calendarService->generateCalendar();
+
+        if ($this->getPage() != $this->calendarService->defaultPage) {
+            $this->redirect(url()->current() . '?page=' . $this->calendarService->defaultPage);
+        }
     }
 
     public function booted() : void

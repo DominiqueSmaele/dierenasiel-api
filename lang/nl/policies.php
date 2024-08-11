@@ -88,10 +88,23 @@ return [
             ],
         ],
         'timeslot' => [
-            'view_any' => 'U heeft geen toestemming om de vrijwilligersagenda te bekijken.',
-            'create' => 'U heeft geen toestemming om tijdsloten aan te maken.',
-            'update' => 'U heeft geen toestemming om tijdsloten aan te passen.',
-            'delete' => 'U heeft geen toestemming om tijdsloten te verwijderen.',
+            'view_any' => [
+                'no_permission' => 'U heeft geen toestemming om de vrijwilligersagenda te bekijken.',
+            ],
+            'create' => [
+                'no_permission' => 'U heeft geen toestemming om tijdsloten aan te maken.',
+            ],
+            'update' => [
+                'no_permission' => 'U heeft geen toestemming om tijdsloten aan te passen.',
+            ],
+            'delete' => [
+                'no_permission' => 'U heeft geen toestemming om tijdsloten te verwijderen.',
+                'shelter_deleted' => 'U kan geen tijdslot verwijderen waarvan het dierenasiel al verwijderd is.',
+            ],
+            'delete_volunteer' => [
+                'no_permission' => 'U heeft geen toestemming om vrijwilligers van tijdsloten te verwijderen.',
+                'shelter_deleted' => 'U kan geen vrijwilliger van een tijdslot verwijderen waarvan het dierenasiel al verwijderd is.',
+            ],
         ],
     ],
 ];

@@ -9,10 +9,16 @@ use Illuminate\Support\Collection;
 
 class CalendarService
 {
+    public int $perPage = 7;
+
+    public int $defaultPage;
+
+    public string $timeZone = 'Europe/Brussels';
+
     public function generateCalendar() : Collection
     {
-        $now = Carbon::now();
-        $startOfCalendar = $now->copy()->startOfWeek(Carbon::MONDAY);
+        $now = Carbon::now($this->timeZone);
+        $startOfCalendar = $now->copy()->firstOfMonth()->startOfWeek(Carbon::MONDAY)->subWeeks(2);
         $endOfCalendar = $now->copy()->lastOfMonth()->endOfWeek(Carbon::SUNDAY)->addWeeks(2);
 
         $dates = CarbonPeriod::create($startOfCalendar, $endOfCalendar);
@@ -23,18 +29,24 @@ class CalendarService
             $calendar->push($date->format('Y-m-d'));
         }
 
+        $this->findDefaultPage($calendar);
+
         return $calendar;
+    }
+
+    public function findDefaultPage(Collection $calendar) : void
+    {
+        $currentDateIndex = $calendar->search(Carbon::now($this->timeZone)->format('Y-m-d'));
+        $this->defaultPage = $currentDateIndex !== false ? intdiv($currentDateIndex, $this->perPage) + 1 : 1;
     }
 
     public function paginateCalendar(Collection $calendar, Collection $timeslots) : LengthAwarePaginator
     {
-        $perPage = 5;
-
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-        $items = $calendar->forPage($currentPage, $perPage);
+        $items = $calendar->forPage($currentPage, $this->perPage);
 
-        $paginatedCalendar = new LengthAwarePaginator($items, $calendar->count(), $perPage, $currentPage);
+        $paginatedCalendar = new LengthAwarePaginator($items, $calendar->count(), $this->perPage, $currentPage);
 
         $this->transformCalendar($paginatedCalendar, $timeslots);
 

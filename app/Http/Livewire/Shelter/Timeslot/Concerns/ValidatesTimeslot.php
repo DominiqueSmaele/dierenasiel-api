@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Shelter\Timeslot\Concerns;
 
 use App\Models\Timeslot;
-use App\Models\Volunteer;
 use Carbon\Carbon;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 trait ValidatesTimeslot
 {
+    public $timeZone = 'Europe/Brussels';
+
     public function mountValidatesTimeslot() : void
     {
         $this->timeslot ??= Timeslot::make(['date' => $this->date]);
@@ -28,13 +28,13 @@ trait ValidatesTimeslot
 
     protected function rules() : array
     {
-        $maxDate = now()->lastOfMonth()->endOfWeek(Carbon::SUNDAY)->addWeeks(2)->format('Y-m-d');
+        $maxDate = now($this->timeZone)->lastOfMonth()->endOfWeek(Carbon::SUNDAY)->addWeeks(2)->format('Y-m-d');
 
         return [
             'timeslot.date' => [
                 'required',
                 'date',
-                'after_or_equal:' . now()->format('Y-m-d'),
+                'after_or_equal:' . now($this->timeZone)->format('Y-m-d'),
                 'before_or_equal:' . $maxDate,
             ],
             'timeslot.start_time' => [
@@ -45,11 +45,6 @@ trait ValidatesTimeslot
                 'required',
                 'date',
                 'after:timeslot.start_time',
-            ],
-            'timeslot.volunteer_id' => [
-                'nullable',
-                'integer',
-                Rule::exists(Volunteer::class, 'id'),
             ],
         ];
     }

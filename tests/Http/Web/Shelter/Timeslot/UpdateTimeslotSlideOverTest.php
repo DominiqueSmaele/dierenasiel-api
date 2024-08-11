@@ -4,7 +4,6 @@ namespace Tests\Http\Web\Shelter\Timeslot;
 
 use App\Http\Livewire\Shelter\Timeslot\UpdateTimeslotSlideOver;
 use App\Models\Timeslot;
-use App\Models\Volunteer;
 use App\Policies\AdminDashboard\TimeslotPolicy;
 use Carbon\Carbon;
 use Livewire\Livewire;
@@ -21,8 +20,6 @@ class UpdateTimeslotSlideOverTest extends TestCase
 
     public Carbon $endTime;
 
-    public Volunteer $volunteer;
-
     public function setUp() : void
     {
         parent::setUp();
@@ -31,7 +28,6 @@ class UpdateTimeslotSlideOverTest extends TestCase
 
         $this->startTime = Carbon::parse($this->faker->time($max = '22:59:59'));
         $this->endTime = $this->startTime->copy()->addHour();
-        $this->volunteer = Volunteer::factory()->create();
     }
 
     /** @test */
@@ -40,7 +36,6 @@ class UpdateTimeslotSlideOverTest extends TestCase
         Livewire::test(UpdateTimeslotSlideOver::class, [$this->timeslot->id])
             ->set('timeslot.start_time', $this->startTime)
             ->set('timeslot.end_time', $this->endTime)
-            ->set('timeslot.volunteer_id', $this->volunteer->id)
             ->call('update')
             ->assertHasNoErrors()
             ->assertDispatched('timeslotUpdated')
@@ -51,7 +46,6 @@ class UpdateTimeslotSlideOverTest extends TestCase
         $this->assertNotNull($dbTimeslot);
         $this->assertSameMinute($this->startTime, $dbTimeslot->start_time);
         $this->assertSameMinute($this->endTime, $dbTimeslot->end_time);
-        $this->assertSame($this->volunteer->id, $dbTimeslot->volunteer_id);
     }
 
     /** @test */
@@ -60,14 +54,10 @@ class UpdateTimeslotSlideOverTest extends TestCase
         Livewire::test(UpdateTimeslotSlideOver::class, [$this->timeslot->id])
             ->set('timeslot.start_time', null)
             ->set('timeslot.end_time', null)
-            ->set('timeslot.volunteer_id', null)
             ->call('update')
             ->assertHasErrors([
                 'timeslot.start_time',
                 'timeslot.end_time',
-            ])
-            ->assertHasNoErrors([
-                'timeslot.volunteer_id',
             ]);
     }
 

@@ -1,4 +1,4 @@
-<div class="flex w-1/3 flex-col justify-between border border-blue-base bg-blue-lightest 4xl:w-1/4">
+<div class="flex w-1/3 flex-col justify-between border border-blue-base bg-blue-lightest 4xl:w-1/4 5xl:w-1/5">
     <div class="flex items-center justify-between px-4 py-8">
         <div class="flex items-center">
             <span class="mr-2">
@@ -9,13 +9,13 @@
 
         @if ($shelter->openingPeriods->isNotEmpty())
             @can('update', [App\Models\OpeningPeriod::class, $shelter])
-                <x-button leading-icon="pencil" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-opening-periods-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
+                <x-button leading-icon="pencil" variant="secondary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-opening-periods-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
                     {{ __('web.shelter_detail_opening_periods_update_button') }}
                 </x-button>
             @endcan
         @else
             @can('create', [App\Models\OpeningPeriod::class, $shelter])
-                <x-button leading-icon="plus" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.create-opening-periods-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
+                <x-button leading-icon="plus" variant="secondary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.create-opening-periods-slide-over', arguments: {'shelterId': {{ $shelter->id }}}})">
                     {{ __('web.shelter_detail_opening_periods_create_button') }}
                 </x-button>
             @endcan
@@ -33,7 +33,7 @@
 
                         <div>
                             @if ($openingPeriod->open && $openingPeriod->close)
-                                <p class="text-base leading-5">{{ $openingPeriod->open?->format('H:i') }} - {{ $openingPeriod->close?->format('H:i') }}</p>
+                                <p class="text-base leading-5">{{ $openingPeriod->open->format('H:i') }} - {{ $openingPeriod->close->format('H:i') }}</p>
                             @else
                                 <p class="text-base leading-5">{{ __('web.shelter_detail_page_opening_periods_closed') }}</p>
                             @endif
