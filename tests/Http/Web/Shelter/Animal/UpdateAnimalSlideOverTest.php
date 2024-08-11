@@ -6,6 +6,7 @@ use App\Http\Livewire\Shelter\Animal\UpdateAnimalSlideOver;
 use App\Models\Animal;
 use App\Models\Type;
 use App\Policies\AdminDashboard\AnimalPolicy;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Tests\AuthenticateAsWebUser;
@@ -25,9 +26,7 @@ class UpdateAnimalSlideOverTest extends TestCase
 
     public string $sex;
 
-    public int $years;
-
-    public int $months;
+    public Carbon $birthDate;
 
     public string $race;
 
@@ -43,8 +42,7 @@ class UpdateAnimalSlideOverTest extends TestCase
         $this->name = $this->faker->name();
         $this->type = Type::factory()->create();
         $this->sex = $this->faker->randomElement(['male', 'female']);
-        $this->years = $this->faker->numberBetween(0, 25);
-        $this->months = $this->faker->numberBetween(0, 11);
+        $this->birthDate = Carbon::parse($this->faker->dateTime());
         $this->race = $this->faker->word();
         $this->description = $this->faker->text();
     }
@@ -57,8 +55,7 @@ class UpdateAnimalSlideOverTest extends TestCase
             ->set('animal.name', $this->name)
             ->set('animal.type_id', $this->type->id)
             ->set('animal.sex', $this->sex)
-            ->set('animal.years', $this->years)
-            ->set('animal.months', $this->months)
+            ->set('animal.birth_date', $this->birthDate->copy()->format('c'))
             ->set('animal.race', $this->race)
             ->set('animal.description', $this->description)
             ->call('update')
@@ -73,8 +70,7 @@ class UpdateAnimalSlideOverTest extends TestCase
         $this->assertSame($this->name, $dbAnimal->name);
         $this->assertSame($this->type->id, $dbAnimal->type->id);
         $this->assertSame($this->sex, $dbAnimal->sex);
-        $this->assertSame($this->years, $dbAnimal->years);
-        $this->assertSame($this->months, $dbAnimal->months);
+        $this->assertSameMinute($this->birthDate, $dbAnimal->birth_date);
         $this->assertSame($this->race, $dbAnimal->race);
         $this->assertSame($this->description, $dbAnimal->description);
     }
@@ -87,8 +83,7 @@ class UpdateAnimalSlideOverTest extends TestCase
             ->set('animal.name', null)
             ->set('animal.type_id', null)
             ->set('animal.sex', null)
-            ->set('animal.years', null)
-            ->set('animal.months', null)
+            ->set('animal.birth_date', null)
             ->set('animal.race', null)
             ->set('animal.description', null)
             ->call('update')
@@ -100,8 +95,7 @@ class UpdateAnimalSlideOverTest extends TestCase
             ])
             ->assertHasNoErrors([
                 'image',
-                'animal.years',
-                'animal.months',
+                'animal.birth_date',
                 'animal.race',
             ]);
     }

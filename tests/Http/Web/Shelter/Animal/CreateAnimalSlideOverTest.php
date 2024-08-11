@@ -7,6 +7,7 @@ use App\Models\Animal;
 use App\Models\Shelter;
 use App\Models\Type;
 use App\Policies\AdminDashboard\AnimalPolicy;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Tests\AuthenticateAsWebUser;
@@ -26,9 +27,7 @@ class CreateAnimalSlideOverTest extends TestCase
 
     public string $sex;
 
-    public int $years;
-
-    public int $months;
+    public Carbon $birthDate;
 
     public string $race;
 
@@ -44,8 +43,7 @@ class CreateAnimalSlideOverTest extends TestCase
         $this->name = $this->faker->name();
         $this->type = Type::factory()->create();
         $this->sex = $this->faker->randomElement(['male', 'female']);
-        $this->years = $this->faker->numberBetween(0, 25);
-        $this->months = $this->faker->numberBetween(0, 11);
+        $this->birthDate = Carbon::parse($this->faker->dateTime());
         $this->race = $this->faker->word();
         $this->description = $this->faker->text();
     }
@@ -58,8 +56,7 @@ class CreateAnimalSlideOverTest extends TestCase
             ->set('animal.name', $this->name)
             ->set('animal.type_id', $this->type->id)
             ->set('animal.sex', $this->sex)
-            ->set('animal.years', $this->years)
-            ->set('animal.months', $this->months)
+            ->set('animal.birth_date', $this->birthDate->copy()->format('c'))
             ->set('animal.race', $this->race)
             ->set('animal.description', $this->description)
             ->call('create')
@@ -74,8 +71,7 @@ class CreateAnimalSlideOverTest extends TestCase
         $this->assertSame($this->name, $dbAnimal->name);
         $this->assertSame($this->type->id, $dbAnimal->type->id);
         $this->assertSame($this->sex, $dbAnimal->sex);
-        $this->assertSame($this->years, $dbAnimal->years);
-        $this->assertSame($this->months, $dbAnimal->months);
+        $this->assertSameMinute($this->birthDate, $dbAnimal->birth_date);
         $this->assertSame($this->race, $dbAnimal->race);
         $this->assertSame($this->description, $dbAnimal->description);
     }
@@ -88,8 +84,7 @@ class CreateAnimalSlideOverTest extends TestCase
             ->set('animal.name', null)
             ->set('animal.type_id', null)
             ->set('animal.sex', null)
-            ->set('animal.years', null)
-            ->set('animal.months', null)
+            ->set('animal.birth_date', null)
             ->set('animal.race', null)
             ->set('animal.description', null)
             ->call('create')
@@ -101,8 +96,7 @@ class CreateAnimalSlideOverTest extends TestCase
                 'animal.description',
             ])
             ->assertHasNoErrors([
-                'animal.years',
-                'animal.months',
+                'animal.birth_date',
                 'animal.race',
             ]);
     }

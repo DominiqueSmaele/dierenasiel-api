@@ -14,8 +14,7 @@ return new class() extends Migration {
             $table->id();
             $table->string('name');
             $table->string('sex');
-            $table->integer('years')->nullable();
-            $table->integer('months')->nullable();
+            $table->dateTime('birth_date')->nullable();
             $table->string('race')->nullable();
             $table->text('description');
             $table->foreignId('type_id')->constrained('types');

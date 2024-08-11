@@ -91,6 +91,8 @@ return [
     'animal_fieldset_animal_type_label' => 'Categorie',
     'animal_fieldset_sex_label' => 'Geslacht',
     'animal_fieldset_sex_placeholder' => 'Geslacht',
+    'animal_fieldset_birth_date_label' => 'Geboortedatum',
+    'animal_fieldset_birth_date' => 'MM-YYYY',
     'animal_fieldset_sex_male' => 'mannelijk',
     'animal_fieldset_sex_female' => 'vrouwelijk',
     'animal_fieldset_age_label' => 'Leeftijd',
