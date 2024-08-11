@@ -19,13 +19,12 @@
         @endif
     </div>
 
-    <div class="mt-10">
+    <div class="mt-5">
         <h2 class="font-highlight-sans text-4xl font-semibold leading-7">{{ $shelter->name }}</h2>
     </div>
 
     <div class="flex">
         <div class="mt-10 w-1/2 flex-col gap-20">
-
             <div class="flex gap-20">
                 <div>
                     <div class="flex">

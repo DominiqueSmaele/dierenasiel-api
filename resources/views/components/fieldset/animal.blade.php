@@ -21,7 +21,7 @@
                 @endif
             </div>
         </div>
-        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-96 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
+        <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-[425px] flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
             <input
                 type="file"
                 accept="image/jpg,image/jpeg,image/png"
@@ -31,7 +31,8 @@
                 @drop="dragging = false"
                 id="animal-image"
                 class="cursor-point absolute inset-0 z-50 h-full w-full text-transparent opacity-0"
-                @if (!$animal->exists) required @endif />
+                @if (!$animal->exists) required @endif
+                autofocus />
 
             @if (($animal->exists && !$withoutImage) || ($image && is_object($image)))
                 <div class="h-full w-full bg-cover bg-center" style="background-image: url('{{ $image && is_object($image) ? $image?->temporaryUrl() : $animal->image?->getAvailableFullUrl(['small', 'medium']) }}')">
@@ -46,7 +47,7 @@
 
     <x-input.group :error="$errors->first('animal.name')">
         <x-label>{{ __('web.animal_fieldset_name_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
-        <x-input class="mt-1" wire:model="animal.name" :placeholder="__('web.animal_fieldset_name_placeholder')" required autofocus />
+        <x-input class="mt-1" wire:model="animal.name" :placeholder="__('web.animal_fieldset_name_placeholder')" required />
     </x-input.group>
 
     <x-input.group :error="$errors->first('animal.type_id')" class="mt-1">

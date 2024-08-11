@@ -7,7 +7,7 @@ return [
         'modal' => [
             'view' => 'wire-elements-pro::modal.component',
             'property-resolvers' => [
-                \WireElements\Pro\Components\Modal\Resolvers\EnumPropertyResolver::class,
+                WireElements\Pro\Components\Modal\Resolvers\EnumPropertyResolver::class,
             ],
             'default-behavior' => [
                 'close-on-escape' => true,
@@ -22,7 +22,7 @@ return [
         'slide-over' => [
             'view' => 'wire-elements-pro::slide-over.component',
             'property-resolvers' => [
-                \WireElements\Pro\Components\Modal\Resolvers\EnumPropertyResolver::class,
+                WireElements\Pro\Components\Modal\Resolvers\EnumPropertyResolver::class,
             ],
             'default-behavior' => [
                 'close-on-escape' => true,

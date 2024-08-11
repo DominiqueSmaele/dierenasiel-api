@@ -23,6 +23,7 @@ export default {
             "2xl": "1536px",
             '3xl': '1920px',
             '4xl': '2560px',
+            '5xl': '3840px',
         },
 
         boxShadow: {
@@ -58,7 +59,7 @@ export default {
                 'base': '#EF6161',
             },
             'green': {
-                'base': '#1EE372',
+                'base': '#17b75b',
             },
         },
 

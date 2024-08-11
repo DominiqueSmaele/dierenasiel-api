@@ -10,13 +10,13 @@
     </div>
 
     @if ($animals->isNotEmpty())
-        <div class="mt-12 grid grid-cols-3 gap-5 2xl:grid-cols-4 4xl:grid-cols-5">
+        <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-9">
             @foreach ($animals as $animal)
                 @php
                     $image = $animal?->getMedia('image')->first();
                 @endphp
 
-                <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" class="relative box-border flex flex-col border border-blue-light bg-white">
+                <a wire:key="animal-{{ $animal->id }}" href="{{ route('shelter.animal-detail', $animal->id) }}" wire:navigate class="relative box-border flex flex-col border border-blue-light bg-white">
                     @can('update', $animal)
                         <x-button class="absolute right-0 top-0 h-10 border-0" variant="primary" wire:click.prevent="$dispatch('slide-over.open', {component: 'shelter.update-animal-slide-over', arguments: {'animalId': {{ $animal->id }}}})">
                             <x-icon.pencil class="h-4 w-4" />
@@ -24,7 +24,7 @@
                     @endcan
 
                     @if ($image)
-                        <img class="h-96 object-cover" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                        <img class="h-96 object-cover 4xl:h-[450px]" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
                     @endif
 
                     <div class="flex flex-col break-words p-4">
