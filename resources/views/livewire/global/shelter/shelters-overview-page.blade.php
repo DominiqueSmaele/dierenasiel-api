@@ -26,7 +26,7 @@
                             <img class="mt-3 h-32" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
                         @endif
 
-                        <p class="mt-3 font-highlight-sans text-xl font-semibold leading-5">{{ $shelter->name }}</p>
+                        <p class="mb-2 mt-5 font-highlight-sans text-xl font-semibold leading-5">{{ $shelter->name }}</p>
                     </div>
 
                 </a>

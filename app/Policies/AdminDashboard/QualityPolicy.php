@@ -46,4 +46,16 @@ class QualityPolicy
 
         return $this->allow();
     }
+
+    public function delete(User $user) : Response | bool
+    {
+        if (! $user->hasPermission(Permission::manageAllShelters)) {
+            return $this->deny(
+                __('policies.admin_dashboard.quality.delete.no_permission'),
+                'no_permission'
+            );
+        }
+
+        return $this->allow();
+    }
 }
