@@ -6,7 +6,6 @@ import { nl } from "flatpickr/dist/l10n/nl.js";
 import moment from 'moment-timezone';
 import 'moment/dist/locale/nl';
 
-
 window.parsePhoneNumber = parsePhoneNumber;
 window.flatpickr = flatpickr;
 window.monthSelectPlugin = monthSelectPlugin;

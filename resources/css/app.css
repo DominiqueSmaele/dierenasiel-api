@@ -2,7 +2,7 @@
 @import '../../node_modules/flatpickr/dist/themes/airbnb.css';
 @import '../../node_modules/flatpickr/dist/plugins/monthSelect/style.css';
 
-@import "./wire-elements.css";
+@import './wire-elements.css';
 @import './flatpickr.css';
 
 @tailwind base;

@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "flatpickr": "^4.6.13",
-        "libphonenumber-js": "^1.10.51",
+        "libphonenumber-js": "^1.11.3",
         "moment": "^2.30.1",
         "moment-timezone": "^0.5.45"
     }

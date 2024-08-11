@@ -8,6 +8,7 @@ use App\Http\Livewire\Shelter\Admin\AdminsOverviewPage;
 use App\Http\Livewire\Shelter\Animal\AnimalDetailPage;
 use App\Http\Livewire\Shelter\Animal\AnimalsOverviewPage;
 use App\Http\Livewire\Shelter\ShelterDetailPage;
+use App\Http\Livewire\Shelter\Timeslot\TimeslotsOverviewPage;
 use App\Http\Middleware\DispatchServingAdminDashboardEvent;
 use App\Http\Middleware\EnsureUserCanViewAdminDashboard;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,7 @@ Route::middleware(['auth', EnsureUserCanViewAdminDashboard::class, DispatchServi
     Route::get('/qualities', QualitiesOverviewPage::class)->name('global.qualities-overview');
 
     Route::get('/shelter/{shelter}/animals', AnimalsOverviewPage::class)->name('shelter.animals-overview');
+    Route::get('/shelter/{shelter}/volunteers', TimeslotsOverviewPage::class)->name('shelter.volunteers-overview');
     Route::get('/shelter/{shelter}/information', ShelterDetailPage::class)->name('shelter.detail');
 
     Route::get('/animal/{animal}', AnimalDetailPage::class)->name('shelter.animal-detail');

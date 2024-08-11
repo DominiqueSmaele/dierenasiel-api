@@ -87,5 +87,8 @@ return [
                 'no_permission' => 'U heeft geen toestemming om openingsuren aan te passen.',
             ],
         ],
+        'timeslot' => [
+            'view_any' => 'U heeft geen toestemming om de vrijwilligersagenda te bekijken',
+        ],
     ],
 ];
