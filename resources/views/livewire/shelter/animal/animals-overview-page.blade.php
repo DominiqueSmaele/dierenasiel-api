@@ -9,6 +9,24 @@
         @endcan
     </div>
 
+    @if (App\Models\Animal::exists())
+        <div class="mt-12 flex items-end">
+            <x-input wire:model.live.debounce.250ms="searchValue" inline-left-icon="search" :placeholder="__('web.animals_overview_page_search_placeholder')" class="flex-1"></x-input>
+        </div>
+
+        <div class="mt-10 flex gap-4">
+            <x-button wire:click="resetFilter" :variant="$filterValue === null ? 'primary' : 'secondary'" color="blue">
+                {{ __('web.animals_overview_page_all_types_label') }}
+            </x-button>
+
+            @foreach (\App\Models\Type::all()->sortBy('id') as $type)
+                <x-button wire:click="$set('filterValue', {{ $type->id }})" wire:key="{{ $type->id }}" :variant="$filterValue === $type->id ? 'primary' : 'secondary'" color="blue">
+                    {{ $type->name }}
+                </x-button>
+            @endforeach
+        </div>
+    @endif
+
     @if ($animals->isNotEmpty())
         <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-9">
             @foreach ($animals as $animal)

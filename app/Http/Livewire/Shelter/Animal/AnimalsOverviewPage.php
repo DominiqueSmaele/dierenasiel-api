@@ -16,6 +16,11 @@ class AnimalsOverviewPage extends Component
 
     public Shelter $shelter;
 
+    public ?string $searchValue = null;
+
+    #[Url(as: 'q')]
+    public ?int $filterValue = null;
+
     protected $listeners = [
         'animalCreated' => '$refresh',
         'animalUpdated' => '$refresh',
@@ -27,10 +32,22 @@ class AnimalsOverviewPage extends Component
         $this->authorize('viewAny', [Animal::class, $this->shelter]);
     }
 
+    public function updatingSearchValue()
+    {
+        $this->resetPage();
+    }
+
+    public function resetFilter() : void
+    {
+        $this->reset('filterValue');
+    }
+
     public function render() : View
     {
         return view('livewire.shelter.animal.animals-overview-page', [
             'animals' => Animal::query()
+                ->when($this->searchValue)->search($this->searchValue)
+                ->when($this->filterValue)->where('type_id', $this->filterValue)
                 ->where('shelter_id', $this->shelter->id)
                 ->orderBy('name')
                 ->orderBy('id')
