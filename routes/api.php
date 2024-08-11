@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ShelterAnimalController;
 use App\Http\Controllers\ShelterController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('shelters', [ShelterController::class, 'index']);
+
+    Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
 
     Route::get('animals', [AnimalController::class, 'index']);
 
