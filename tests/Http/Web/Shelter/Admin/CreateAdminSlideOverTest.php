@@ -8,7 +8,6 @@ use App\Models\Shelter;
 use App\Models\User;
 use App\Policies\AdminDashboard\UserPolicy;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\AuthenticateAsWebUser;
 use Tests\TestCase;
@@ -38,7 +37,7 @@ class CreateAdminSlideOverTest extends TestCase
         $this->firstname = $this->faker->firstName();
         $this->lastname = $this->faker->lastName();
         $this->email = $this->faker->unique()->safeEmail();
-        $this->password = Str::random(7) . rand(0, 9);
+        $this->password = str()->password();
         $this->passwordRepeat = $this->password;
     }
 
@@ -109,7 +108,7 @@ class CreateAdminSlideOverTest extends TestCase
             ->set('user.lastname', $this->lastname)
             ->set('user.email', $this->email)
             ->set('password', $this->password)
-            ->set('passwordRepeat', Str::random(6))
+            ->set('passwordRepeat', str()->password())
             ->call('create')
             ->assertHasErrors('passwordRepeat');
     }

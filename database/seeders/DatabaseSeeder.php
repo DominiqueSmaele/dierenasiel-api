@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(LaratrustSeeder::class);
         $this->call(CountrySeeder::class);
+        $this->call(TypeSeeder::class);
     }
 }

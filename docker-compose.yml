@@ -1,5 +1,4 @@
 # For more information: https://laravel.com/docs/sail
-version: '3'
 services:
     dierenasiel.test:
         build:
@@ -20,8 +19,8 @@ services:
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
         volumes:
             - '.:/var/www/html:delegated'
-            - '${HOME}/.config/valet/Certificates/dierenasiel.test.key:/var/www/Certificates/dierenasiel.test.key'
-            - '${HOME}/.config/valet/Certificates/dierenasiel.test.crt:/var/www/Certificates/dierenasiel.test.crt'
+            - '/mnt/c/Users/Dayornight/.config/valet/Certificates/dierenasiel.test.key:/var/www/Certificates/dierenasiel.test.key'
+            - '/mnt/c/Users/Dayornight/.config/valet/Certificates/dierenasiel.test.crt:/var/www/Certificates/dierenasiel.test.crt'
         networks:
             - sail
         depends_on:

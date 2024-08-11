@@ -60,7 +60,10 @@ export default {
                 'base': '#EF6161',
             },
             'green': {
-                'base': '#17b75b',
+                'base': '#17B75B',
+            },
+            'pink': {
+                'base': '#F06292',
             },
         },
 

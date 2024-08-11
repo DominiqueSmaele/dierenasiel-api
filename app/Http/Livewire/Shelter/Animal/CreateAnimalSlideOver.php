@@ -43,6 +43,10 @@ class CreateAnimalSlideOver extends SlideOver
             $this->animal->shelter()->associate($this->shelter);
             $this->animal->save();
 
+            $this->animal->qualities()->syncWithoutDetaching(
+                $this->animal->type->qualities->sortBy('id')->values()->pluck('id')->toArray()
+            );
+
             if ($this->image === null) {
                 return;
             }

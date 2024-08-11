@@ -58,7 +58,7 @@ trait ValidatesAnimal
             'animal.sex' => [
                 'required',
                 'string',
-                Rule::in(['male', 'female']),
+                Rule::in(['m', 'f']),
             ],
             'animal.birth_date' => [
                 'nullable',

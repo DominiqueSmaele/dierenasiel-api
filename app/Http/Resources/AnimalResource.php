@@ -15,6 +15,7 @@ class AnimalResource extends JsonResource
             'birth_date' => $this->birth_date,
             'race' => $this->race,
             'description' => $this->description,
+            'image' => ImageResource::make($this->image)->ofModel($this->resource),
             'type' => TypeResource::make($this->whenLoaded('type')),
             'shelter' => ShelterResource::make($this->whenLoaded('shelter')),
         ];

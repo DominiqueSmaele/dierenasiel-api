@@ -42,7 +42,17 @@ class LoginTest extends TestCase
             'password' => $this->password,
         ])
             ->assertStatus(401)
-            ->assertJson(['error' => 'Invalid credentials']);
+            ->assertJson(['message' => __('auth.failed')]);
+    }
+
+    /** @test */
+    public function it_does_not_authenticate_when_email_is_invalid()
+    {
+        $this->postJson('/api/login', [
+            'email' => Str::random(),
+            'password' => $this->password,
+        ])
+            ->assertStatus(422);
     }
 
     /** @test */

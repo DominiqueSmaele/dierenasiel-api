@@ -42,11 +42,15 @@
                     @endcan
 
                     @if ($image)
-                        <img class="h-96 object-cover 4xl:h-[450px]" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
+                        <img class="h-[425px] object-cover 4xl:h-[500px]" src="{{ $image->getAvailableFullUrl(['small', 'medium']) }}" />
                     @endif
 
                     <div class="flex flex-col break-words p-4">
-                        <p class="mt-1 font-highlight-sans text-2xl font-semibold leading-5 text-blue-base">{{ ucfirst($animal->name) }}</p>
+                        <div class="mt-1 flex items-center justify-between">
+                            <p class="font-highlight-sans text-2xl font-semibold leading-5 text-blue-base">{{ ucfirst($animal->name) }}</p>
+                            <x-dynamic-component :component="$animal->sex == 'm' ? 'icon.male' : 'icon.female'" class="{{ $animal->sex == 'm' ? 'text-blue-base' : 'text-pink-base' }} h-5 w-5" />
+                        </div>
+
                         <p class="mt-2 font-highlight-sans text-lg font-semibold leading-5">{{ $animal->race ? ucfirst($animal->race) : '-' }}</p>
                         <div class="flex gap-1">
                             <p class="mt-3 font-highlight-sans text-base leading-5">{{ __('web.animals_overview_page_sex_' . $animal->sex) }}</p>

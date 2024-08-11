@@ -22,7 +22,7 @@
         <div x-data="{ dragging: false }" :class="dragging ? 'bg-blue-light/10' : 'bg-blue-lightest'" class="relative flex h-96 flex-none cursor-pointer flex-col items-center justify-center gap-2 self-stretch hover:bg-blue-light/10">
             <input
                 type="file"
-                accept="image/jpg,image/jpeg,image/png"
+                accept="image/jpg,image/jpeg,image/png,image/webp"
                 wire:model="image"
                 @dragover="dragging = true"
                 @dragleave="dragging = false"
@@ -63,10 +63,10 @@
     <x-input.group :error="$errors->first('animal.sex')" class="mt-1">
         <x-label>{{ __('web.animal_fieldset_sex_label') }} <span class="text-red-base">{{ __('web.required_label') }}</span></x-label>
 
-        <div x-data="{ sex: @entangle('animal.sex') }" x-init="sex ??= 'male'">
+        <div x-data="{ sex: @entangle('animal.sex') }" x-init="sex ??= 'm'">
             <x-select x-model="sex" class="mt-1" required>
-                <x-select.option value='male'>{{ ucfirst(__('web.animal_fieldset_sex_male')) }}</x-select.option>
-                <x-select.option value='female'>{{ ucfirst(__('web.animal_fieldset_sex_female')) }}</x-select.option>
+                <x-select.option value='m'>{{ ucfirst(__('web.animal_fieldset_sex_male')) }}</x-select.option>
+                <x-select.option value='f'>{{ ucfirst(__('web.animal_fieldset_sex_female')) }}</x-select.option>
             </x-select>
         </div>
     </x-input.group>
