@@ -22,6 +22,23 @@
             @endif
         </x-label>
         <x-input class="mt-1" type="password" wire:model="password" :placeholder="$this->user->id ? __('web.admin_fieldset_new_password_placeholder') : __('web.admin_fieldset_password_placeholder')" />
+
+        <div class="mt-3">
+            <ul class="list-disc pl-5 text-sm text-black">
+                <li>
+                    <p>{{ __('web.create_admin_slide_over_password_min_8') }}</p>
+                </li>
+                <li>
+                    <p>{{ __('web.create_admin_slide_over_password_number') }}</p>
+                </li>
+                <li>
+                    <p>{{ __('web.create_admin_slide_over_password_uppercase') }}</p>
+                </li>
+                <li>
+                    <p>{{ __('web.create_admin_slide_over_password_lowercase') }}</p>
+                </li>
+            </ul>
+        </div>
     </x-input.group>
 
     <x-input.group class="mt-1" :error="$errors->first('passwordRepeat')">

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Shelter\Admin\Concerns;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
 
 trait ValidatesAdmin
@@ -52,23 +53,19 @@ trait ValidatesAdmin
             ],
             'user.email' => [
                 'required',
-                'email',
+                'email:filter',
                 Rule::unique(User::class, 'email')->ignore($this->user),
                 'max:255',
             ],
             'password' => [
                 $this->user->id ? 'nullable' : 'required',
                 'string',
-                'min:8',
+                Password::min(8)->mixedCase()->numbers()->uncompromised(),
                 'max:255',
-                'regex:/[0-9]/',
             ],
             'passwordRepeat' => [
                 $this->user->id ? 'nullable' : 'required',
                 'string',
-                'min:8',
-                'max:255',
-                'regex:/[0-9]/',
                 'same:password',
             ],
         ];

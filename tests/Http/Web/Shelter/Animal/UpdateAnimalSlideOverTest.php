@@ -41,7 +41,7 @@ class UpdateAnimalSlideOverTest extends TestCase
         $this->image = UploadedFile::fake()->image('image.png');
         $this->name = $this->faker->name();
         $this->type = Type::factory()->create();
-        $this->sex = $this->faker->randomElement(['male', 'female']);
+        $this->sex = $this->faker->randomElement(['m', 'f']);
         $this->birthDate = Carbon::parse($this->faker->dateTime());
         $this->race = $this->faker->word();
         $this->description = $this->faker->text();

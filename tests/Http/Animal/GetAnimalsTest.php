@@ -27,6 +27,7 @@ class GetAnimalsTest extends TestCase
                         'birth_date',
                         'race',
                         'description',
+                        'image',
                         'type',
                         'shelter',
                     ],

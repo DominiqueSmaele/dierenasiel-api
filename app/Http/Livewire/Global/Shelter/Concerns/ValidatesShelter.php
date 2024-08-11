@@ -92,7 +92,7 @@ trait ValidatesShelter
             ],
             'shelter.email' => [
                 'required',
-                'email',
+                'email:filter',
                 Rule::unique(Shelter::class, 'email')->ignore($this->shelter),
                 'max:255',
             ],

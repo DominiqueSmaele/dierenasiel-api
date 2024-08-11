@@ -15,7 +15,7 @@ return [
         'mixed' => 'Het :attribute moet minimaal één hoofdletter en één kleine letter bevatten.',
         'numbers' => 'Het :attribute moet minstens één getal bevatten.',
         'symbols' => 'Het :attribute moet minstens één symbool bevatten.',
-        'uncompromised' => 'Het opgegeven :attribuut is verschenen in een datalek. Kies een ander :attribuut.',
+        'uncompromised' => 'Het opgegeven :attribute is verschenen in een datalek. Kies een ander :attribute.',
     ],
     'phone' => ':attribute-veld moet een geldig nummer zijn.',
     'required' => 'Dit veld is verplicht.',

@@ -13,7 +13,7 @@ class AnimalController extends Controller
     {
         $animals = Animal::query()
             ->select('*')
-            ->with('type', 'shelter')
+            ->with('type', 'shelter.address.country')
             ->when($request->q, fn ($query) => $query->search($request->q))
             ->orderBy('name')
             ->orderBy('id')
