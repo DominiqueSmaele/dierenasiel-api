@@ -15,14 +15,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
-        host: 'dierenasiel.test',
-        hmr: {
-            host: 'dierenasiel.test',
-        },
-        https: {
-            key: fs.readFileSync('/var/www/Certificates/dierenasiel.test.key'),
-            cert: fs.readFileSync('/var/www/Certificates/dierenasiel.test.crt'),
-        },
-    },
 });
