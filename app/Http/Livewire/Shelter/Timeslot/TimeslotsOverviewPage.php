@@ -22,6 +22,10 @@ class TimeslotsOverviewPage extends Component
 
     protected $calendarService;
 
+    protected $listeners = [
+        'timeslotCreated' => '$refresh',
+    ];
+
     public function __construct()
     {
         $this->calendarService = app(CalendarService::class);
@@ -44,6 +48,7 @@ class TimeslotsOverviewPage extends Component
             ->whereBetween('date', [Carbon::parse($this->calendar->first()), Carbon::parse($this->calendar->last())])
             ->with('volunteer')
             ->orderBy('date')
+            ->orderBy('start_time')
             ->orderBy('id')
             ->get()
             ->groupBy(function ($timeslot) {
