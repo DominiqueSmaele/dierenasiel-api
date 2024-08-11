@@ -19,7 +19,7 @@
 
             @foreach ($types as $type)
                 <x-button wire:click="$set('filterValue', {{ $type->id }})" wire:key="{{ $type->id }}" :variant="$filterValue === $type->id ? 'primary' : 'secondary'" color="blue">
-                    {{ $type->name }}
+                    {{ __('web.' . strtolower($type->name)) }}
                 </x-button>
             @endforeach
         </div>
@@ -29,7 +29,7 @@
         <div class="mt-12 grid auto-rows-fr grid-cols-4 gap-5 4xl:grid-cols-6 5xl:grid-cols-10">
             @foreach ($qualities as $quality)
                 <a wire:key="quality-{{ $quality->id }}" wire:click="$dispatch('slide-over.open', {component: 'global.update-quality-slide-over', arguments: {'qualityId': {{ $quality->id }}}})" variant="secondary" class="flex cursor-pointer flex-col items-center break-words border border-blue-base bg-white p-4 text-center shadow-light hover:bg-blue-base hover:text-white">
-                    <p class="mb-3 font-highlight-sans text-xl font-semibold leading-5">{{ $quality->type->name }}</p>
+                    <p class="mb-3 font-highlight-sans text-xl font-semibold leading-5">{{ __('web.' . strtolower($quality->type->name)) }}</p>
                     <div class="flex h-full items-center p-1">
                         <p class="text-gray-dark">{{ ucfirst($quality->name) }}</p>
                     </div>

@@ -49,6 +49,7 @@ class AnimalsOverviewPage extends Component
                 ->when($this->searchValue)->search($this->searchValue)
                 ->when($this->filterValue)->where('type_id', $this->filterValue)
                 ->where('shelter_id', $this->shelter->id)
+                ->with('shelter')
                 ->orderBy('name')
                 ->orderBy('id')
                 ->paginate(20),

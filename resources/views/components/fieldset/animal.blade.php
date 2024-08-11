@@ -54,7 +54,7 @@
         <div x-data="{ typeId: @entangle('animal.type_id') }" x-init="typeId ??= {{ $types->first()?->id }}">
             <x-select x-model="typeId" class="mt-1" required>
                 @foreach ($types as $type)
-                    <x-select.option :value="$type->id">{{ $type->name }}</x-select.option>
+                    <x-select.option :value="$type->id">{{ __('web.' . strtolower($type->name)) }}</x-select.option>
                 @endforeach
             </x-select>
         </div>
