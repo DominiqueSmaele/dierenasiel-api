@@ -9,7 +9,7 @@
         {{ $paginatedCalendar->links('pagination.calendar', ['translationKey' => 'web.calendar_pagination_info']) }}
     </div>
 
-    <div class="mt-4 grid w-full grid-cols-7 gap-y-8">
+    <div class="mt-4 grid w-full grid-cols-1 gap-y-8 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7">
         @foreach ($paginatedCalendar as $day)
             <div>
                 @php

@@ -1,4 +1,4 @@
-<div class="flex w-1/3 flex-col justify-between border border-blue-base bg-blue-lightest 4xl:w-1/4 5xl:w-1/5">
+<div class="flex w-1/4 min-w-[400px] flex-col justify-between border border-blue-base bg-blue-lightest 4xl:w-1/5">
     <div class="flex items-center justify-between px-4 py-8">
         <div class="flex items-center">
             <span class="mr-2">

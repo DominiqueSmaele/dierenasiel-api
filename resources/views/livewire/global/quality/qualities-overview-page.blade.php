@@ -12,7 +12,7 @@
     </div>
 
     @if ($types->isNotEmpty())
-        <div class="mt-10 flex gap-4">
+        <div class="mt-10 flex flex-wrap gap-4">
             <x-button wire:click="resetFilter" :variant="$filterValue === null ? 'primary' : 'secondary'" color="blue">
                 {{ __('web.qualities_overview_page_all_types_label') }}
             </x-button>
@@ -26,7 +26,7 @@
     @endif
 
     @if ($qualities->isNotEmpty())
-        <div class="mt-12 grid auto-rows-fr grid-cols-4 gap-5 4xl:grid-cols-6 5xl:grid-cols-10">
+        <div class="mt-12 grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 4xl:grid-cols-6 5xl:grid-cols-10">
             @foreach ($qualities as $quality)
                 <a wire:key="quality-{{ $quality->id }}" wire:click="$dispatch('slide-over.open', {component: 'global.update-quality-slide-over', arguments: {'qualityId': {{ $quality->id }}}})" variant="secondary" class="flex cursor-pointer flex-col items-center break-words border border-blue-base bg-white p-4 text-center shadow-light hover:bg-blue-base hover:text-white">
                     <p class="mb-3 font-highlight-sans text-xl font-semibold leading-5">{{ __('web.' . strtolower($quality->type->name)) }}</p>

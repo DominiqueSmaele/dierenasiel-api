@@ -14,7 +14,7 @@
     @endif
 
     @if ($shelters->isNotEmpty())
-        <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-8">
+        <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-8">
             @foreach ($shelters as $shelter)
                 @php
                     $image = $shelter?->getMedia('image')->first();
