@@ -14,7 +14,7 @@
             <x-input wire:model.live.debounce.250ms="searchValue" inline-left-icon="search" :placeholder="__('web.animals_overview_page_search_placeholder')" class="flex-1"></x-input>
         </div>
 
-        <div class="mt-10 flex gap-4">
+        <div class="mt-10 flex flex-wrap gap-4">
             <x-button wire:click="resetFilter" :variant="$filterValue === null ? 'primary' : 'secondary'" color="blue">
                 {{ __('web.animals_overview_page_all_types_label') }}
             </x-button>
@@ -28,7 +28,7 @@
     @endif
 
     @if ($animals->isNotEmpty())
-        <div class="mt-12 grid grid-cols-3 gap-5 3xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-9">
+        <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 4xl:grid-cols-5 5xl:grid-cols-9">
             @foreach ($animals as $animal)
                 @php
                     $image = $animal?->getMedia('image')->first();

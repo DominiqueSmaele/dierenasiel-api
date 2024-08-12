@@ -13,11 +13,13 @@ class AnimalController extends Controller
     {
         $animals = Animal::query()
             ->select('*')
-            ->with('type', 'shelter.address.country')
+            ->with('type', 'shelter.address.country', 'qualities')
             ->when($request->q, fn ($query) => $query->search($request->q))
             ->orderBy('name')
             ->orderBy('id')
             ->cursorPaginate($request->integer('per_page'));
+
+        //dd($animals);
 
         return AnimalResource::collection($animals)
             ->response()
