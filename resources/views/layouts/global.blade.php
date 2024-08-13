@@ -18,7 +18,7 @@
     <div x-data="{ isCollapsed: localStorage.getItem('isCollapsed') === 'true' }" class="flex flex-shrink-0" x-init="$watch('isCollapsed', value => localStorage.setItem('isCollapsed', value))">
         <div :class="isCollapsed ? 'w-20' : 'w-80'" class="navigation flex flex-col justify-between px-4 py-8">
             <div>
-                <div class="flex h-10 items-center justify-between gap-3 px-3">
+                <div class="flex h-10 items-center justify-between px-3">
                     <a href="{{ route('home') }}" x-show="!isCollapsed" class="truncate font-highlight-sans text-2xl font-semibold text-white">{{ __('web.app_name') }}</a>
 
                     <div @click="isCollapsed = !isCollapsed"

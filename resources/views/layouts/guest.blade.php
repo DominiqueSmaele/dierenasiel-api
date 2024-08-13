@@ -18,7 +18,7 @@
     <div class="flex min-h-screen flex-col content-start items-center justify-center">
         <div class="w-full max-w-md">
             <a href="{{ route('login') }}" class="flex justify-center">
-                <x-graphic.logo class="h-36" />
+                <x-graphic.logo class="h-28" />
             </a>
 
             <div class="mt-4 w-full overflow-hidden px-6 py-4">
