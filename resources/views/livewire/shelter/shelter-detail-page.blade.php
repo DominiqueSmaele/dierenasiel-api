@@ -22,7 +22,7 @@
                     <img class="h-36" src="{{ asset('storage/images/shelter/logo-placeholder.png') }}" />
                 @endif
 
-                <h2 class="mt-5 text-center font-highlight-sans text-3xl font-semibold leading-7">{{ $shelter->name }}</h2>
+                <h2 class="mt-5 px-2 text-center font-highlight-sans text-3xl font-semibold leading-5 leading-7">{{ $shelter->name }}</h2>
             </div>
 
             <div class="w-full">
