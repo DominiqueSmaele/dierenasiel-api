@@ -19,8 +19,6 @@ class AnimalController extends Controller
             ->orderBy('id')
             ->cursorPaginate($request->integer('per_page'));
 
-        //dd($animals);
-
         return AnimalResource::collection($animals)
             ->response()
             ->setStatusCode(200);
