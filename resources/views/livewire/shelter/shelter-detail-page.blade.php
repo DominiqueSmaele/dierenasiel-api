@@ -10,7 +10,7 @@
     </div>
 
     <div class="mt-12 flex flex-wrap gap-8">
-        <div class="flex w-1/5 min-w-[400px] flex-col items-center justify-between border border-blue-base bg-blue-lightest pt-8 4xl:w-[10%]">
+        <div class="flex w-1/5 min-w-[300px] flex-col items-center justify-between border border-blue-base bg-blue-lightest pt-8 4xl:w-[10%]">
             <div class="flex w-full flex-col items-center pb-8">
                 @php
                     $image = $shelter?->getMedia('image')->first();
