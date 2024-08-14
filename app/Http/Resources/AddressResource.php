@@ -10,6 +10,10 @@ class AddressResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'coordinates' => $this->coordinates ? [
+                'latitude' => $this->coordinates->latitude,
+                'longitude' => $this->coordinates->longitude,
+            ] : null,
             'street' => $this->street,
             'number' => $this->number,
             'box_number' => $this->box_number,
