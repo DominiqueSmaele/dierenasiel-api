@@ -15,7 +15,7 @@ class ShelterAnimalController extends Controller
         $animals = Animal::query()
             ->select('*')
             ->where('shelter_id', $shelter->id)
-            ->with('type', 'shelter')
+            ->with('type', 'shelter.address.country', 'shelter.openingPeriods', 'qualities')
             ->when($request->q, fn ($query) => $query->search($request->q))
             ->orderBy('name')
             ->orderBy('id')
