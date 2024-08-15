@@ -17,6 +17,7 @@ return [
         'symbols' => 'Het :attribute moet minstens één symbool bevatten.',
         'uncompromised' => 'Het opgegeven :attribute is verschenen in een datalek. Kies een ander :attribute.',
     ],
+    'exists' => ':attribute bestaat niet.',
     'phone' => ':attribute-veld moet een geldig nummer zijn.',
     'required' => 'Dit veld is verplicht.',
     'size' => [
@@ -50,7 +51,7 @@ return [
         'lastname' => 'Achternaam',
         'name' => 'Naam',
         'birth_date' => 'Geboortedatum',
-        'email' => 'Email-adres',
+        'email' => 'E-mailadres',
         'password' => 'Wachtwoord',
         'passwordRepeat' => 'Herhaling Wachtwoord',
         'phone' => 'Telefoonnummer',

@@ -58,9 +58,11 @@ export default {
             },
             'red': {
                 'base': '#EF6161',
+                'light': '#F48D8D',
             },
             'green': {
                 'base': '#17B75B',
+                'light': '#49CB7D',
             },
             'pink': {
                 'base': '#F06292',

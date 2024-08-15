@@ -17,6 +17,7 @@ return [
         'symbols' => 'The :attribute must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
+    'exist' => ':attribute doesn\'t exist.',
     'phone' => 'The :attribute field contains an invalid number.',
     'required' => 'The :attribute field is required.',
     'size' => [

@@ -30,12 +30,15 @@ use App\Http\Livewire\Shelter\Timeslot\DeleteTimeslotModal;
 use App\Http\Livewire\Shelter\Timeslot\DeleteTimeslotVolunteerModal;
 use App\Http\Livewire\Shelter\Timeslot\UpdateTimeslotSlideOver;
 use App\Http\Livewire\Shelter\Volunteer\TimeslotsOverviewPage;
+use App\Http\Livewire\User\DeleteUserPage;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 class LivewireServiceProvider extends ServiceProvider
 {
     public array $components = [
+        'user.delete-page' => DeleteUserPage::class,
+
         'global.developers-overview-page' => DevelopersOverviewPage::class,
 
         'global.shelters-overview-page' => SheltersOverviewPage::class,
