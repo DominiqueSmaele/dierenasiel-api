@@ -19,6 +19,8 @@ class UserObserver
 
     public function deleting(User $user) : void
     {
+        $user->anonymize();
+
         $user->revokeTokens();
     }
 }

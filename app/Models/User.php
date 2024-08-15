@@ -72,6 +72,15 @@ class User extends Authenticatable implements LaratrustUser, HasLocalePreference
         return $role ? ShelterRole::from($role) : null;
     }
 
+    public function anonymize() : void
+    {
+        $this->update([
+            'firstname' => 'anonymized',
+            'lastname' => 'anonymized',
+            'email' => "anonymized{$this->id}@example.com",
+        ]);
+    }
+
     public function revokeTokens() : void
     {
         RefreshToken::query()

@@ -37,6 +37,24 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    public function it_anonymizes_user_on_deletion()
+    {
+        $user = User::factory()->create();
+
+        $user->delete();
+
+        $dbUser = User::withTrashed()->find($user->id);
+
+        $this->assertNotNull($dbUser);
+        $this->assertTrue($dbUser->trashed());
+
+        $this->assertSame('anonymized', $dbUser->firstname);
+        $this->assertSame('anonymized', $dbUser->lastname);
+        $this->assertSame("anonymized{$user->id}@example.com", $dbUser->email);
+        $this->assertNotNull($dbUser->deleted_at);
+    }
+
+    /** @test */
     public function it_revokes_access_and_refresh_tokens_if_user_is_being_soft_deleted()
     {
         $user = User::factory()->create();

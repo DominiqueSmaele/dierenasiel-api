@@ -9,6 +9,7 @@ use App\Http\Livewire\Shelter\Animal\AnimalDetailPage;
 use App\Http\Livewire\Shelter\Animal\AnimalsOverviewPage;
 use App\Http\Livewire\Shelter\ShelterDetailPage;
 use App\Http\Livewire\Shelter\Timeslot\TimeslotsOverviewPage;
+use App\Http\Livewire\User\DeleteUserPage;
 use App\Http\Middleware\DispatchServingAdminDashboardEvent;
 use App\Http\Middleware\EnsureUserCanViewAdminDashboard;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ use Livewire\Livewire;
 */
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/user/delete', DeleteUserPage::class)->name('user.delete-page');
 
 Route::middleware(['auth', EnsureUserCanViewAdminDashboard::class, DispatchServingAdminDashboardEvent::class])->group(function () {
     Route::redirect('/settings', '/shelters')->name('global.home');
