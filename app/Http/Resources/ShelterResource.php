@@ -19,6 +19,7 @@ class ShelterResource extends JsonResource
             'address' => AddressResource::make($this->whenLoaded('address')),
             'image' => ImageResource::make($this->image)->ofModel($this->resource),
             'opening_periods' => OpeningPeriodResource::collection($this->whenLoaded('openingPeriods')),
+            'timeslots' => TimeslotResource::collection($this->whenLoaded('timeslots')),
         ];
     }
 }

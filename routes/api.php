@@ -7,6 +7,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\ShelterAnimalController;
 use App\Http\Controllers\ShelterController;
+use App\Http\Controllers\ShelterTimeslotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('user/password', [CurrentUserController::class, 'updatePassword']);
 
     Route::get('shelters', [ShelterController::class, 'index']);
+    Route::get('shelters/timeslots', [ShelterTimeslotController::class, 'index']);
 
     Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
 
