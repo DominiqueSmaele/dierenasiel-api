@@ -64,6 +64,11 @@ class Shelter extends TeamModel implements HasMedia
         return $this->hasMany(OpeningPeriod::class);
     }
 
+    public function timeslots() : HasMany
+    {
+        return $this->hasMany(Timeslot::class);
+    }
+
     protected function image() : Attribute
     {
         return Attribute::make(get: fn () : ?Media => $this->getFirstMedia('image'));

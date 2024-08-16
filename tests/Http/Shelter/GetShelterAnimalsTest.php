@@ -40,6 +40,7 @@ class GetShelterAnimalsTest extends TestCase
                         'description',
                         'type',
                         'shelter',
+                        'qualities',
                     ],
                 ],
             ])->assertJsonArray('data.*.id', $animals->pluck('id'));
