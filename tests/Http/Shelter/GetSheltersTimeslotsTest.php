@@ -13,7 +13,7 @@ class GetSheltersTimeslotsTest extends TestCase
     /** @test */
     public function it_returns_shelters_timeslots()
     {
-        $timeslots = Timeslot::factory()->count(4)->create(['volunteer_id' => null]);
+        $timeslots = Timeslot::factory()->count(4)->create(['user_id' => null]);
 
         $this->actingAsOAuthUser()
             ->getJson('/api/shelters/timeslots')

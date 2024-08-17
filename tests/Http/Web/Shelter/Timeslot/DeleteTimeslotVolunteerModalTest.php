@@ -32,7 +32,7 @@ class DeleteTimeslotVolunteerModalTest extends TestCase
 
         $dbTimeslot = Timeslot::find($this->timeslot->id);
 
-        $this->assertNull($dbTimeslot->volunteer_id);
+        $this->assertNull($dbTimeslot->user_id);
     }
 
     /** @test */

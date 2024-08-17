@@ -26,7 +26,7 @@
 
                 @foreach ($day['timeslots'] as $timeslot)
                     @php
-                        $volunteer = $timeslot?->volunteer;
+                        $user = $timeslot?->user;
                     @endphp
 
                     <div
@@ -41,15 +41,15 @@
 
                             @if ($date->startOfDay()->lt(now($timeZone)->startOfDay()))
                                 <p class="rounded-full bg-gray-base px-2 py-0.5 text-sm font-bold text-white">{{ __('web.timeslot_closed_label') }}</p>
-                            @elseif ($volunteer)
+                            @elseif ($user)
                                 <p class="rounded-full bg-red-base px-2 py-0.5 text-sm font-bold text-white">{{ __('web.timeslot_filled_label') }}</p>
                             @else
                                 <p class="rounded-full bg-green-base px-2 py-0.5 text-sm font-bold text-white">{{ __('web.timeslot_open_label') }}</p>
                             @endif
                         </div>
 
-                        @if ($volunteer)
-                            <p class="text-sm font-bold text-blue-base">{{ $volunteer->user->firstname }} {{ $volunteer->user->lastname }}</p>
+                        @if ($user)
+                            <p class="text-sm font-bold text-blue-base">{{ $user->firstname }} {{ $user->lastname }}</p>
                         @else
                             <p class="text-sm font-bold text-blue-base">-</p>
                         @endif

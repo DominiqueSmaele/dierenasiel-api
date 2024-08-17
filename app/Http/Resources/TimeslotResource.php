@@ -13,6 +13,7 @@ class TimeslotResource extends JsonResource
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
+            'shelter' => ShelterResource::make($this->whenLoaded('shelter')),
         ];
     }
 }

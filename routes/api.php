@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\ShelterAnimalController;
 use App\Http\Controllers\ShelterController;
 use App\Http\Controllers\ShelterTimeslotController;
+use App\Http\Controllers\TimeslotUserController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,12 +31,17 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('user', [CurrentUserController::class, 'update']);
     Route::patch('user/password', [CurrentUserController::class, 'updatePassword']);
 
-    Route::get('shelters', [ShelterController::class, 'index']);
-    Route::get('shelters/timeslots', [ShelterTimeslotController::class, 'index']);
-
-    Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
+    Route::get('user/timeslots', [TimeslotUserController::class, 'index']);
 
     Route::get('animals', [AnimalController::class, 'index']);
+
+    Route::get('shelters', [ShelterController::class, 'index']);
+    Route::get('shelters/timeslots', [ShelterTimeslotController::class, 'index']);
+    Route::get('shelter/{shelter}/animals', [ShelterAnimalController::class, 'index']);
+
+    Route::get('types', [TypeController::class, 'index']);
+
+    Route::delete('timeslot/user', [TimeslotUserController::class, 'delete']);
 
     Route::post('logout', [LogoutController::class, 'store']);
 });

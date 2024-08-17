@@ -15,11 +15,11 @@ class ShelterTimeslotController extends Controller
             ->select('*')
             ->whereHas('timeslots', function ($query) {
                 $query->where('date', '>=', Carbon::today())
-                    ->whereNull('volunteer_id');
+                    ->whereNull('user_id');
             })
             ->with(['timeslots' => function ($query) {
                 $query->where('date', '>=', Carbon::today())
-                    ->whereNull('volunteer_id');
+                    ->whereNull('user_id');
             }])
             ->orderBy('name')
             ->orderBy('id')

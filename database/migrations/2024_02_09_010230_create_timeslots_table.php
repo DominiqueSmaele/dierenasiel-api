@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
-            $table->foreignId('volunteer_id')->nullable()->constrained('volunteers');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('shelter_id')->constrained('shelters');
             $table->timestamps();
         });

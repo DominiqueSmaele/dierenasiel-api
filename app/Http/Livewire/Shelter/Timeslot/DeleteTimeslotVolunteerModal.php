@@ -27,7 +27,7 @@ class DeleteTimeslotVolunteerModal extends Modal
     public function delete() : void
     {
         DB::transaction(function () {
-            $this->timeslot->volunteer_id = null;
+            $this->timeslot->user_id = null;
 
             $this->timeslot->save();
         });
