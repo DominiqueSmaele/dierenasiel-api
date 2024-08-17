@@ -26,13 +26,13 @@
         </div>
     </div>
 
-    @if ($this->timeslot->volunteer)
+    @if ($this->timeslot->user)
         @php
-            $name = "{$this->timeslot->volunteer->user->firstname} {$this->timeslot->volunteer->user->lastname}";
+            $name = "{$this->timeslot->user->firstname} {$this->timeslot->user->lastname}";
         @endphp
 
         <div class="mt-8">
-            <x-input.group class="mt-6" :error="$errors->first('timeslot.volunteer_id')">
+            <x-input.group class="mt-6" :error="$errors->first('timeslot.user_id')">
                 <div class="flex items-center justify-between">
                     <x-label>{{ __('web.timeslot_fieldset_volunteer_name_label') }}</x-label>
 
@@ -44,10 +44,10 @@
                 <x-input class="mt-1" :value="$name" placeholder="-" readonly />
             </x-input.group>
 
-            <x-input.group class="mt-6" :error="$errors->first('timeslot.volunteer_id')">
+            <x-input.group class="mt-6" :error="$errors->first('timeslot.userr_id')">
                 <x-label>{{ __('web.timeslot_fieldset_volunteer_email_label') }}</x-label>
 
-                <x-input class="mt-1" :value="$this->timeslot->volunteer->user->email" placeholder="-" readonly />
+                <x-input class="mt-1" :value="$this->timeslot->user->email" placeholder="-" readonly />
             </x-input.group>
         </div>
     @endif

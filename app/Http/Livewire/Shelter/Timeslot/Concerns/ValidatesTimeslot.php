@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Shelter\Timeslot\Concerns;
 
 use App\Models\Timeslot;
-use App\Models\Volunteer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
@@ -48,10 +48,10 @@ trait ValidatesTimeslot
                 'date',
                 'after:timeslot.start_time',
             ],
-            'timeslot.volunteer_id' => [
+            'timeslot.user_id' => [
                 'nullable',
                 'integer',
-                Rule::exists(Volunteer::class, 'id'),
+                Rule::exists(User::class, 'id'),
             ],
         ];
     }

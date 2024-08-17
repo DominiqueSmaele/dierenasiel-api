@@ -1,7 +1,7 @@
 <x-modal
     wire:submit="delete"
     :title="__('web.delete_timeslot_volunteer_modal_title')"
-    :description="__('web.delete_timeslot_volunteer_modal_description', ['firstname' => $timeslot->volunteer->user->firstname, 'lastname' => $timeslot->volunteer->user->lastname])"
+    :description="__('web.delete_timeslot_volunteer_modal_description', ['firstname' => $timeslot->user->firstname, 'lastname' => $timeslot->user->lastname])"
     class="pb-3">
 
     <div class="mt-10 flex flex-col gap-1">

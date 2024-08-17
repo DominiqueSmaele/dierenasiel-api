@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Shelter;
-use App\Models\Volunteer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +15,7 @@ class TimeslotFactory extends Factory
             'date' => $this->faker->dateTimeBetween(now(), now()->addWeeks(2))->format('Y-m-d'),
             'start_time' => $start = $this->faker->time($max = '22:59:59'),
             'end_time' => Carbon::createFromFormat('H:i:s', $start)->addHour(),
-            'volunteer_id' => Volunteer::factory(),
+            'user_id' => User::factory(),
             'shelter_id' => Shelter::factory(),
         ];
     }

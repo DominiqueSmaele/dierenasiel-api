@@ -56,7 +56,7 @@ class TimeslotsOverviewPage extends Component
         return Timeslot::query()
             ->where('shelter_id', $this->shelter->id)
             ->whereBetween('date', [Carbon::parse($this->calendar->first()), Carbon::parse($this->calendar->last())])
-            ->with('volunteer.user')
+            ->with('user')
             ->orderBy('date')
             ->orderBy('start_time')
             ->orderBy('id')

@@ -22,7 +22,7 @@ class Timeslot extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
         'shelter_id' => 'integer',
-        'volunteer_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
     public function shelter() : BelongsTo
@@ -30,9 +30,9 @@ class Timeslot extends Model
         return $this->belongsTo(Shelter::class);
     }
 
-    public function volunteer() : BelongsTo
+    public function user() : BelongsTo
     {
-        return $this->belongsTo(Volunteer::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getDateAttribute($value) : string
