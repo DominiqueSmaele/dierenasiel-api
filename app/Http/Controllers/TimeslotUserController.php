@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeleteTimeslotUserRequest;
+use App\Http\Requests\UpdateTimeslotUserRequest;
 use App\Http\Resources\TimeslotResource;
 use App\Models\Timeslot;
 use Carbon\Carbon;
@@ -49,5 +50,25 @@ class TimeslotUserController extends Controller
         }
 
         return response(null)->setStatusCode(204);
+    }
+
+    public function update(UpdateTimeslotUserRequest $request) : Response
+    {
+        try {
+            $timeslot = Timeslot::find($request->id);
+
+            if ($timeslot->user_id !== null) {
+                return response(['message' => __('api.unprocessable')], 422);
+            }
+
+            DB::transaction(function () use ($request, $timeslot) {
+                $timeslot->user()->associate(auth()->user());
+                $timeslot->save();
+            });
+        } catch (Exception $e) {
+            return response(['message' => $e->getMessage()], 400);
+        }
+
+        return response(null)->setStatusCode(200);
     }
 }
