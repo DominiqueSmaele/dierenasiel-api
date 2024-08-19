@@ -41,6 +41,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('types', [TypeController::class, 'index']);
 
+    Route::patch('timeslot/user', [TimeslotUserController::class, 'update']);
     Route::delete('timeslot/user', [TimeslotUserController::class, 'delete']);
 
     Route::post('logout', [LogoutController::class, 'store']);

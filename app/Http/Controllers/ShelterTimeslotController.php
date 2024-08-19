@@ -19,7 +19,9 @@ class ShelterTimeslotController extends Controller
             })
             ->with(['timeslots' => function ($query) {
                 $query->where('date', '>=', Carbon::today())
-                    ->whereNull('user_id');
+                    ->whereNull('user_id')
+                    ->orderBy('date')
+                    ->orderBy('start_time');
             }])
             ->orderBy('name')
             ->orderBy('id')
